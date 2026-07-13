@@ -38,7 +38,7 @@ export default async function decorate(block) {
   const ctaNodes = cell(3) ? [...cell(3).querySelectorAll('a')] : [];
 
   block.replaceChildren();
-  block.classList.add('ds-hero--photo');
+  block.classList.add('service-hero--photo');
 
   // hero photo (bg via CSS url()) + L-to-R navy scrim
   const photo = document.createElement('div');
