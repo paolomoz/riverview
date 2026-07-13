@@ -1,0 +1,25 @@
+/* article-body — centered reading measure.
+   Rules lifted from blog-finding-comfort-courtney-cox-cole-infusion-center-proposed.html
+   (.ds-article-section / .ds-article / .ds-article-fig*), rescoped under .article-body.
+   The article measure is pinned at 680px (= 68ch at the 16px root) per the
+   prototype provenance note. */
+
+.article-body { padding-block: var(--spacing-lg) 0; }
+.article-body .ds-article { max-width: 680px; margin-inline: auto; font-size: 19px; line-height: 1.65; }
+.article-body .ds-article > p + p { margin-top: 1.35em; }
+.article-body .ds-article > figure + p,
+.article-body .ds-article > p + figure,
+.article-body .ds-article > figure + figure { margin-top: var(--spacing-md); }
+.article-body .ds-article-fig { margin: var(--spacing-md) 0; }
+.article-body .ds-article-fig img { margin-inline: auto; border-radius: var(--radius); }
+.article-body .ds-article-fig figcaption { margin-top: 10px; font-size: var(--body-sm); line-height: 1.5; color: var(--color-muted); text-align: center; }
+
+/* caption-only figure — source image 404'd and was omitted per media-reconciliation;
+   the captured caption survives as a mint-ruled italic aside. */
+.article-body .ds-article-fig--caption-only { border-left: 3px solid var(--color-mint); padding: 4px 0 4px 18px; max-width: 60ch; }
+.article-body .ds-article-fig--caption-only figcaption { margin-top: 0; text-align: left; font-style: italic; }
+
+@media (max-width: 640px) {
+  .article-body { padding-block: var(--spacing-md) 0; }
+  .article-body .ds-article { font-size: 18px; }
+}

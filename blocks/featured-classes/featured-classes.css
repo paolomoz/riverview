@@ -1,0 +1,23 @@
+/* featured-classes — 3× class cards on a mint-wash band.
+   Rules lifted from index-proposed.html (.ds-band-mint / .ds-class-*),
+   rescoped under .featured-classes. */
+
+.featured-classes { background: var(--color-mint-wash); padding-block: var(--section-padding); }
+.featured-classes .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.featured-classes h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+
+.featured-classes .ds-class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); margin-top: var(--spacing-md); }
+.featured-classes .ds-class-card { background: var(--color-bg); border-radius: var(--radius-tile); overflow: hidden; box-shadow: var(--shadow-chip); display: flex; flex-direction: column; transition: box-shadow 0.15s ease; }
+.featured-classes .ds-class-card:hover { box-shadow: var(--shadow-card); }
+.featured-classes .ds-class-card img { width: 100%; height: auto; aspect-ratio: 500 / 333; object-fit: cover; }
+.featured-classes .ds-class-body { padding: 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.featured-classes .ds-class-card h3 { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; }
+.featured-classes .ds-class-body .btn { margin-top: auto; align-self: flex-start; }
+
+@media (max-width: 1023px) {
+  .featured-classes .ds-class-grid { grid-template-columns: repeat(2, 1fr); }
+  .featured-classes .ds-class-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .featured-classes .ds-class-grid { grid-template-columns: 1fr; }
+}

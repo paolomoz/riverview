@@ -11,3 +11,11 @@ helix-importer-ui
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md
+
+# token hygiene / local QA (stardust deploy)
+.env
+.env.*
+qa/
+samples/
+stardust/
+skills/

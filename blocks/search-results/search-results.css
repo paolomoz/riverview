@@ -1,0 +1,22 @@
+/* search-results — lifted from search-results-proposed.html (.ds-searchmain + results + pagination), rescoped. */
+.search-results .ds-wrap { padding-block: var(--spacing-lg) 0; }
+.search-results .ds-result-count { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--heading-md); color: var(--color-accent); }
+.search-results .ds-results { margin-top: var(--spacing-sm); border-top: 1px solid var(--color-border); }
+.search-results .ds-result { padding-block: var(--spacing-md); border-bottom: 1px solid var(--color-border); }
+.search-results .ds-result-title { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; }
+.search-results .ds-result-title a { color: var(--color-link); text-decoration: none; display: inline-block; padding-block: 7px; margin-top: -3px; }
+.search-results .ds-result-title a:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+.search-results .ds-result-snippet { margin-top: 8px; color: var(--color-fg); line-height: 1.55; max-width: 78ch; }
+.search-results .ds-result-url { margin-top: 10px; font-size: var(--body-sm); color: var(--color-muted); word-break: break-word; }
+
+/* ---- pagination ---- */
+.search-results .ds-pagenav { padding-block: var(--spacing-lg) var(--spacing-xl); }
+.search-results .ds-pagenav ul { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--spacing-xs); }
+.search-results .ds-page-link { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 44px; min-height: 44px; padding: 8px 14px; border: 1px solid transparent; border-radius: 8px; background: transparent; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); text-decoration: none; }
+.search-results a.ds-page-link:hover { border-color: var(--color-accent); color: var(--color-ink-navy); background: #ffffff; }
+.search-results .ds-page-link[aria-current="page"] { background: var(--color-accent); border-color: var(--color-accent); color: #ffffff; }
+
+@media (max-width: 640px) {
+  .search-results .ds-result-title { font-size: var(--lede); }
+  .search-results .ds-result-title a { padding-block: 10px; }
+}

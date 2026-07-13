@@ -1,0 +1,65 @@
+/* service-body — two-column main prose + grey sticky rail.
+   Rules lifted from services-cancer-services-proposed.html (.ds-body / .ds-prose /
+   .ds-tour / .ds-rail), rescoped under .service-body. */
+
+.service-body { padding-block: var(--section-padding); }
+.service-body .ds-body-grid { display: grid; grid-template-columns: minmax(0, 1fr) 304px; grid-template-areas: "main rail"; gap: var(--spacing-xl); align-items: start; }
+.service-body .ds-main { grid-area: main; min-width: 0; }
+
+/* ---- prose (68ch measure) ---- */
+.service-body .ds-prose { max-width: var(--measure-article); }
+.service-body .ds-prose h2 { font-size: clamp(27px, 4vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); margin-top: var(--spacing-xl); }
+.service-body .ds-prose > h2:first-child { margin-top: 0; }
+.service-body .ds-prose p { font-size: var(--body); line-height: var(--line-height-body); margin-top: var(--spacing-sm); }
+.service-body .ds-prose a { color: var(--color-link); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.service-body .ds-prose a:hover { color: var(--color-ink-navy); }
+.service-body .ds-cond-list { list-style: disc; padding-left: 1.3em; margin-top: var(--spacing-sm); columns: 2; column-gap: var(--spacing-lg); }
+.service-body .ds-cond-list li { margin-block: 6px; break-inside: avoid; font-size: var(--body); line-height: 1.5; }
+.service-body .ds-cond-list li::marker { color: var(--color-accent); }
+
+/* ---- virtual tour region (captured poster; video embed = migrate conditional) ---- */
+.service-body .ds-tour { margin-top: var(--spacing-md); }
+.service-body .ds-tour figure { margin: 0; }
+.service-body .ds-tour-media { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); aspect-ratio: 16/9; background: var(--color-surface); }
+.service-body .ds-tour-media img { width: 100%; height: 100%; object-fit: cover; }
+.service-body .ds-tour figcaption { font-size: var(--body-sm); color: var(--color-muted); line-height: 1.4; margin-top: 10px; }
+
+/* ---- grey sticky rail (More Information) ---- */
+.service-body .ds-rail { grid-area: rail; background: var(--color-surface); border-radius: var(--radius-tile); padding: 8px 24px 24px; position: sticky; top: 24px; align-self: start; }
+.service-body .ds-rail-disc { margin: 0; }
+.service-body .ds-rail-disc summary { display: none; list-style: none; }
+.service-body .ds-rail-disc summary::-webkit-details-marker { display: none; }
+.service-body .ds-disc-pill { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xs); min-height: 48px; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-accent); }
+.service-body .ds-disc-pill svg { transition: transform .15s ease; }
+.service-body .ds-rail-disc[open] .ds-disc-pill svg { transform: rotate(180deg); }
+.service-body .ds-rail-label { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--heading-md); color: var(--color-accent); margin: 12px 0 4px; }
+.service-body .ds-rail-nav ul { list-style: none; margin: 0; padding: 0; }
+.service-body .ds-rail-nav a { display: flex; align-items: center; min-height: 44px; padding: 10px 8px; margin-inline: -8px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); text-decoration: none; border-top: 1px solid var(--color-border); border-radius: var(--radius); }
+.service-body .ds-rail-nav li:first-child a { border-top: 0; }
+.service-body .ds-rail-nav a:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+.service-body .ds-rail-nav a[aria-current="page"] { color: var(--color-fg); font-weight: 700; cursor: default; }
+.service-body .ds-rail-nav a[aria-current="page"]:hover { color: var(--color-fg); text-decoration: none; }
+.service-body .ds-rail-info { margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border); }
+.service-body .ds-rail-info .ds-rail-label { margin-top: 0; }
+.service-body .ds-rail-address { font-style: normal; line-height: 1.65; font-size: var(--body-sm); color: var(--color-fg); }
+.service-body .ds-rail-address a { font-family: var(--heading-font-family); font-weight: 700; color: var(--color-link); text-decoration: none; display: inline-block; min-height: 44px; padding-block: 10px; }
+.service-body .ds-rail-address a:hover { text-decoration: underline; text-underline-offset: 3px; color: var(--color-ink-navy); }
+
+/* ---- responsive ---- */
+@media (max-width: 1023px) {
+  .service-body .ds-body-grid { gap: var(--spacing-lg); }
+}
+@media (max-width: 900px) {
+  /* rail -> disclosure above the single-column prose */
+  .service-body .ds-body-grid { grid-template-columns: 1fr; grid-template-areas: "rail" "main"; gap: var(--spacing-md); }
+  .service-body .ds-rail { position: static; padding: 8px 20px 20px; }
+  .service-body .ds-rail-disc summary { display: block; cursor: pointer; }
+  .service-body .ds-rail-label { display: none; }
+  .service-body .ds-rail-body { padding-top: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-body .ds-disc-pill svg { transition: none; }
+}
+@media (max-width: 640px) {
+  .service-body .ds-cond-list { columns: 1; }
+}

@@ -1,0 +1,40 @@
+/* event-body — lifted from event-aquatic-aerobics-proposed.html (.ds-body), rescoped. */
+.event-body { padding-block: var(--section-padding); }
+.event-body .ds-body-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; grid-template-areas: "main rail"; gap: var(--spacing-xl); align-items: start; }
+.event-body .ds-main { grid-area: main; min-width: 0; }
+
+/* ---- event photo (single mint-plinth signature figure) ---- */
+.event-body .ds-event-figure { margin: 0 0 var(--spacing-lg); max-width: 520px; }
+.event-body .ds-event-figure img { width: 100%; height: auto; border-radius: var(--radius-tile); box-shadow: 10px 10px 0 0 var(--color-mint); }
+
+/* ---- prose (68ch measure) ---- */
+.event-body .ds-prose { max-width: 68ch; }
+.event-body .ds-prose h2 { font-size: clamp(27px, 4vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); margin-top: var(--spacing-xl); }
+.event-body .ds-prose > h2:first-child, .event-body .ds-prose > *:first-child { margin-top: 0; }
+.event-body .ds-prose p { font-size: var(--body); line-height: var(--line-height-body); margin-top: var(--spacing-sm); }
+.event-body .ds-prose p.ds-lede { font-family: var(--body-font-family); font-size: var(--lede); line-height: 1.5; color: var(--color-fg); }
+.event-body .ds-prose h3 { font-size: var(--heading-lg); font-weight: 700; line-height: 1.2; color: var(--color-fg); margin-top: var(--spacing-lg); }
+.event-body .ds-sessions-label { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--lede); color: var(--color-accent); margin-top: var(--spacing-lg); }
+.event-body .ds-eff-note { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); color: var(--color-muted); margin-top: var(--spacing-xs); }
+.event-body .ds-times { margin-top: var(--spacing-sm); border-top: 1px solid var(--color-border); max-width: 54ch; }
+.event-body .ds-times li { padding: 12px 4px; border-bottom: 1px solid var(--color-border); font-size: var(--body); line-height: 1.5; }
+
+/* ---- grey Location rail card ---- */
+.event-body .ds-rail { grid-area: rail; background: var(--color-surface); border-radius: var(--radius-tile); padding: 24px; position: sticky; top: 24px; align-self: start; }
+.event-body .ds-rail h2 { font-size: var(--heading-md); font-weight: 700; line-height: 1.2; color: var(--color-accent); margin: 0 0 var(--spacing-sm); }
+.event-body .ds-venue { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-fg); margin-bottom: 6px; }
+.event-body .ds-rail-address { font-style: normal; line-height: 1.65; font-size: var(--body-sm); color: var(--color-fg); }
+.event-body .ds-rail-info { margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border); }
+.event-body .ds-rail-label { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-accent); margin: 0 0 4px; }
+.event-body .ds-rail-contact { font-size: var(--body-sm); line-height: 1.6; color: var(--color-fg); }
+.event-body .ds-rail-contact a { color: var(--color-link); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; display: inline-block; min-height: 44px; padding-block: 10px; }
+.event-body .ds-rail-contact a:hover { color: var(--color-ink-navy); }
+
+@media (max-width: 1023px) { .event-body .ds-body-grid { gap: var(--spacing-lg); } }
+@media (max-width: 900px) {
+  .event-body .ds-body-grid { grid-template-columns: 1fr; grid-template-areas: "rail" "main"; gap: var(--spacing-lg); }
+  .event-body .ds-rail { position: static; }
+}
+@media (max-width: 640px) {
+  .event-body .ds-event-figure img { box-shadow: 6px 6px 0 0 var(--color-mint); }
+}

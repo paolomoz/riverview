@@ -1,0 +1,48 @@
+/* listing-hero — lifted from providers/locations/blog -proposed.html (.ds-shero
+   + .ds-shero-form + .ds-shero-lede + .ds-shero-quick), rescoped under .listing-hero.
+   Serves the providers (.search-hero), locations (.finder-hero) and blog heroes. */
+
+.listing-hero { position: relative; background: var(--color-accent); color: #ffffff; overflow: hidden; }
+.listing-hero .ds-wrap { position: relative; z-index: 2; }
+.listing-hero .ds-topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.listing-hero .ds-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(48px, 8vw, 110px); display: block; z-index: 1; }
+.listing-hero .ds-shero-inner { padding-block: clamp(32px, 5vw, 56px) clamp(88px, 11vw, 140px); }
+.listing-hero.search-hero .ds-shero-inner,
+.listing-hero.finder-hero .ds-shero-inner { padding-block: clamp(32px, 5vw, 56px) clamp(96px, 12vw, 150px); }
+.listing-hero h1 { font-size: clamp(36px, 7vw, var(--heading-xxl)); font-weight: 900; line-height: 1.08; letter-spacing: -0.01em; color: #ffffff; }
+.listing-hero .ds-shero-lede { font-size: clamp(17px, 4.5vw, var(--lede)); line-height: 1.45; max-width: 65ch; margin-top: var(--spacing-sm); color: #ffffff; }
+
+/* ---- search form ---- */
+.listing-hero .ds-shero-form { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) auto; gap: var(--spacing-sm); align-items: end; margin-top: var(--spacing-md); }
+.listing-hero .ds-field-label-row { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--spacing-xs); margin-bottom: 6px; }
+.listing-hero .ds-field-label { display: inline-block; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.3; color: #ffffff; padding-bottom: 4px; }
+.listing-hero .ds-input { width: 100%; min-height: 48px; border-radius: var(--radius-pill); border: 1px solid var(--color-border); background: #ffffff; color: var(--color-fg); font-family: var(--body-font-family); font-size: var(--body); padding: 12px 20px; }
+.listing-hero .ds-input::placeholder { color: var(--color-muted); opacity: 1; }
+.listing-hero .ds-input-affix { position: relative; }
+.listing-hero .ds-input-affix .ds-input { padding-left: 48px; }
+.listing-hero .ds-input-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--color-muted); pointer-events: none; }
+.listing-hero .ds-use-loc { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; color: #ffffff; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); min-height: 44px; padding: 10px 12px; margin: -10px -12px -6px 0; border-radius: var(--radius); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.listing-hero .ds-use-loc:hover { color: var(--color-mint-wash); }
+.listing-hero .ds-shero-submit { min-width: 150px; }
+.listing-hero .ds-shero-quick { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+
+/* ---- buttons used inside the hero (lifted from the prototype .ds-btn system) ---- */
+.listing-hero .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.2; min-height: 48px; padding: 12px 24px; text-decoration: none; box-shadow: var(--shadow-chip); border: 0; cursor: pointer; }
+.listing-hero .ds-btn--mint { background: var(--color-mint); color: var(--color-ink-navy); }
+.listing-hero .ds-btn--mint:hover { background: #77bbad; }
+.listing-hero .ds-btn--outline-light { background: transparent; border: 2px solid #ffffff; color: #ffffff; box-shadow: none; padding: 10px 22px; }
+.listing-hero .ds-btn--outline-light:hover { background: rgba(255, 255, 255, 0.12); }
+.listing-hero :focus-visible { outline-color: #ffffff; }
+
+@media (max-width: 900px) {
+  .listing-hero .ds-shero-form { grid-template-columns: 1fr; }
+  .listing-hero .ds-shero-submit { width: 100%; }
+}
+@media (max-width: 640px) {
+  .listing-hero .ds-shero-inner,
+  .listing-hero.search-hero .ds-shero-inner,
+  .listing-hero.finder-hero .ds-shero-inner { padding-block: var(--spacing-md) clamp(72px, 18vw, 100px); }
+  .listing-hero .ds-shero-form { margin-top: var(--spacing-sm); gap: 12px; }
+  .listing-hero .ds-shero-quick { margin-top: var(--spacing-sm); gap: 12px; }
+  .listing-hero .ds-shero-quick .ds-btn { width: 100%; }
+}

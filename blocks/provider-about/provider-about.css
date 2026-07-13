@@ -1,0 +1,10 @@
+/* provider-about — About prose band. Rules lifted from
+   provider-kathleen-miller-md-proposed.html (.ds-section / .ds-section-head /
+   .ds-about-body), rescoped under .provider-about. */
+
+.provider-about { padding-block: var(--section-padding); }
+.provider-about .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.provider-about h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.provider-about .ds-about-body { max-width: 72ch; }
+.provider-about .ds-about-body p { font-size: var(--lede); line-height: 1.45; }
+.provider-about .ds-about-body p + p { margin-top: var(--spacing-sm); }

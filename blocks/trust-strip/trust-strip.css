@@ -1,0 +1,15 @@
+/* trust-strip — "Accredited by" monochrome accreditor logo strip.
+   Rules lifted from index-proposed.html (.ds-trust*), rescoped under .trust-strip. */
+
+.trust-strip { background: var(--color-surface); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding-block: var(--spacing-md); }
+.trust-strip .ds-wrap { display: flex; flex-direction: column; align-items: center; gap: var(--spacing-md); }
+.trust-strip .ds-trust-label { display: flex; align-items: center; gap: 14px; font-family: var(--body-font-family); font-weight: 400; font-size: 13px; letter-spacing: 0.08em; color: var(--color-muted); white-space: nowrap; }
+.trust-strip .ds-trust-label::before, .trust-strip .ds-trust-label::after { content: ""; display: block; width: 48px; height: 1px; background: var(--color-border); }
+.trust-strip .ds-trust-logos { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: var(--spacing-lg); row-gap: var(--spacing-sm); list-style: none; margin: 0; padding: 0; }
+.trust-strip .ds-trust-logos li { display: flex; align-items: center; }
+.trust-strip .ds-trust-logos img { height: 44px; width: auto; max-width: min(180px, 100%); object-fit: contain; }
+
+@media (max-width: 640px) {
+  .trust-strip .ds-trust-logos { column-gap: var(--spacing-md); }
+  .trust-strip .ds-trust-logos img { height: 36px; max-width: 140px; }
+}

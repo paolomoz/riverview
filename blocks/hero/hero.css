@@ -1,37 +1,30 @@
-.hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
-}
+/* hero — navy wave/topo signature hero with ambient video.
+   Rules lifted verbatim from index-proposed.html .ds-hero* rules, rescoped
+   under the .hero block class (root .ds-hero → .hero; descendants → .hero …). */
 
-.hero {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
-}
+.hero { position: relative; background: var(--color-accent); color: #ffffff; overflow: hidden; }
+.hero .ds-hero-media, .hero .ds-hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero .ds-hero-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20, 22, 43, 0.88) 0%, rgba(20, 22, 43, 0.62) 42%, rgba(20, 22, 43, 0.22) 72%, rgba(20, 22, 43, 0.05) 100%); }
+.hero .ds-hero-content { position: relative; z-index: 2; padding-block: clamp(48px, 8vw, 112px) clamp(120px, 14vw, 180px); max-width: 720px; }
+.hero h1 { font-size: clamp(36px, 9vw, var(--heading-xxl)); font-weight: 900; line-height: 1.08; letter-spacing: -0.01em; }
+.hero .ds-mint-word { color: var(--color-mint); }
+@media (min-width: 420px) { .hero .ds-h1-brand { white-space: nowrap; } }
+.hero .ds-hero-lede { font-size: var(--lede); line-height: 1.45; max-width: 56ch; margin-top: var(--spacing-sm); }
+.hero .ds-hero-ctas { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.hero .ds-hero-pause { position: absolute; right: 24px; bottom: clamp(110px, 13vw, 150px); z-index: 3; width: 48px; height: 48px; border-radius: var(--radius-pill); background: rgba(20, 22, 43, 0.65); border: 2px solid #ffffff; color: #ffffff; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
+.hero .ds-hero-pause:hover { background: rgba(20, 22, 43, 0.85); }
+.hero .ds-hero-pause .ds-ic-play { display: none; }
+.hero .ds-hero-pause[aria-pressed="true"] .ds-ic-play { display: block; }
+.hero .ds-hero-pause[aria-pressed="true"] .ds-ic-pause { display: none; }
+.hero .ds-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(48px, 8vw, 110px); display: block; z-index: 2; }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+@media (max-width: 767px) {
+  .hero .ds-hero-video, .hero .ds-hero-pause { display: none; }
 }
-
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+@media (prefers-reduced-motion: reduce) {
+  .hero .ds-hero-video, .hero .ds-hero-pause { display: none; }
 }
-
-.hero img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-@media (width >= 900px) {
-  .hero {
-    padding: 40px 32px;
-  }
+@media (max-width: 640px) {
+  .hero .ds-hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero .ds-hero-content { padding-block: var(--spacing-lg) clamp(90px, 22vw, 120px); }
 }

@@ -1,0 +1,31 @@
+/* filter-rail — lifted from providers/locations -proposed.html (.ds-rail + .ds-facet
+   + .ds-select + .ds-check), rescoped under .filter-rail. As a standalone EDS block
+   the rail is full-width (not the prototype's 290px sticky sidebar coupled to the
+   results grid); the facet form lays out as a responsive row on wide viewports. */
+
+.filter-rail .ds-rail { background: var(--color-surface); border-radius: var(--radius-tile); padding: 8px 24px 24px; }
+.filter-rail .ds-rail-disc summary { display: none; list-style: none; }
+.filter-rail .ds-rail-disc summary::-webkit-details-marker { display: none; }
+.filter-rail .ds-rail-body { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 var(--spacing-md); }
+.filter-rail .ds-facet { padding-block: var(--spacing-sm); border-top: 1px solid var(--color-border); border: 0; margin: 0; padding-inline: 0; }
+.filter-rail .ds-facet-name, .filter-rail .ds-facet legend { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-fg); padding: 0; margin: 0 0 6px; display: block; }
+.filter-rail .ds-check { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: var(--body); color: var(--color-fg); cursor: pointer; }
+.filter-rail .ds-check input { width: 24px; height: 24px; margin: 0; flex: none; appearance: none; -webkit-appearance: none; background: #ffffff; border: 2px solid #7a8290; border-radius: var(--radius); display: inline-grid; place-content: center; cursor: pointer; }
+.filter-rail .ds-check input:checked { background: var(--color-accent); border-color: var(--color-accent); }
+.filter-rail .ds-check input:checked::before { content: ""; width: 12px; height: 12px; background: #ffffff; clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); }
+.filter-rail .ds-select { width: 100%; min-height: 48px; border-radius: var(--radius-pill); border: 1px solid #7a8290; background: #ffffff; color: var(--color-fg); font-family: var(--body-font-family); font-size: var(--body); padding: 10px 44px 10px 20px; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23262b62' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
+.filter-rail .ds-select--placeholder { color: var(--color-muted); }
+.filter-rail .ds-disc-pill { display: none; }
+
+@media (max-width: 700px) {
+  .filter-rail .ds-rail { padding: 8px 20px 0; }
+  .filter-rail .ds-rail-body { grid-template-columns: 1fr; }
+  .filter-rail .ds-rail-disc summary { display: block; cursor: pointer; }
+  .filter-rail .ds-disc-pill { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-xs); min-height: 48px; margin-block: 12px; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-accent); }
+  .filter-rail .ds-disc-pill svg { transition: transform 0.15s ease; }
+  .filter-rail .ds-rail-disc[open] .ds-disc-pill svg { transform: rotate(180deg); }
+  .filter-rail .ds-facet:first-child { border-top: 1px solid var(--color-border); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filter-rail .ds-disc-pill svg { transition: none; }
+}

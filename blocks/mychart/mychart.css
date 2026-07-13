@@ -1,0 +1,19 @@
+/* mychart — MyChart split with a mint-plinth image.
+   Rules lifted from index-proposed.html (.ds-split / .ds-plinth-frame / .ds-split-*),
+   rescoped under .mychart. */
+
+.mychart { padding-block: var(--section-padding); }
+.mychart .ds-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: center; }
+.mychart .ds-plinth-frame { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-plinth); margin: 0 10px 10px 0; }
+.mychart .ds-plinth-frame img { width: 100%; height: auto; aspect-ratio: 1620 / 1080; object-fit: cover; }
+.mychart h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.mychart .ds-split-copy p + p { margin-top: var(--spacing-sm); }
+.mychart .ds-split-copy .ds-intro { font-size: var(--lede); line-height: 1.45; margin-top: var(--spacing-sm); }
+.mychart .ds-split-ctas { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+
+@media (max-width: 1023px) {
+  .mychart .ds-split { grid-template-columns: 1fr; gap: var(--spacing-md); }
+}
+@media (max-width: 640px) {
+  .mychart .ds-split-ctas { flex-direction: column; align-items: flex-start; }
+}

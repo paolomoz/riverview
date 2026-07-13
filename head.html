@@ -1,9 +1,43 @@
-<meta
-  http-equiv="Content-Security-Policy"
-  content="script-src 'nonce-aem' 'strict-dynamic' 'unsafe-inline' http: https:; base-uri 'self'; object-src 'none'; frame-src 'self' https:; require-trusted-types-for 'script';"
-  move-to-http-header="true"
-/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<script nonce="aem" src="/scripts/aem.js" type="module"></script>
-<script nonce="aem" src="/scripts/scripts.js" type="module"></script>
 <link rel="stylesheet" href="/styles/styles.css"/>
+<script src="/scripts/scripts.js" type="module"></script>
+<script src="/scripts/ak.js" type="module"></script>
+<link rel="icon" href="/favicon.avif">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalOrganization",
+      "@id": "https://www.riverview.org/#organization",
+      "name": "Riverview Health",
+      "url": "https://www.riverview.org/",
+      "logo": "https://www.riverview.org/sites/default/files/2026-03/RVH_PoweredBy_CMYK_Horizontal.jpg",
+      "telephone": "+1-317-773-0760",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "395 Westfield Rd",
+        "addressLocality": "Noblesville",
+        "addressRegion": "IN",
+        "postalCode": "46060",
+        "addressCountry": "US"
+      },
+      "sameAs": [
+        "https://www.twitter.com/riverviewhosp",
+        "https://www.facebook.com/riverviewhospital",
+        "https://www.youtube.com/@riverview_health",
+        "https://www.instagram.com/riverviewhealth/",
+        "https://www.linkedin.com/company/riverview-hospital/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.riverview.org/#website",
+      "name": "Riverview Health",
+      "url": "https://www.riverview.org/",
+      "publisher": { "@id": "https://www.riverview.org/#organization" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>

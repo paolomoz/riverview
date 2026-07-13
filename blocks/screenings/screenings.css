@@ -1,0 +1,25 @@
+/* screenings — 3× screening cards (one mint variant, price display).
+   Rules lifted from index-proposed.html (.ds-screen-*), rescoped under .screenings. */
+
+.screenings { padding-block: var(--section-padding); }
+.screenings .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.screenings h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.screenings .ds-intro { font-size: var(--lede); line-height: 1.45; max-width: 65ch; margin-top: var(--spacing-sm); }
+
+.screenings .ds-screen-cta { margin-top: var(--spacing-md); text-align: center; }
+.screenings .ds-screen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); margin-top: var(--spacing-md); }
+.screenings .ds-screen-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.screenings .ds-screen-card img { width: 100%; height: auto; aspect-ratio: 500 / 333; object-fit: cover; }
+.screenings .ds-screen-card--mint { background: var(--color-mint-wash); border-color: transparent; }
+.screenings .ds-screen-body { padding: 32px 24px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.screenings .ds-screen-card h3 { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; color: var(--color-accent); }
+.screenings .ds-screen-card h3 .ds-price { display: block; font-size: var(--heading-lg); font-weight: 900; color: var(--color-fg); margin-top: 4px; }
+.screenings .ds-screen-body .btn { margin-top: auto; align-self: flex-start; }
+
+@media (max-width: 1023px) {
+  .screenings .ds-screen-grid { grid-template-columns: repeat(2, 1fr); }
+  .screenings .ds-screen-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .screenings .ds-screen-grid { grid-template-columns: 1fr; }
+}

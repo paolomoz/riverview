@@ -1,0 +1,19 @@
+/* contact-hours — contact + hours card with a two-up interactive map.
+   Rules lifted from location-riverview-health-physicians-obgyn-proposed.html
+   (.ds-contact-card / .ds-contact-* / .ds-loc-phone / .ds-loc-map[-frame]),
+   rescoped under .contact-hours. */
+
+.contact-hours { padding-block: var(--section-padding); }
+.contact-hours .ds-contact-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 460px); gap: var(--spacing-md); align-items: stretch; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px; }
+.contact-hours .ds-contact-body { display: flex; flex-direction: column; gap: var(--spacing-sm); padding-block: 8px; }
+.contact-hours h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.contact-hours .ds-contact-address { font-style: normal; line-height: 1.6; font-size: var(--body); }
+.contact-hours .ds-contact-label { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); color: var(--color-muted); }
+.contact-hours .ds-loc-phone { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--lede); text-decoration: underline; text-underline-offset: 3px; border-radius: var(--radius); }
+.contact-hours .ds-loc-phone:hover { color: var(--color-ink-navy); }
+.contact-hours .ds-loc-map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); aspect-ratio: 4 / 3; }
+.contact-hours .ds-loc-map img, .contact-hours .ds-loc-map-frame { width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+
+@media (max-width: 900px) {
+  .contact-hours .ds-contact-card { grid-template-columns: 1fr; }
+}

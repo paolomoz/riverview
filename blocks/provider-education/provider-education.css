@@ -1,0 +1,22 @@
+/* provider-education — education & certifications band (surface-tinted).
+   Rules lifted from provider-kathleen-miller-md-proposed.html (.ds-edu-band /
+   .ds-edu-grid / .ds-edu-group / .ds-edu-list / .ds-cert-list), rescoped under
+   .provider-education. The block sits on the tinted band, so lift .ds-edu-band. */
+
+.provider-education { padding-block: var(--section-padding); background: var(--color-surface); }
+.provider-education .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.provider-education h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.provider-education .ds-edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-md); align-items: start; }
+.provider-education .ds-edu-group { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px; }
+.provider-education .ds-edu-group h3 { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; margin-bottom: var(--spacing-sm); }
+.provider-education .ds-edu-list { margin: 0; }
+.provider-education .ds-edu-list > div + div { margin-top: var(--spacing-xs); }
+.provider-education .ds-edu-list dt { color: var(--color-muted); }
+.provider-education .ds-edu-list dt::after { content: ":"; }
+.provider-education .ds-edu-list dd { margin: 0; font-family: var(--heading-font-family); font-weight: 700; color: var(--color-fg); }
+.provider-education .ds-cert-list li { font-family: var(--heading-font-family); font-weight: 700; color: var(--color-fg); }
+.provider-education .ds-cert-list li + li { margin-top: var(--spacing-xs); }
+
+@media (max-width: 640px) {
+  .provider-education .ds-edu-grid { grid-template-columns: 1fr; }
+}

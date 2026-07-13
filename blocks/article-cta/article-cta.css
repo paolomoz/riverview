@@ -1,0 +1,15 @@
+/* article-cta — closing CTA band.
+   Rules lifted from blog-finding-comfort-courtney-cox-cole-infusion-center-proposed.html
+   (.ds-article-cta / .ds-measure), rescoped under .article-cta. The CTA is authored
+   as <em><a> and painted by the global .btn system; the balance/full-width overrides
+   below reproduce the prototype's .ds-article-cta .ds-btn treatment. */
+
+.article-cta { padding-block: var(--spacing-lg) 0; }
+.article-cta .ds-measure { max-width: 680px; margin-inline: auto; }
+.article-cta .actions { display: flex; }
+.article-cta .actions a { white-space: normal; text-align: center; height: auto; text-wrap: balance; }
+
+@media (max-width: 640px) {
+  .article-cta { padding-block: var(--spacing-md) 0; }
+  .article-cta .actions a { width: 100%; }
+}

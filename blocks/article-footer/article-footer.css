@@ -1,0 +1,23 @@
+/* article-footer — article end matter (tags + actions).
+   Rules lifted from blog-finding-comfort-courtney-cox-cole-infusion-center-proposed.html
+   (.ds-article-end / .ds-article-tags / .ds-article-actions / .ds-article-byline),
+   rescoped under .article-footer. */
+
+.article-footer { padding-block: var(--spacing-lg) var(--spacing-2xl); }
+.article-footer .ds-measure { max-width: 680px; margin-inline: auto; }
+.article-footer .ds-article-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding-bottom: var(--spacing-md); border-bottom: 1px solid var(--color-border); }
+.article-footer .ds-tags-label { font-size: var(--body-sm); color: var(--color-muted); }
+.article-footer .ds-chip-tag { display: inline-flex; align-items: center; min-height: 44px; padding: 9px 18px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); background: #ffffff; box-shadow: var(--shadow-chip); color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); text-decoration: none; line-height: 1.2; }
+.article-footer .ds-chip-tag:hover { border-color: var(--color-accent); color: var(--color-ink-navy); }
+.article-footer .ds-chip-tag:focus-visible { box-shadow: 0 0 0 6px rgba(132, 197, 184, .55); }
+.article-footer .ds-article-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.article-footer .ds-article-byline { display: inline-flex; align-items: baseline; gap: 8px; margin: 0; }
+.article-footer .ds-article-byline-kicker { font-size: var(--body-sm); color: var(--color-muted); }
+.article-footer .ds-article-more { display: inline-flex; align-items: center; min-height: 44px; }
+.article-footer .ds-article-author { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 2px; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--heading-md); color: var(--color-accent); text-decoration: none; border-radius: var(--radius); }
+.article-footer .ds-article-author:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 640px) {
+  .article-footer { padding-block: var(--spacing-md) var(--spacing-xl); }
+  .article-footer .ds-article-actions { flex-direction: column; align-items: flex-start; }
+}

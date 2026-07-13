@@ -1,0 +1,30 @@
+/* jasons-story — navy patient-story band, quote + image.
+   Rules lifted from index-proposed.html (.ds-story* + .ds-split + .ds-wave-top +
+   .ds-topo), rescoped under .jasons-story. */
+
+.jasons-story { position: relative; background: var(--color-accent); color: #ffffff; overflow: hidden; }
+.jasons-story .ds-wrap { position: relative; z-index: 2; }
+.jasons-story .ds-story-inner { padding-block: clamp(100px, 12vw, 150px) clamp(56px, 7vw, 96px); }
+.jasons-story .ds-split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); align-items: center; }
+.jasons-story h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: #ffffff; }
+.jasons-story .ds-story-quote { font-family: var(--body-font-family); font-size: var(--heading-md); font-weight: 400; line-height: 1.45; max-width: 56ch; margin-top: var(--spacing-sm); }
+.jasons-story .ds-story-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.jasons-story .ds-story-ctas .ds-link { color: #ffffff; text-decoration-color: var(--color-mint); }
+.jasons-story .ds-story-ctas .ds-link:hover { color: var(--color-mint-wash); }
+.jasons-story .ds-story-frame { border-radius: var(--radius); overflow: hidden; }
+.jasons-story .ds-story-frame img { width: 100%; height: auto; aspect-ratio: 1000 / 684; object-fit: cover; transform: scale(1.05); }
+.jasons-story .ds-wave-top { position: absolute; left: 0; right: 0; top: -1px; width: 100%; height: clamp(40px, 6vw, 90px); display: block; z-index: 2; transform: scaleY(-1); }
+.jasons-story .ds-topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+
+/* on-dark surface: light-outline treatment for the <em><a> secondary CTA
+   (foundation targets main .story; this block is named jasons-story). */
+.jasons-story a.btn-secondary { border-color: #ffffff; color: #ffffff; }
+.jasons-story a.btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+.jasons-story :focus-visible { outline-color: #ffffff; }
+
+@media (max-width: 1023px) {
+  .jasons-story .ds-split { grid-template-columns: 1fr; gap: var(--spacing-md); }
+}
+@media (max-width: 640px) {
+  .jasons-story .ds-story-ctas { flex-direction: column; align-items: flex-start; }
+}

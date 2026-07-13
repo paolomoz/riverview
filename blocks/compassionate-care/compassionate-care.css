@@ -1,0 +1,26 @@
+/* compassionate-care — 4× quick-card grid with diamond mint icons.
+   Rules lifted from index-proposed.html (.ds-section head + .ds-quick-*),
+   rescoped under .compassionate-care. */
+
+.compassionate-care { padding-block: var(--section-padding); }
+.compassionate-care .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.compassionate-care h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.compassionate-care .ds-intro { font-size: var(--lede); line-height: 1.45; max-width: 65ch; margin-top: var(--spacing-sm); }
+
+.compassionate-care .ds-quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.compassionate-care .ds-quick-card { position: relative; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 12px; transition: box-shadow 0.15s ease; }
+.compassionate-care .ds-quick-card:hover { box-shadow: var(--shadow-card); }
+.compassionate-care .ds-quick-icon { width: 46px; height: 46px; border: 2px solid var(--color-mint); border-radius: 8px; background: transparent; color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center; transform: rotate(45deg); margin: 9px 0 9px 9px; }
+.compassionate-care .ds-quick-icon svg { transform: rotate(-45deg); }
+.compassionate-care .ds-quick-card h3 { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; }
+.compassionate-care .ds-quick-card p { color: var(--color-fg); }
+.compassionate-care .ds-quick-card .ds-link { margin-top: auto; padding-block: 10px; }
+.compassionate-care .ds-quick-card .ds-link::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.compassionate-care .ds-quick-foot { margin-top: var(--spacing-md); }
+
+@media (max-width: 1023px) {
+  .compassionate-care .ds-quick-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .compassionate-care .ds-quick-grid { grid-template-columns: 1fr; }
+}

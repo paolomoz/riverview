@@ -1,0 +1,49 @@
+/* location-results — lifted from locations-proposed.html (.ds-cards / .ds-lcard /
+   .ds-finder-map + the .ds-btn--outline treatment), rescoped under .location-results.
+   Equal-height cards: grid rows stretch and .ds-lcard-body flex:1 pushes the actions
+   row to the bottom. */
+
+.location-results .ds-finder-map { border: 1px solid var(--color-border); border-radius: var(--radius-tile); overflow: hidden; aspect-ratio: 16 / 10; margin-bottom: var(--spacing-md); }
+.location-results .ds-finder-map[hidden] { display: none; }
+.location-results .ds-finder-map-frame { width: 100%; height: 100%; border: 0; display: block; }
+
+.location-results .ds-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-md); align-items: stretch; }
+.location-results .ds-lcard { position: relative; display: flex; flex-direction: column; background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius); transition: transform 0.16s ease-out, box-shadow 0.16s ease-out, border-color 0.16s ease-out; }
+.location-results .ds-lcard:hover, .location-results .ds-lcard:focus-within { box-shadow: var(--shadow-card); border-color: #c9cdd6; transform: translateY(-3px); }
+.location-results .ds-lcard:hover .ds-lcard-name a, .location-results .ds-lcard:focus-within .ds-lcard-name a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.location-results .ds-lcard:hover .ds-lcard-media img, .location-results .ds-lcard:focus-within .ds-lcard-media img { transform: scale(1.03); }
+.location-results .ds-lcard-media { border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; overflow: hidden; }
+.location-results .ds-lcard-media img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; background: var(--color-surface); transition: transform 0.16s ease-out; }
+.location-results .ds-lcard-body { display: flex; flex-direction: column; align-items: flex-start; padding: 20px 24px 0; flex: 1; }
+.location-results .ds-lcard-type { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.location-results .ds-chip { display: inline-flex; align-items: center; background: var(--color-surface); border: 0; color: var(--color-ink-navy); font-family: var(--body-font-family); font-weight: 600; font-size: 13px; line-height: 1.3; padding: 4px 10px; border-radius: 6px; }
+.location-results .ds-chip-more { font-size: 13px; color: var(--color-muted); }
+.location-results .ds-lcard-name { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; margin-top: 12px; }
+.location-results .ds-lcard-name:first-child { margin-top: 0; }
+.location-results .ds-lcard-name a { display: inline-block; color: var(--color-fg); text-decoration: none; padding-block: 11px; margin-block: -11px; }
+.location-results .ds-lcard-name a:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.location-results .ds-lcard-name a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.location-results .ds-lcard-addr { font-size: var(--body-sm); color: var(--color-muted); line-height: 1.45; margin-top: 8px; }
+.location-results .ds-lcard-actions { position: relative; z-index: 1; display: flex; padding: 16px 24px 24px; margin-top: auto; }
+.location-results .ds-lcard-actions .ds-btn { width: 100%; }
+
+/* details CTA (lifted from the prototype .ds-btn--outline) */
+.location-results .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.2; min-height: 48px; padding: 12px 24px; text-decoration: none; box-shadow: var(--shadow-chip); border: 0; cursor: pointer; }
+.location-results .ds-btn--outline { background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent); box-shadow: none; padding: 10px 22px; }
+.location-results .ds-btn--outline:hover { background: rgba(38, 43, 98, 0.08); }
+.location-results .ds-btn:focus-visible { box-shadow: 0 0 0 6px rgba(132, 197, 184, 0.55); }
+
+@media (max-width: 700px) {
+  .location-results .ds-cards { grid-template-columns: 1fr; gap: var(--spacing-sm); }
+  .location-results .ds-finder-map { aspect-ratio: 3 / 4; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .location-results .ds-lcard, .location-results .ds-lcard-media img { transition: none; }
+  .location-results .ds-lcard:hover, .location-results .ds-lcard:focus-within { transform: none; }
+  .location-results .ds-lcard:hover .ds-lcard-media img, .location-results .ds-lcard:focus-within .ds-lcard-media img { transform: none; }
+}
+@media (max-width: 640px) {
+  .location-results .ds-lcard-body { padding: 16px 16px 0; }
+  .location-results .ds-lcard-name { font-size: var(--lede); }
+  .location-results .ds-lcard-actions { padding: 14px 16px 16px; }
+}

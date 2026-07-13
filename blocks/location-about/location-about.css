@@ -1,0 +1,8 @@
+/* location-about — About prose band. Rules lifted from
+   location-riverview-health-physicians-obgyn-proposed.html (.ds-section /
+   .ds-about-body + the article measure), rescoped under .location-about. */
+
+.location-about { padding-block: var(--section-padding); }
+.location-about .ds-about-body { max-width: var(--measure-article, 680px); }
+.location-about .ds-about-body p { font-size: var(--body); line-height: var(--line-height-body); }
+.location-about .ds-about-body p + p { margin-top: var(--spacing-sm); }

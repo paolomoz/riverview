@@ -1,0 +1,26 @@
+/* provider-locations — practice-location cards with a static map.
+   Rules lifted from provider-kathleen-miller-md-proposed.html (.ds-section /
+   .ds-loc-card / .ds-loc-* and the .ds-btn--outline treatment), rescoped under
+   .provider-locations. */
+
+.provider-locations { padding-block: var(--section-padding); }
+.provider-locations .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.provider-locations h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.provider-locations .ds-loc-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: var(--spacing-md); align-items: center; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px; }
+.provider-locations .ds-loc-card + .ds-loc-card { margin-top: var(--spacing-md); }
+.provider-locations .ds-loc-card h3 { font-size: var(--heading-md); font-weight: 700; line-height: 1.25; }
+.provider-locations .ds-loc-address { font-style: normal; margin-top: var(--spacing-sm); line-height: 1.6; }
+.provider-locations .ds-loc-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-sm); margin-top: var(--spacing-sm); }
+.provider-locations .ds-loc-phone { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); text-decoration: underline; text-underline-offset: 3px; border-radius: var(--radius); }
+.provider-locations .ds-loc-phone:hover { color: var(--color-ink-navy); }
+.provider-locations .ds-loc-map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); }
+.provider-locations .ds-loc-map img { width: 100%; height: auto; }
+
+/* details button (lifted from the prototype .ds-btn system) */
+.provider-locations .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.2; min-height: 48px; padding: 12px 24px; text-decoration: none; box-shadow: var(--shadow-chip); border: 0; cursor: pointer; }
+.provider-locations .ds-btn--outline { background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent); box-shadow: none; padding: 10px 22px; }
+.provider-locations .ds-btn--outline:hover { background: rgba(38, 43, 98, 0.08); }
+
+@media (max-width: 900px) {
+  .provider-locations .ds-loc-card { grid-template-columns: 1fr; }
+}

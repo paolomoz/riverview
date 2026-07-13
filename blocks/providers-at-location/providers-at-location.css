@@ -1,0 +1,52 @@
+/* providers-at-location — "Providers at This Location" mini cards (surface band).
+   Rules lifted from location-riverview-health-physicians-obgyn-proposed.html
+   (.ds-prov-band / .ds-mini-grid / .ds-mini / .ds-mini-* / .ds-prov-more + the
+   .ds-btn--outline treatment), rescoped under .providers-at-location.
+   EQUAL-HEIGHT: grid align-items:stretch + li flex + .ds-mini flex:1 + actions
+   margin-top:auto keep 1-line and 2-line cards the same height. */
+
+.providers-at-location { padding-block: var(--section-padding); background: var(--color-surface); }
+.providers-at-location .ds-section-head { max-width: 72ch; margin-bottom: var(--spacing-md); }
+.providers-at-location h2.ds-h2 { font-size: clamp(27px, 4.5vw, var(--heading-xl)); font-weight: 700; line-height: 1.15; color: var(--color-fg); }
+.providers-at-location .ds-mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--spacing-md); align-items: stretch; }
+.providers-at-location .ds-mini-grid > li { display: flex; }
+.providers-at-location .ds-mini { position: relative; flex: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: stretch; background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius); padding: 24px; transition: transform 0.16s ease-out, box-shadow 0.16s ease-out, border-color 0.16s ease-out; }
+.providers-at-location .ds-mini-media { align-self: start; width: clamp(96px, 9vw, 132px); border-radius: var(--radius); overflow: hidden; }
+.providers-at-location .ds-mini:hover, .providers-at-location .ds-mini:focus-within { box-shadow: var(--shadow-card); border-color: #c9cdd6; transform: translateY(-3px); }
+.providers-at-location .ds-mini:hover .ds-mini-name a, .providers-at-location .ds-mini:focus-within .ds-mini-name a { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.providers-at-location .ds-mini:hover .ds-mini-media img, .providers-at-location .ds-mini:focus-within .ds-mini-media img { transform: scale(1.03); }
+.providers-at-location .ds-mini-media img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: top center; border-radius: var(--radius); background: #ffffff; transition: transform 0.16s ease-out; }
+.providers-at-location .ds-mini-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.providers-at-location .ds-mini-name { font-size: var(--heading-md); font-weight: 700; line-height: 1.2; }
+.providers-at-location .ds-mini-name a { display: inline-block; color: var(--color-fg); text-decoration: none; padding-block: 11px; margin-block: -11px; }
+.providers-at-location .ds-mini-name a:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 3px; }
+.providers-at-location .ds-mini-name a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.providers-at-location .ds-mini-spec { font-size: var(--body-sm); color: var(--color-muted); line-height: 1.3; }
+.providers-at-location .ds-mini-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; margin-top: auto; padding-top: 8px; }
+.providers-at-location .ds-mini-phone { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); text-decoration: none; }
+.providers-at-location .ds-mini-phone:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+.providers-at-location .ds-mini-phone svg { flex-shrink: 0; }
+.providers-at-location .ds-mini-details { position: relative; z-index: 1; display: inline-flex; align-items: center; min-height: 44px; }
+.providers-at-location .ds-prov-more { display: flex; justify-content: center; margin-top: var(--spacing-md); }
+
+/* View More button (lifted from the prototype .ds-btn system) */
+.providers-at-location .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.2; min-height: 48px; padding: 12px 24px; text-decoration: none; box-shadow: var(--shadow-chip); border: 0; cursor: pointer; }
+.providers-at-location .ds-btn--outline { background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent); box-shadow: none; padding: 10px 22px; }
+.providers-at-location .ds-btn--outline:hover { background: rgba(38, 43, 98, 0.08); }
+
+/* the ds-link text-link flourish (View details) */
+.providers-at-location .ds-link { color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; display: inline-block; padding-block: 10px; }
+.providers-at-location .ds-link:hover { color: var(--color-ink-navy); }
+
+@media (max-width: 1023px) {
+  .providers-at-location .ds-mini-grid { grid-template-columns: 1fr; gap: var(--spacing-sm); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .providers-at-location .ds-mini, .providers-at-location .ds-mini-media img { transition: none; }
+  .providers-at-location .ds-mini:hover, .providers-at-location .ds-mini:focus-within { transform: none; }
+  .providers-at-location .ds-mini:hover .ds-mini-media img, .providers-at-location .ds-mini:focus-within .ds-mini-media img { transform: none; }
+}
+@media (max-width: 640px) {
+  .providers-at-location .ds-mini { grid-template-columns: auto minmax(0, 1fr); padding: 16px; gap: 16px; }
+  .providers-at-location .ds-mini-media { width: 96px; }
+}

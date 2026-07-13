@@ -1,0 +1,46 @@
+/* provider-hero — navy identity band with topo texture + wave mask.
+   Rules lifted from provider-kathleen-miller-md-proposed.html (.ds-phero and its
+   parts, the mint/outline-light .ds-btn treatments), rescoped under .provider-hero. */
+
+.provider-hero { position: relative; background: var(--color-accent); color: #ffffff; overflow: hidden; }
+.provider-hero .ds-wrap { position: relative; z-index: 2; }
+.provider-hero .ds-topo { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.provider-hero .ds-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(48px, 8vw, 110px); display: block; z-index: 1; }
+.provider-hero .ds-phero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: var(--spacing-xl); align-items: center; padding-block: clamp(40px, 6vw, 72px) clamp(100px, 13vw, 160px); }
+.provider-hero.ds-phero--no-photo .ds-phero-grid { grid-template-columns: minmax(0, 1fr); }
+.provider-hero.ds-phero--no-photo .ds-phero-portrait { display: none; }
+.provider-hero h1 { font-size: clamp(36px, 7vw, var(--heading-xxl)); font-weight: 900; line-height: 1.08; letter-spacing: -0.01em; color: #ffffff; }
+.provider-hero .ds-specialty { font-family: var(--heading-font-family); font-weight: 700; font-size: var(--lede); line-height: 1.3; color: var(--color-mint); margin-top: var(--spacing-sm); }
+.provider-hero .ds-status-chip { display: inline-flex; align-items: center; background: var(--color-surface); color: var(--color-fg); font-family: var(--body-font-family); font-weight: 700; font-size: var(--body-sm); line-height: 1.3; border-radius: var(--radius-pill); padding: 8px 16px; margin-top: var(--spacing-sm); }
+.provider-hero .ds-phero-ctas { display: flex; flex-wrap: wrap; gap: var(--spacing-sm); margin-top: var(--spacing-md); }
+.provider-hero .ds-phero-portrait { width: 100%; max-width: 200px; margin: 0 10px 10px 0; }
+.provider-hero .ds-plinth-frame { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-plinth); }
+.provider-hero .ds-plinth-frame img { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.provider-hero :focus-visible { outline-color: #ffffff; }
+
+/* action buttons (lifted from the prototype .ds-btn system) */
+.provider-hero .ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); line-height: 1.2; min-height: 48px; padding: 12px 24px; text-decoration: none; box-shadow: var(--shadow-chip); border: 0; cursor: pointer; }
+.provider-hero .ds-btn--mint { background: var(--color-mint); color: var(--color-ink-navy); font-weight: 700; }
+.provider-hero .ds-btn--mint:hover { background: #77bbad; }
+.provider-hero .ds-btn--outline-light { background: transparent; border: 2px solid #ffffff; color: #ffffff; box-shadow: none; padding: 10px 22px; }
+.provider-hero .ds-btn--outline-light:hover { background: rgba(255, 255, 255, 0.12); }
+
+@media (max-width: 1023px) {
+  .provider-hero .ds-phero-grid { gap: var(--spacing-md); grid-template-columns: minmax(0, 1fr) 200px; }
+  .provider-hero .ds-phero-portrait { max-width: 200px; }
+}
+@media (max-width: 900px) {
+  /* stacked order: name -> specialty -> status chip -> portrait -> CTA row */
+  .provider-hero .ds-phero-grid { display: flex; flex-direction: column; align-items: flex-start; gap: 0; }
+  .provider-hero .ds-phero-copy { display: contents; }
+  .provider-hero .ds-phero-copy h1 { order: 1; }
+  .provider-hero .ds-specialty { order: 2; }
+  .provider-hero .ds-status-chip { order: 3; }
+  .provider-hero .ds-phero-portrait { order: 4; width: min(180px, 100%); max-width: 180px; margin: var(--spacing-sm) 10px 0 0; }
+  .provider-hero .ds-phero-ctas { order: 5; align-self: stretch; }
+}
+@media (max-width: 640px) {
+  .provider-hero .ds-phero-grid { padding-block: var(--spacing-md) clamp(80px, 20vw, 110px); }
+  .provider-hero .ds-phero-ctas { flex-direction: column; align-items: stretch; }
+  .provider-hero .ds-phero-portrait { width: min(180px, 100%); max-width: 180px; }
+}
