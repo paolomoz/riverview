@@ -71,4 +71,44 @@ export default async function decorate(block) {
   }
 
   block.replaceChildren(wrap);
+
+  // Phase-3 dynamic: federated live search across provider/location/content indexes,
+  // wired to the site-search-hero input (and the ?keys= query param).
+  const { loadIndex } = await import('/scripts/list-search.js');
+  const [prov, loc, cont] = await Promise.all([
+    loadIndex('/provider-index.json'), loadIndex('/location-index.json'), loadIndex('/content-index.json'),
+  ]);
+  if (!prov && !loc && !cont) return;
+  const TYPE = { blog: 'Article', 'press-release': 'News', 'patient-story': 'Patient Story', video: 'Video' };
+  const corpus = [
+    ...(prov || []).map((r) => ({ title: r.name, path: r.path, kind: 'Provider', extra: r.specialty || '' })),
+    ...(loc || []).map((r) => ({ title: r.title, path: r.path, kind: 'Location', extra: r.city || '' })),
+    ...(cont || []).map((r) => ({ title: r.title, path: r.path, kind: TYPE[r.type] || 'Page', extra: '' })),
+  ];
+  const countEl = wrap.querySelector('.ds-result-count');
+  const nav = wrap.querySelector('.ds-pagenav');
+  function run(q) {
+    const query = q.trim().toLowerCase();
+    if (!query) return; // empty → keep captured default state
+    const hits = corpus.filter((r) => r.title && (r.title.toLowerCase().includes(query) || r.extra.toLowerCase().includes(query))).slice(0, 50);
+    countEl.textContent = `${hits.length} result${hits.length === 1 ? '' : 's'} for “${q.trim()}”`;
+    list.replaceChildren(...hits.map((r) => {
+      const li = document.createElement('li');
+      li.className = 'ds-result';
+      li.innerHTML = `<h3 class="ds-result-title"><a href="${r.path}">${r.title}</a></h3>
+        <p class="ds-result-snippet">${r.kind}${r.extra ? ` · ${r.extra}` : ''}</p>
+        <p class="ds-result-url">riverview.org${r.path}</p>`;
+      return li;
+    }));
+    if (nav) nav.hidden = true;
+  }
+  const input = document.querySelector('.site-search-hero input[type="search"], .site-search-hero input[name="keys"], input[name="keys"]');
+  if (input) {
+    let t;
+    input.addEventListener('input', (e) => { clearTimeout(t); t = setTimeout(() => run(e.target.value), 180); });
+    const form = input.closest('form');
+    if (form) form.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); });
+  }
+  const keys = new URLSearchParams(window.location.search).get('keys');
+  if (keys) { if (input) input.value = keys; run(keys); }
 }

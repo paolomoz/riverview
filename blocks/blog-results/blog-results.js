@@ -109,4 +109,31 @@ export default async function decorate(block) {
   }
 
   block.replaceChildren(wrap);
+
+  // Phase-3 dynamic: live content search + type/category facets over /content-index.json
+  const { loadIndex, enhanceList } = await import('/scripts/list-search.js');
+  const data = await loadIndex('/content-index.json');
+  if (!data) return;
+  const TYPE = { blog: 'Blog', 'press-release': 'News', 'patient-story': 'Patient Stories', video: 'Video' };
+  const cats = [...new Set(data.flatMap((r) => r.categories || []))].filter(Boolean).sort();
+  const fmt = (ep) => new Date(ep * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  enhanceList(wrap, grid, {
+    data: data.slice().sort((a, b) => (b.date || 0) - (a.date || 0)),
+    noun: 'article',
+    search: (r, q) => r.title.toLowerCase().includes(q),
+    facets: [
+      { name: 'type', label: 'All types', values: Object.values(TYPE), match: (r, v) => TYPE[r.type] === v },
+      { name: 'cat', label: 'All categories', values: cats, match: (r, v) => (r.categories || []).includes(v) },
+    ],
+    card: (r) => {
+      const el = document.createElement('article');
+      el.className = 'ds-bcard';
+      el.innerHTML = `${r.image ? `<a href="${r.path}" class="ds-bcard-media"><img src="${r.image}" alt="${r.title}" loading="lazy"></a>` : ''}
+        <div class="ds-bcard-body">
+          <p class="ds-bcard-meta">${TYPE[r.type] || r.type}${r.date ? ` · ${fmt(r.date)}` : ''}</p>
+          <h3 class="ds-bcard-title"><a href="${r.path}">${r.title}</a></h3>
+        </div>`;
+      return el;
+    },
+  });
 }

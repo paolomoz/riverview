@@ -81,4 +81,29 @@ export default async function decorate(block) {
   wrap.append(grid);
 
   block.replaceChildren(wrap);
+
+  // Phase-3 dynamic: live location search + city facet over /location-index.json
+  const { loadIndex, enhanceList } = await import('/scripts/list-search.js');
+  const data = await loadIndex('/location-index.json');
+  if (!data) return;
+  const cities = [...new Set(data.map((r) => r.city).filter(Boolean))].sort();
+  enhanceList(wrap, grid, {
+    data: data.slice().sort((a, b) => a.title.localeCompare(b.title)),
+    noun: 'location',
+    perPage: 18,
+    search: (r, q) => r.title.toLowerCase().includes(q) || (r.city || '').toLowerCase().includes(q),
+    facets: [{ name: 'city', label: 'All cities', values: cities, match: (r, v) => r.city === v }],
+    card: (r) => {
+      const el = document.createElement('article');
+      el.className = 'ds-lcard';
+      const dir = (r.lat && r.lng) ? `https://www.google.com/maps/dir/?api=1&destination=${r.lat},${r.lng}` : '';
+      el.innerHTML = `<div class="ds-lcard-body">
+        <h3 class="ds-lcard-name"><a href="${r.path}">${r.title}</a></h3>
+        ${r.city ? `<p class="ds-lcard-city">${r.city}, IN</p>` : ''}
+        ${r.phone ? `<p class="ds-lcard-phone"><a href="tel:${r.phone.replace(/[^\d]/g, '')}">${r.phone}</a></p>` : ''}
+        <div class="ds-lcard-actions"><a class="ds-link" href="${r.path}">View details</a>${dir ? `<a class="ds-link" href="${dir}">Get directions</a>` : ''}</div>
+      </div>`;
+      return el;
+    },
+  });
 }
