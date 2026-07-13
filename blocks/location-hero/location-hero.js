@@ -30,6 +30,22 @@ export default async function decorate(block) {
   const affil = cell(3)?.querySelector('p') || cell(3);
   const ctaNodes = cell(4) ? [...cell(4).querySelectorAll('a')] : [];
 
+  // Phase-4 SEO: MedicalClinic JSON-LD from the parsed identity fields
+  try {
+    const telA = cell(4)?.querySelector('a[href^="tel:"]');
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'MedicalClinic',
+      name: (h1?.textContent || '').trim(), url: window.location.href,
+      address: (addrCell?.textContent || '').replace(/\s+/g, ' ').trim() || undefined,
+      telephone: telA ? telA.getAttribute('href').replace('tel:', '') : undefined,
+      parentOrganization: { '@type': 'MedicalOrganization', name: 'Riverview Health', '@id': 'https://www.riverview.org/#organization' },
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(ld);
+    document.head.append(s);
+  } catch (e) { /* non-fatal */ }
+
   block.replaceChildren();
   block.insertAdjacentHTML('beforeend', TOPO_SVG);
 

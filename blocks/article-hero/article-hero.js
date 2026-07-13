@@ -32,6 +32,21 @@ export default async function decorate(block) {
   const catCell = cell(3);
   const catLinks = catCell ? [...catCell.querySelectorAll('a')] : [];
 
+  // Phase-4 SEO: Article JSON-LD from the parsed hero fields
+  try {
+    const t = dateCell?.querySelector('time');
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'Article',
+      headline: (h1?.textContent || '').trim(), url: window.location.href,
+      datePublished: t ? t.getAttribute('datetime') : undefined,
+      publisher: { '@type': 'MedicalOrganization', name: 'Riverview Health', '@id': 'https://www.riverview.org/#organization' },
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(ld, (k, v) => (v === undefined ? undefined : v));
+    document.head.append(s);
+  } catch (e) { /* non-fatal */ }
+
   block.replaceChildren();
   block.insertAdjacentHTML('beforeend', TOPO_SVG);
 

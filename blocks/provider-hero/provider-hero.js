@@ -30,6 +30,21 @@ export default async function decorate(block) {
   const ctaNodes = cell(4) ? [...cell(4).querySelectorAll('a')] : [];
   const name = (h1?.textContent || '').trim();
 
+  // Phase-4 SEO: Physician JSON-LD from the parsed identity fields
+  try {
+    const ld = {
+      '@context': 'https://schema.org', '@type': 'Physician',
+      name, url: window.location.href,
+      medicalSpecialty: (specialty?.textContent || '').trim() || undefined,
+      image: img?.getAttribute('src') || undefined,
+      affiliation: { '@type': 'MedicalOrganization', name: 'Riverview Health', '@id': 'https://www.riverview.org/#organization' },
+    };
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.textContent = JSON.stringify(ld, (k, v) => (v === undefined ? undefined : v));
+    document.head.append(s);
+  } catch (e) { /* non-fatal */ }
+
   block.replaceChildren();
   block.insertAdjacentHTML('beforeend', TOPO_SVG);
 
