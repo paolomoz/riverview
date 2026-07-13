@@ -2,12 +2,14 @@
 
 Live preview: https://main--riverview--paolomoz.aem.live/  ·  ~1,509 pages deployed.
 
-## BLOCKED NOW — DA_TOKEN expired mid-run
-- `DA_TOKEN` in `.env` expired (dev tokens ~24h). **Refresh it, then re-run:**
-  `DA_TOKEN=… node skills/deploy/scripts/deploy-batch.mjs --org paolomoz --repo riverview --branch main --content content`
-  The ledger skips everything already live and drives only the **3 remaining es hub pages**
-  (`/es/centros-de-salud`, `/es/colecciones-sobre-salud`, `/es/herramientas`). Their Spanish
-  chrome + `/es/` routing is already deployed as code.
+## es-locale — DONE (2026-07-13)
+- Spanish header/footer chrome + `/es/` locale routing live; 6 es articles + 3 es hubs
+  (`/es/centros-de-salud`, `/es/colecciones-sobre-salud`, `/es/herramientas`) live and verified.
+- Refinement (optional): hreflang es↔en pairing on the article pairs.
+
+## Redirect-map cleanup
+- `/EHRupdate`, `/employerclinicEHR` are content-less EHR utility stubs — add to the redirect
+  map (they are not content pages; they verify-fail as empty).
 
 ## Tracked decisions (per Paolo, this run)
 1. **Fonts — self-host Parabolica (confirmed keep).** ⚠️ Still verify the Adobe Fonts/Typekit
