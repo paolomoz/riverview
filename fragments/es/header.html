@@ -1,0 +1,166 @@
+<style>
+  /* riverview header chrome — lifted from stardust canon. Interactivity is
+     CSS-only (fragment <script> is inert under postlcp innerHTML injection). */
+  header.header { display: block; }
+  .rv-util { background: var(--color-accent); color: #fff; }
+  .rv-util .rv-wrap { display: flex; align-items: center; justify-content: flex-end; gap: var(--spacing-sm); flex-wrap: wrap; padding-block: 6px; }
+  .rv-util-group { display: flex; align-items: center; gap: 4px; }
+  .rv-util-group + .rv-util-group { border-left: 1px solid rgba(255,255,255,0.3); padding-left: var(--spacing-sm); }
+  .rv-util a:not(.btn) { color: #fff; text-decoration: none; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 12px; border-radius: var(--radius); }
+  .rv-util a:not(.btn):hover { text-decoration: underline; text-underline-offset: 3px; }
+  .rv-util a.btn-standing { background: transparent; border: 2px solid #fff; color: #fff; box-shadow: none; min-height: 44px; padding: 8px 18px; border-radius: var(--radius-pill); font-family: var(--heading-font-family); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; }
+  .rv-util a.btn-standing:hover { background: rgba(255,255,255,0.12); text-decoration: underline; text-underline-offset: 3px; }
+  .rv-util :focus-visible, .rv-mobile-panel :focus-visible { outline-color: #fff; }
+
+  .rv-wrap { max-width: var(--max-width); margin-inline: auto; padding-inline: 32px; }
+  .rv-header-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--spacing-sm); padding-block: 12px; }
+  .rv-logo { display: inline-flex; align-items: center; border-radius: var(--radius); padding-block: 4px; }
+  .rv-logo img { width: 230px; height: auto; }
+  .rv-nav ul.rv-nav-list { display: flex; align-items: center; gap: 2px; }
+  .rv-nav-item { position: relative; display: flex; align-items: center; }
+  .rv-nav-top { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 12px; color: var(--color-fg); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); text-decoration: none; border-radius: var(--radius); }
+  .rv-nav-top:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
+  .rv-nav-caret { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; color: var(--color-accent); pointer-events: none; }
+  .rv-nav-caret svg { transition: transform 0.15s ease; }
+  .rv-nav-sub { display: none; position: absolute; top: 100%; left: 0; min-width: 290px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 8px; z-index: 70; }
+  /* CSS-only dropdown: open on hover or keyboard focus-within */
+  .rv-nav-item:hover .rv-nav-sub, .rv-nav-item:focus-within .rv-nav-sub { display: block; }
+  .rv-nav-item:hover .rv-nav-caret svg, .rv-nav-item:focus-within .rv-nav-caret svg { transform: rotate(180deg); }
+  .rv-nav-sub a { display: block; padding: 11px 14px; color: var(--color-link); text-decoration: none; font-size: var(--body); border-radius: var(--radius); }
+  .rv-nav-sub a:hover { background: var(--color-surface); color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+
+  .rv-burger { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; background: none; border: 2px solid var(--color-accent); border-radius: var(--radius); color: var(--color-accent); cursor: pointer; }
+  .rv-mnav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+  .rv-mobile-panel { display: none; background: var(--color-accent); color: #fff; }
+  .rv-mnav-toggle:checked ~ .rv-mobile-panel { display: block; }
+  .rv-mobile-panel .rv-wrap { padding-block: var(--spacing-sm) var(--spacing-md); }
+  .rv-mobile-panel a { display: block; color: #fff; text-decoration: none; font-family: var(--heading-font-family); font-weight: 700; font-size: 18px; padding: 12px 4px; border-radius: var(--radius); }
+  .rv-mobile-panel a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .rv-mobile-util { border-top: 1px solid rgba(255,255,255,0.3); margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); }
+  .rv-mobile-util a { font-family: var(--body-font-family); font-weight: 400; font-size: var(--body); }
+
+  @media (max-width: 900px) {
+    .rv-nav, .rv-util-links { display: none; }
+    .rv-burger { display: inline-flex; }
+    .rv-util .rv-wrap { justify-content: flex-end; }
+    .rv-util-group + .rv-util-group { border-left: 0; padding-left: 0; }
+    .rv-logo img { width: 184px; }
+  }
+  @media (max-width: 767px) { .rv-util { display: none; } }
+</style>
+
+<div class="rv-util">
+  <nav aria-label="Utilidad">
+    <div class="rv-wrap">
+      <div class="rv-util-group rv-util-links">
+        <a href="/providers">Buscar un Proveedor</a>
+        <a href="/bill-pay">Pagar Mi Factura</a>
+      </div>
+      <div class="rv-util-group rv-util-links">
+        <a href="/riverview-work">Para Empleadores</a>
+        <a href="https://careers.riverview.org/">Empleos</a>
+        <a href="/donate">Donar</a>
+      </div>
+      <div class="rv-util-group rv-util-links">
+        <a href="/search-results"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg> Search</a>
+      </div>
+      <div class="rv-util-group">
+        <a class="btn-standing" href="/schedule-appointment">Programar una Cita</a>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="rv-wrap rv-header-bar">
+  <a class="rv-logo" href="/" aria-label="Riverview Health — home">
+    <img src="https://www.riverview.org/sites/default/files/2026-03/RVH_PoweredBy_CMYK_Horizontal.jpg" alt="Riverview Health logo" width="2042" height="426">
+  </a>
+  <nav class="rv-nav" aria-label="Principal">
+    <ul class="rv-nav-list">
+      <li class="rv-nav-item">
+        <a class="rv-nav-top" href="/patients-and-visitors">Pacientes y Visitantes</a>
+        <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <ul class="rv-nav-sub">
+          <li><a href="/schedule-appointment">Programar una Cita</a></li>
+          <li><a href="/bill-pay">Pagar Mi Factura</a></li>
+          <li><a href="/preparing-your-visit-0">Preparando su Visita</a></li>
+          <li><a href="/visitor-information">Información para Visitantes</a></li>
+          <li><a href="/frequently-asked-questions">Preguntas Frecuentes</a></li>
+          <li><a href="/patient-stories">Historias de Pacientes</a></li>
+          <li><a href="/press-release">Comunicados de Prensa</a></li>
+        </ul>
+      </li>
+      <li class="rv-nav-item">
+        <a class="rv-nav-top" href="/services">Servicios</a>
+        <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <ul class="rv-nav-sub">
+          <li><a href="/services/primary-care">Atención Primaria</a></li>
+          <li><a href="/services/specialty-care">Atención Especializada</a></li>
+          <li><a href="/services/emergency-room-urgent-care">Sala de Emergencias y Atención Urgente</a></li>
+          <li><a href="/services/womens-health">Salud de la Mujer</a></li>
+          <li><a href="/services/rehabilitation-services">Servicios de Rehabilitación</a></li>
+          <li><a href="/location/azure-plastic-surgery-med-spa">Azure Plastic Surgery &amp; Med Spa</a></li>
+          <li><a href="/services/orthopedic-services">Servicios Ortopédicos</a></li>
+          <li><a href="/services/gastroenterology-services">Servicios de Gastroenterología</a></li>
+          <li><a href="/services/laboratory-services">Servicios de Laboratorio</a></li>
+        </ul>
+      </li>
+      <li class="rv-nav-item">
+        <a class="rv-nav-top" href="/community-wellness">Comunidad y Bienestar</a>
+        <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <ul class="rv-nav-sub">
+          <li><a href="/events-search">Buscar Eventos</a></li>
+          <li><a href="/community-wellness/wellness-coalition">Coalición de Bienestar</a></li>
+        </ul>
+      </li>
+      <li class="rv-nav-item">
+        <a class="rv-nav-top" href="/locations">Ubicaciones</a>
+        <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <ul class="rv-nav-sub">
+          <li><a href="/locations">Todas las Ubicaciones</a></li>
+          <li><a href="https://www.riverview.org/sites/default/files/pdf/riverview-health-noblesville-hospital-map.pdf">Noblesville Hospital Map (PDF)</a></li>
+          <li><a href="https://www.riverview.org/sites/default/files/pdf/riverview-health-noblesville-hospital-parking-lot-map.pdf">Noblesville Hospital Parking Lot Map (PDF)</a></li>
+        </ul>
+      </li>
+      <li class="rv-nav-item">
+        <a class="rv-nav-top" href="/about">Acerca de</a>
+        <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        <ul class="rv-nav-sub">
+          <li><a href="/about-riverview-health">Acerca de Riverview Health</a></li>
+          <li><a href="/leadership">Liderazgo</a></li>
+          <li><a href="/history-0">Historia</a></li>
+          <li><a href="/about/awards-accreditations">Premios y Acreditaciones</a></li>
+          <li><a href="/community-benefit-0">Beneficio Comunitario</a></li>
+          <li><a href="/suburban-health-organization">Suburban Health Organization</a></li>
+          <li><a href="/foundation">Fundación</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <input type="checkbox" id="rv-mnav" class="rv-mnav-toggle" aria-hidden="true" tabindex="-1">
+  <label class="rv-burger" for="rv-mnav" aria-label="Open menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </label>
+  <div class="rv-mobile-panel">
+    <nav aria-label="Móvil">
+      <div class="rv-wrap">
+        <ul>
+          <li><a href="/patients-and-visitors">Pacientes y Visitantes</a></li>
+          <li><a href="/services">Servicios</a></li>
+          <li><a href="/community-wellness">Comunidad y Bienestar</a></li>
+          <li><a href="/locations">Ubicaciones</a></li>
+          <li><a href="/about">Acerca de</a></li>
+        </ul>
+        <ul class="rv-mobile-util">
+          <li><a href="/providers">Buscar un Proveedor</a></li>
+          <li><a href="/bill-pay">Pagar Mi Factura</a></li>
+          <li><a href="/riverview-work">Para Empleadores</a></li>
+          <li><a href="https://careers.riverview.org/">Empleos</a></li>
+          <li><a href="/donate">Donar</a></li>
+          <li><a href="/search-results">Buscar</a></li>
+          <li><a href="/schedule-appointment">Programar una Cita</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

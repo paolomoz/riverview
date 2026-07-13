@@ -1,9 +1,9 @@
 import { getConfig } from './ak.js';
 
-// Language of the current page from its path prefix (DE is the default tree).
+// Language of the current page from its path prefix (EN is the default tree; /es/ = Spanish).
 function currentLang() {
   const seg = window.location.pathname.split('/')[1];
-  return (seg === 'fr' || seg === 'en') ? seg : 'de';
+  return seg === 'es' ? 'es' : 'en';
 }
 
 async function loadStaticFragment(name) {
@@ -13,7 +13,7 @@ async function loadStaticFragment(name) {
   // Language-prefixed nav: /fr/… and /en/… pages load their own fragment;
   // everything else uses the default (DE). Fall back to default if absent.
   const lang = currentLang();
-  const prefix = lang === 'de' ? '' : `${lang}/`;
+  const prefix = lang === 'en' ? '' : `${lang}/`;
   let resp = await fetch(`${codeBase}/fragments/${prefix}${name}.html`);
   if (!resp.ok && prefix) resp = await fetch(`${codeBase}/fragments/${name}.html`);
   if (!resp.ok) return;
