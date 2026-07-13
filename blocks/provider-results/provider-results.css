@@ -3,6 +3,19 @@
    rescoped under .provider-results. Equal-height cards: grid rows stretch and the
    .ds-pcard-top takes flex:1 so every actions row sits flush at the bottom. */
 
+/* Phase-3 dynamic controls (live search / specialty filter / accepting / pager) */
+.provider-results .ds-pfilter { display: flex; flex-wrap: wrap; align-items: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-md); padding-bottom: var(--spacing-sm); border-bottom: 1px solid var(--color-border); }
+.provider-results .ds-pfilter input[type="search"], .provider-results .ds-pfilter select { min-height: 44px; padding: 10px 14px; border: 1px solid #7a8290; border-radius: var(--radius); font: inherit; background: #fff; }
+.provider-results .ds-pfilter input[type="search"] { min-width: 240px; }
+.provider-results .ds-pfilter-accept { display: inline-flex; align-items: center; gap: 8px; font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body-sm); }
+.provider-results .ds-pfilter-count { margin-left: auto; color: var(--color-muted); font-family: var(--heading-font-family); font-weight: 700; }
+.provider-results .ds-btn--disabled { background: var(--color-surface); color: var(--color-muted); border: 1px solid var(--color-border); box-shadow: none; cursor: not-allowed; }
+.provider-results .ds-pager { display: flex; flex-wrap: wrap; gap: 6px; margin-top: var(--spacing-md); }
+.provider-results .ds-pager button { min-width: 44px; min-height: 44px; border: 1px solid var(--color-border); background: #fff; border-radius: var(--radius); font-family: var(--heading-font-family); font-weight: 700; cursor: pointer; }
+.provider-results .ds-pager button.is-current { background: var(--color-accent); color: #fff; border-color: var(--color-accent); }
+.provider-results .ds-pager button:hover:not(.is-current) { border-color: var(--color-accent); }
+@media (max-width: 640px) { .provider-results .ds-pfilter-count { margin-left: 0; width: 100%; } }
+
 .provider-results .ds-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--spacing-sm) var(--spacing-md); align-items: stretch; }
 .provider-results .ds-pcard { position: relative; display: flex; flex-direction: column; background: #ffffff; border: 1px solid var(--color-border); border-radius: var(--radius); transition: transform 0.16s ease-out, box-shadow 0.16s ease-out, border-color 0.16s ease-out; }
 .provider-results .ds-pcard:hover, .provider-results .ds-pcard:focus-within { box-shadow: var(--shadow-card); border-color: #c9cdd6; transform: translateY(-3px); }

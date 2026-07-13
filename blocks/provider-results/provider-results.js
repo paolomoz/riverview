@@ -143,4 +143,92 @@ export default async function decorate(block) {
   }
 
   block.replaceChildren(wrap);
+
+  // Phase-3 dynamic: fetch the provider index and take over with live
+  // search / specialty filter / accepting toggle / pagination. Progressive
+  // enhancement — if the index isn't reachable, the static cards above stand.
+  enhanceDynamic(wrap, grid);
+}
+
+const PER_PAGE = 12;
+function cardFromIndex(p) {
+  const el = document.createElement('article');
+  el.className = 'ds-pcard';
+  const action = p.accepting
+    ? '<a class="ds-btn ds-btn--primary" href="/schedule-appointment">Schedule an Appointment</a>'
+    : '<span class="ds-btn ds-btn--disabled" aria-disabled="true">Not accepting new patients</span>';
+  el.innerHTML = `
+    <div class="ds-pcard-top">
+      ${p.image ? `<img class="ds-pcard-photo" src="${p.image}" alt="${p.name}" width="130" height="176" loading="lazy">` : ''}
+      <h3 class="ds-pcard-name"><a href="${p.path}">${p.name}</a></h3>
+      ${p.specialty ? `<p class="ds-pcard-spec">${p.specialty}</p>` : ''}
+      ${p.locations && p.locations[0] ? `<p class="ds-pcard-loc">${p.locations[0]}</p>` : ''}
+      ${p.phone ? `<p class="ds-pcard-phone"><a href="tel:${p.phone.replace(/[^\d]/g, '')}">${p.phone}</a></p>` : ''}
+    </div>
+    <div class="ds-pcard-actions">${action}<a class="ds-link" href="${p.path}">View details</a></div>`;
+  return el;
+}
+
+async function enhanceDynamic(wrap, staticGrid) {
+  let idx;
+  try {
+    const res = await fetch('/provider-index.json');
+    if (!res.ok) return;
+    idx = (await res.json()).data || [];
+  } catch { return; }
+  if (!Array.isArray(idx) || !idx.length) return;
+
+  const specs = [...new Set(idx.map((p) => p.specialty).filter(Boolean))].sort();
+  const controls = document.createElement('form');
+  controls.className = 'ds-pfilter';
+  controls.setAttribute('data-app', 'provider-search');
+  controls.innerHTML = `
+    <label class="ds-pfilter-search"><span class="ds-sr-only">Search providers by name</span>
+      <input type="search" name="q" placeholder="Search by name…" autocomplete="off"></label>
+    <label class="ds-pfilter-spec"><span class="ds-sr-only">Filter by specialty</span>
+      <select name="spec"><option value="">All specialties</option>${specs.map((s) => `<option value="${s}">${s}</option>`).join('')}</select></label>
+    <label class="ds-pfilter-accept"><input type="checkbox" name="accepting"> Accepting new patients</label>
+    <p class="ds-pfilter-count" role="status" aria-live="polite"></p>`;
+  wrap.insertBefore(controls, staticGrid);
+
+  const grid = document.createElement('div');
+  grid.className = 'ds-cards';
+  grid.setAttribute('data-slot', 'results');
+  staticGrid.replaceWith(grid);
+  const pager = document.createElement('nav');
+  pager.className = 'ds-pager';
+  pager.setAttribute('aria-label', 'Search results pages');
+  grid.after(pager);
+
+  const state = { q: '', spec: '', accepting: false, page: 1 };
+  const countEl = controls.querySelector('.ds-pfilter-count');
+
+  function filtered() {
+    const q = state.q.trim().toLowerCase();
+    return idx.filter((p) => (!q || p.name.toLowerCase().includes(q))
+      && (!state.spec || p.specialty === state.spec || (p.specialties || []).includes(state.spec))
+      && (!state.accepting || p.accepting));
+  }
+  function renderPage() {
+    const list = filtered();
+    const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+    state.page = Math.min(state.page, pages);
+    const slice = list.slice((state.page - 1) * PER_PAGE, state.page * PER_PAGE);
+    grid.replaceChildren(...slice.map(cardFromIndex));
+    countEl.textContent = `${list.length} provider${list.length === 1 ? '' : 's'}`;
+    pager.replaceChildren();
+    if (pages > 1) {
+      for (let i = 1; i <= pages && i <= 8; i += 1) {
+        const b = document.createElement('button');
+        b.type = 'button'; b.textContent = i; b.className = i === state.page ? 'is-current' : '';
+        b.addEventListener('click', () => { state.page = i; renderPage(); grid.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        pager.append(b);
+      }
+    }
+  }
+  controls.querySelector('[name=q]').addEventListener('input', (e) => { state.q = e.target.value; state.page = 1; renderPage(); });
+  controls.querySelector('[name=spec]').addEventListener('change', (e) => { state.spec = e.target.value; state.page = 1; renderPage(); });
+  controls.querySelector('[name=accepting]').addEventListener('change', (e) => { state.accepting = e.target.checked; state.page = 1; renderPage(); });
+  controls.addEventListener('submit', (e) => e.preventDefault());
+  renderPage();
 }
