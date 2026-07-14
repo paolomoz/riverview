@@ -3371,3 +3371,21 @@
 {"t":"2026-07-14T14:41:43.805Z","path":"/visitor-information","step":"verify","ok":true}
 {"t":"2026-07-14T14:41:45.908Z","path":"/westfield-endoscopy-center","step":"verify","ok":true}
 {"t":"2026-07-14T14:41:47.700Z","path":"/your-wellness-newsletter-riverview-health","step":"verify","ok":true}
+{"t":"2026-07-14T14:50:59.387Z","path":"/EHRupdate","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-14T14:50:59.622Z","path":"/champions-care","step":"verify","ok":true}
+{"t":"2026-07-14T14:50:59.956Z","path":"/campaign/grateful-patients-chuck-and-sally-crow","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:00.071Z","path":"/book-specialty-care-appointment","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:04.217Z","path":"/foundation-events","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:04.231Z","path":"/employerclinicEHR","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-14T14:51:04.763Z","path":"/foundation50","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:05.692Z","path":"/foundation","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:08.811Z","path":"/maternity-center","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:09.133Z","path":"/patients-and-visitors/schedule-appointment/request-appointment","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:10.020Z","path":"/preventative-screenings","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:10.335Z","path":"/riverview-health-employer-health-center","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:13.713Z","path":"/riverview-health-foundation","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:13.883Z","path":"/services/fitness-and-wellness/body-knowledge","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:14.759Z","path":"/services/pharmacy-services","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:15.080Z","path":"/services/orthopedic-services","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:18.132Z","path":"/services/primary-care","step":"verify","ok":true}
+{"t":"2026-07-14T14:51:18.772Z","path":"/services/rehabilitation-services/outpatient-rehab","step":"verify","ok":true}

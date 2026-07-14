@@ -26,8 +26,10 @@ const itemsOf = (lists) => {
   for (const l of lists) for (const it of (l.items || [])) out.push(typeof it === 'string' ? { text: it } : it);
   return out;
 };
-// short medical labels, no per-item link/description
-const isLabelSet = (items) => items.length >= 3 && items.every((it) => !it.href && !it.desc && words(it.text) <= 8);
+// short medical labels (a per-item link is fine — the label links to its sub-page);
+// a per-item description means it's a rich card, not a label
+const isLabelSet = (items) => items.length >= 3 && items.every((it) => !it.desc && words(it.text) <= 8);
+const label = (it) => (it.href ? `<a href="${attr(rel(it.href))}">${esc(it.text)}</a>` : esc(it.text));
 
 function heroCtaHref(nodes) {
   for (const n of nodes) {
@@ -84,11 +86,11 @@ function regionSection(headNode, body) {
     const head = headNode ? `<h2>${esc(htext)}</h2>` : '';
     // symptom/condition short-label sets → pill cluster
     if (isLabelSet(items) && PILLS_RE.test(htext) && !SVC_RE.test(htext)) {
-      return { type: 'pills', html: section(head, introP, block('pills', items.map((it) => [esc(it.text)]))) };
+      return { type: 'pills', html: section(head, introP, block('pills', items.map((it) => [label(it)]))) };
     }
     // service/procedure/allergen short-label sets → mint-diamond service cards
     if (isLabelSet(items)) {
-      return { type: 'svc-cards', html: section(head, introP, block('svc-cards', items.map((it) => [esc(it.text)]))) };
+      return { type: 'svc-cards', html: section(head, introP, block('svc-cards', items.map((it) => [label(it)]))) };
     }
     // rich (linked / described) items → cards
     const cards = items.map((it) => [`<h3>${it.href ? `<a href="${attr(rel(it.href))}">${esc(it.text)}</a>` : esc(it.text)}</h3>`
