@@ -4,6 +4,7 @@
 
 .service-body { padding-block: var(--section-padding); }
 .service-body .ds-body-grid { display: grid; grid-template-columns: minmax(0, 1fr) 304px; grid-template-areas: "main rail"; gap: var(--spacing-xl); align-items: start; }
+.service-body .ds-body-grid--single { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main"; }
 .service-body .ds-main { grid-area: main; min-width: 0; }
 
 /* ---- prose (68ch measure) ---- */

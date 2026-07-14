@@ -38,18 +38,21 @@ export default async function decorate(block) {
   const ctaNodes = cell(3) ? [...cell(3).querySelectorAll('a')] : [];
 
   block.replaceChildren();
-  block.classList.add('service-hero--photo');
 
-  // hero photo (bg via CSS url()) + L-to-R navy scrim
-  const photo = document.createElement('div');
-  photo.className = 'ds-hero-photo';
-  photo.setAttribute('role', 'img');
-  photo.setAttribute('aria-label', PHOTO_ALT);
-  block.append(photo);
-  const scrim = document.createElement('div');
-  scrim.className = 'ds-hero-scrim';
-  scrim.setAttribute('aria-hidden', 'true');
-  block.append(scrim);
+  // hero photo band is a variant (class "photo") — the cancer-services hub carries
+  // it; service-detail / SEO-lander / enriched pages use the plain navy topo band.
+  if (block.classList.contains('photo')) {
+    block.classList.add('service-hero--photo');
+    const photo = document.createElement('div');
+    photo.className = 'ds-hero-photo';
+    photo.setAttribute('role', 'img');
+    photo.setAttribute('aria-label', PHOTO_ALT);
+    block.append(photo);
+    const scrim = document.createElement('div');
+    scrim.className = 'ds-hero-scrim';
+    scrim.setAttribute('aria-hidden', 'true');
+    block.append(scrim);
+  }
 
   block.insertAdjacentHTML('beforeend', TOPO_SVG);
 

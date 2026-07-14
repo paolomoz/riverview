@@ -6,7 +6,7 @@
 //   ≥3 titled prose sub-sections → topic-panels · patient-story → story-band
 //   appointment-request → appointment · CTA → cta-band · lead prose → service-body
 // Not a per-page LLM builder — a grammar-encoded segmenter. Gate-filtered downstream.
-import { load, esc, rel, attr, block, section, metadata, doc, ul } from './util.mjs';
+import { load, esc, rel, attr, block, section, metadata, doc, ul, linkify } from './util.mjs';
 
 const CTA_RE = /schedule|appointment|make (a|your) (gift|appointment)|donate|ready to|contact us|get started|request an? /i;
 const RAIL_RE = /^in this section$/i;
@@ -112,58 +112,126 @@ function regionSection(headNode, body) {
   return { type: 'prose', head: headNode ? esc(htext) : '', paras: paras.map((p) => esc(p.text)) };
 }
 
+const INFO_RE = /^(for )?more information$/i;
+const PHONE_RE = /\(?\d{3}\)?[.\-\s]+\d{3}[.\-\s]\d{4}/;
+const ADDR_RE = /\b\d{3}[.\-\s]\d{3}[.\-\s]\d{4}\b|\bIN\s?\d{5}\b|\b(road|rd|street|st|ave|avenue|drive|dr|blvd|suite|ste)\b/i;
+const titleize = (s) => s.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
+// breadcrumb reconstructed from the URL path (the flat scrape drops the site nav)
+function crumbsFromUrl(url, title) {
+  let segs = [];
+  try { segs = new URL(url).pathname.split('/').filter(Boolean); } catch { /* keep [] */ }
+  const li = ['<li><a href="/">Home</a></li>'];
+  let acc = '';
+  segs.forEach((s, i) => {
+    acc += `/${s}`;
+    if (i === segs.length - 1) li.push(`<li>${esc(title)}</li>`);
+    else li.push(`<li><a href="${attr(acc)}">${esc(titleize(s))}</a></li>`);
+  });
+  return `<ul>${li.join('')}</ul>`;
+}
+
 export function build(slug, family, outPath) {
   const d = load(slug);
   const n = d.nodes || [];
   if (n.length < 4) return { ok: false, reason: 'thin-scrape', nodes: n.length };
 
-  // hero: title h1 + first blockquote/prose lede + CTA
+  // walk heading-delimited regions (levels 2-6; L1 is the hero title)
   const firstHeadIdx = n.findIndex((x, i) => i > 0 && isHeading(x) && x.level <= 3);
   const preHead = n.slice(1, firstHeadIdx < 0 ? n.length : firstHeadIdx);
-  const lede = preHead.find((x) => x.t === 'blockquote' || (x.t === 'p' && words(x.text) > 8 && !RAIL_RE.test(x.text)));
-  const cta = heroCtaHref(n);
-  const railLinks = [];
-  for (const x of n) if (x.t === 'p' && RAIL_RE.test(x.text)) for (const l of (x.links || [])) railLinks.push(l);
-
-  const S = [];
-  S.push(section(block('service-hero', [
-    [`<ul><li><a href="/">Home</a></li><li>${esc(d.title)}</li></ul>`],
-    [`<h1>${esc(d.title)}</h1>`],
-    ...(lede ? [[`<p>${esc(lede.text)}</p>`]] : []),
-    [`<p><strong><a href="${attr(rel(cta.href))}">${esc(cta.text)}</a></strong></p>`],
-  ])));
-
-  // remaining intro prose (before first heading, minus the lede) folds into first prose section
-  const introParas = preHead.filter((x) => x !== lede && x.t === 'p' && !RAIL_RE.test(x.text));
-
-  // walk heading-delimited regions (levels 2-6; L1 is the hero title)
   const headIdxs = n.map((x, i) => (isHeading(x) && x.level >= 2 && x.level <= 6 && i > 0 ? i : -1)).filter((i) => i >= 0);
   const regions = [];
-  if (introParas.length) regions.push({ head: null, body: introParas });
+  const introParas0 = preHead.filter((x) => x.t === 'p' && !RAIL_RE.test(x.text));
+  const preRegion = { head: null, body: introParas0 };
+  if (introParas0.length) regions.push(preRegion);
   for (let h = 0; h < headIdxs.length; h += 1) {
     const start = headIdxs[h]; const end = h + 1 < headIdxs.length ? headIdxs[h + 1] : n.length;
     regions.push({ head: n[start], body: n.slice(start + 1, end) });
   }
+
+  // pull the "More Information" region's ADDRESS out of the main flow → rail info.
+  // The flat scrape emits it in DOM order (often ahead of the real intro) and the
+  // heading greedily spans to the next heading, so capture only the leading address
+  // lines (short / address-shaped / "schedule" lines) and return the intro prose
+  // that follows back to the flow — else the whole Overview leaks into the rail.
+  let infoRegion = null;
+  const infoPos = regions.findIndex((r) => r.head && INFO_RE.test(r.head.text));
+  if (infoPos >= 0) {
+    const r = regions[infoPos];
+    const isProse = (x) => x.t === 'p' && words(x.text) > 14 && !ADDR_RE.test(x.text)
+      && !/schedule|call|option|questionnaire|answer/i.test(x.text);
+    let cut = r.body.findIndex(isProse);
+    if (cut < 0) cut = r.body.length;
+    const rest = r.body.slice(cut);
+    regions.splice(infoPos, 1, ...(rest.length ? [{ head: null, body: rest }] : []));
+    infoRegion = { head: r.head, body: r.body.slice(0, cut) };
+  }
+  const infoBody = new Set(infoRegion ? infoRegion.body : []);
+  const railInfoHtml = (() => {
+    if (!infoRegion) return '';
+    const ps = infoRegion.body.filter((x) => x.t === 'p' && (x.text || '').trim());
+    if (!ps.length) return '';
+    return `<p>${esc(infoRegion.head.text)}</p><address>${ps.map((p) => linkify(p)).join('<br>')}</address>`;
+  })();
+
+  // rail child-nav (from an "In this section" links group — often empty in the scrape)
+  const railLinks = [];
+  for (const x of n) if (x.t === 'p' && RAIL_RE.test(x.text)) for (const l of (x.links || [])) railLinks.push(l);
+
+  // hero lede: first substantial prose (a <p> or an intro blockquote) that is NOT
+  // rail/address/info content
+  const lede = n.find((x, i) => i > 0 && (x.t === 'p' || x.t === 'blockquote') && words(x.text) > 10
+    && !RAIL_RE.test(x.text) && !infoBody.has(x) && !ADDR_RE.test(x.text));
+  const cta = heroCtaHref(n);
+  const phoneNode = n.find((x) => x.t === 'p' && PHONE_RE.test(x.text) && /ph|phone|call|tel/i.test(x.text));
+  const phone = phoneNode ? (phoneNode.text.match(PHONE_RE) || [])[0] : null;
+  const phoneCta = phone ? ` <a href="tel:+1${phone.replace(/\D/g, '')}">${esc(phone)}</a>` : '';
+
+  const S = [];
+  S.push(section(block('service-hero', [
+    [crumbsFromUrl(d.url, d.title)],
+    [`<h1>${esc(d.title)}</h1>`],
+    [lede ? `<p>${esc(lede.text)}</p>` : ''],
+    [`<p><strong><a href="${attr(rel(cta.href))}">${esc(cta.text)}</a></strong>${phoneCta}</p>`],
+  ])));
+
+  // avoid duplicating the hero lede in the pre-heading intro region (landers with no
+  // rail). Hub Overview prose lives in a post-heading region and keeps the lede, as
+  // the gold prototype does (hero lede + Overview both open with the same sentence).
+  // But if the lede is the ONLY intro prose, keep it — an empty body drops the page
+  // below the block-diversity gate (better a short body than no body).
+  const introRest = introParas0.filter((x) => x !== lede);
+  preRegion.body = introRest.length ? introRest : introParas0;
 
   // build sections; accumulate consecutive prose sub-sections. At flush: a lead intro
   // (headless) → service-body; ≥3 titled prose sub-sections → topic-panels (the narrative
   // archetype's bordered panels, NOT one giant prose block); ≤2 titled → service-body.
   let proseBuf = []; // [{head, paras}]
   let bareBuf = []; // consecutive heading-only regions (item clusters expressed as headings)
+  let railUsed = false;
+  // the rail (child-nav + address) attaches to the FIRST service-body emitted, once
+  const takeRail = () => {
+    if (railUsed) return ['', ''];
+    const r0 = railLinks.length ? `<p>In this section</p>${ul({ items: railLinks })}` : '';
+    if (r0 || railInfoHtml) { railUsed = true; return [r0, railInfoHtml]; }
+    return ['', ''];
+  };
   const isBare = (r) => r.head && !r.body.some((x) => x.t === 'p' && !RAIL_RE.test(x.text)) && !r.body.some((x) => x.t === 'list');
   const flushProse = () => {
     if (!proseBuf.length) return;
-    const railNav = railLinks.length ? `<p>In this section</p>${ul({ items: railLinks })}` : '';
     const lead = proseBuf.filter((r) => !r.head);
     const titled = proseBuf.filter((r) => r.head && r.paras.length);
     if (lead.length) {
-      S.push(section(block('service-body', [[railNav], [''], [lead.map((r) => r.paras.map((t) => `<p>${t}</p>`).join('')).join('')]])));
+      const [r0, r1] = takeRail();
+      const overview = (r0 || r1) ? '<h2>Overview</h2>' : '';
+      S.push(section(block('service-body', [[r0], [r1], [overview + lead.map((r) => r.paras.map((t) => `<p>${t}</p>`).join('')).join('')]])));
     }
     if (titled.length >= 3) {
       // each titled sub-section → one topic-panel (heading cell + body cell)
       S.push(section(block('topic-panels', titled.map((r) => [`${esc(r.head)}`, r.paras.map((t) => `<p>${t}</p>`).join('')]))));
     } else if (titled.length) {
-      S.push(section(block('service-body', [[lead.length ? '' : railNav], [''], [titled.map((r) => `<h2>${esc(r.head)}</h2>${r.paras.map((t) => `<p>${t}</p>`).join('')}`).join('')]])));
+      const [r0, r1] = lead.length ? ['', ''] : takeRail();
+      S.push(section(block('service-body', [[r0], [r1], [titled.map((r) => `<h2>${esc(r.head)}</h2>${r.paras.map((t) => `<p>${t}</p>`).join('')}`).join('')]])));
     }
     proseBuf = [];
   };
@@ -193,6 +261,15 @@ export function build(slug, family, outPath) {
   }
   flushBare();
   flushProse();
+
+  // rail content but no service-body consumed it (thin contact-style pages: hero +
+  // address + cta) → emit a rail-carrying service-body so the address renders, using
+  // the lede as the Overview prose when present.
+  if (!railUsed && (railInfoHtml || railLinks.length)) {
+    const [r0, r1] = takeRail();
+    const overview = lede ? `<h2>Overview</h2><p>${esc(lede.text)}</p>` : '';
+    S.push(section(block('service-body', [[r0], [r1], [overview]])));
+  }
 
   // ensure a closing cta-band exists (grammar family default)
   const hasCta = S.some((s) => s.includes('class="cta-band"'));

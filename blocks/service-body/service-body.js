@@ -37,65 +37,70 @@ export default async function decorate(block) {
   const infoLabel = (infoCell?.querySelector('p')?.textContent || 'More Information').trim();
   const address = infoCell?.querySelector('address');
 
+  // no rail content (no child-nav links AND no address) → single-column prose,
+  // not the two-column grid with an empty grey rail box.
+  const hasRail = !!(navList || address);
+
   block.replaceChildren();
   const wrap = document.createElement('div');
   wrap.className = 'ds-wrap';
   const grid = document.createElement('div');
-  grid.className = 'ds-body-grid';
+  grid.className = hasRail ? 'ds-body-grid' : 'ds-body-grid ds-body-grid--single';
 
-  // ── rail: sticky "More Information" disclosure ──
-  const aside = document.createElement('aside');
-  aside.className = 'ds-rail';
-  aside.setAttribute('aria-labelledby', 'rail-h');
-  const details = document.createElement('details');
-  details.className = 'ds-rail-disc';
-  details.open = true;
+  if (hasRail) {
+    // ── rail: sticky "More Information" disclosure ──
+    const aside = document.createElement('aside');
+    aside.className = 'ds-rail';
+    aside.setAttribute('aria-labelledby', 'rail-h');
+    const details = document.createElement('details');
+    details.className = 'ds-rail-disc';
+    details.open = true;
 
-  const summary = document.createElement('summary');
-  const pill = document.createElement('span');
-  pill.className = 'ds-disc-pill';
-  pill.append(navLabel);
-  pill.insertAdjacentHTML('beforeend', CHEVRON);
-  summary.append(pill);
-  details.append(summary);
+    const summary = document.createElement('summary');
+    const pill = document.createElement('span');
+    pill.className = 'ds-disc-pill';
+    pill.append(navLabel || infoLabel);
+    pill.insertAdjacentHTML('beforeend', CHEVRON);
+    summary.append(pill);
+    details.append(summary);
 
-  const railBody = document.createElement('div');
-  railBody.className = 'ds-rail-body';
-  const srH = document.createElement('h2');
-  srH.id = 'rail-h';
-  srH.className = 'ds-sr-only';
-  srH.textContent = 'In this section';
-  railBody.append(srH);
+    const railBody = document.createElement('div');
+    railBody.className = 'ds-rail-body';
+    const srH = document.createElement('h2');
+    srH.id = 'rail-h';
+    srH.className = 'ds-sr-only';
+    srH.textContent = 'In this section';
+    railBody.append(srH);
 
-  const label1 = document.createElement('p');
-  label1.className = 'ds-rail-label';
-  label1.textContent = navLabel;
-  railBody.append(label1);
+    if (navList) {
+      const label1 = document.createElement('p');
+      label1.className = 'ds-rail-label';
+      label1.textContent = navLabel;
+      railBody.append(label1);
+      const nav = document.createElement('nav');
+      nav.className = 'ds-rail-nav';
+      nav.setAttribute('aria-label', `${navLabel} sections`);
+      nav.append(navList.cloneNode(true));
+      railBody.append(nav);
+    }
 
-  if (navList) {
-    const nav = document.createElement('nav');
-    nav.className = 'ds-rail-nav';
-    nav.setAttribute('aria-label', `${navLabel} sections`);
-    nav.append(navList.cloneNode(true));
-    railBody.append(nav);
+    if (address) {
+      const info = document.createElement('div');
+      info.className = 'ds-rail-info';
+      const label2 = document.createElement('p');
+      label2.className = 'ds-rail-label';
+      label2.textContent = infoLabel;
+      info.append(label2);
+      const addr = address.cloneNode(true);
+      addr.className = 'ds-rail-address';
+      info.append(addr);
+      railBody.append(info);
+    }
+
+    details.append(railBody);
+    aside.append(details);
+    grid.append(aside);
   }
-
-  if (address) {
-    const info = document.createElement('div');
-    info.className = 'ds-rail-info';
-    const label2 = document.createElement('p');
-    label2.className = 'ds-rail-label';
-    label2.textContent = infoLabel;
-    info.append(label2);
-    const addr = address.cloneNode(true);
-    addr.className = 'ds-rail-address';
-    info.append(addr);
-    railBody.append(info);
-  }
-
-  details.append(railBody);
-  aside.append(details);
-  grid.append(aside);
 
   // ── main: prose column ──
   const main = document.createElement('div');

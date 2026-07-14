@@ -107,6 +107,10 @@ main .section:empty { display: none; } /* metadata-consumed section collapse */
 main > div.has-template, div[data-status] { display: none; }
 
 .ds-wrap, .wrap { max-width: var(--max-width); margin-inline: auto; padding-inline: 32px; }
+/* default content (section headings + intro prose emitted outside a block) must
+   share the same centered content column as .ds-wrap, else it renders full-bleed */
+main .section > .default-content { max-width: var(--max-width); margin-inline: auto; padding-inline: 32px; }
+@media (max-width: 640px) { main .section > .default-content { padding-inline: 20px; } }
 .ds-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
 /* ---- header height reservation (late postlcp fragment inject → CLS) ---- */
