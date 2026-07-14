@@ -116,8 +116,11 @@ export default async function decorate(block) {
   proseNodes.forEach((node) => {
     const el = node.cloneNode(true);
     if (el.tagName === 'UL') {
-      // the conditions list
-      el.className = 'ds-cond-list';
+      // short parallel labels → 2-column condition list; sentence-fragment bullet
+      // lists (criteria, steps) → single-column prose list (readable long items)
+      const lis = [...el.querySelectorAll('li')];
+      const allShort = lis.length > 0 && lis.every((li) => (li.textContent || '').trim().split(/\s+/).length <= 6);
+      el.className = allShort ? 'ds-cond-list' : 'ds-prose-list';
       prose.append(el);
     } else if (el.tagName === 'FIGURE') {
       // Virtual Tour: captured poster only (video embed = migrate conditional).

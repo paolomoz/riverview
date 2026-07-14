@@ -26,10 +26,22 @@ const itemsOf = (lists) => {
   for (const l of lists) for (const it of (l.items || [])) out.push(typeof it === 'string' ? { text: it } : it);
   return out;
 };
-// short medical labels (a per-item link is fine — the label links to its sub-page);
-// a per-item description means it's a rich card, not a label
-const isLabelSet = (items) => items.length >= 3 && items.every((it) => !it.desc && words(it.text) <= 8);
+// A "label set" = short noun-phrase labels (services, conditions, procedures), the
+// only lists that become svc-cards / pills. Everything else (sentence-fragment
+// bullet lists, criteria, steps) stays a real <ul>. A per-item link is fine (the
+// label links to its sub-page); a trailing period or >6 words means it's a clause,
+// not a label; a per-item description means it's a rich card.
+const isLabelSet = (items) => items.length >= 3
+  && items.every((it) => !it.desc && words(it.text) <= 6 && !/[.:;]\s*$/.test((it.text || '').trim()));
 const label = (it) => (it.href ? `<a href="${attr(rel(it.href))}">${esc(it.text)}</a>` : esc(it.text));
+const liOf = (it) => `<li>${typeof it === 'string' ? esc(it) : label(it)}</li>`;
+// render a region body to prose HTML in source order: paragraphs, bullet lists, quotes
+const bodyToHtml = (body) => body.map((x) => {
+  if (x.t === 'p' && !RAIL_RE.test(x.text)) return `<p>${linkify(x)}</p>`;
+  if (x.t === 'list') return `<ul>${(x.items || []).map(liOf).join('')}</ul>`;
+  if (x.t === 'blockquote') return `<blockquote>${esc(x.text)}</blockquote>`;
+  return '';
+}).join('');
 
 function heroCtaHref(nodes) {
   for (const n of nodes) {
@@ -80,7 +92,9 @@ function regionSection(headNode, body) {
     };
   }
 
-  // list region → pills (symptoms/conditions) · svc-cards (services/procedures) · cards (rich)
+  // list region → pills (symptom/condition labels) · svc-cards (service/procedure
+  // labels) · cards (described items). A plain sentence-fragment bullet list is NOT
+  // any of these — it falls through to prose and renders as a real <ul>.
   const items = itemsOf(lists);
   if (items.length >= 3) {
     const head = headNode ? `<h2>${esc(htext)}</h2>` : '';
@@ -92,10 +106,13 @@ function regionSection(headNode, body) {
     if (isLabelSet(items)) {
       return { type: 'svc-cards', html: section(head, introP, block('svc-cards', items.map((it) => [label(it)]))) };
     }
-    // rich (linked / described) items → cards
-    const cards = items.map((it) => [`<h3>${it.href ? `<a href="${attr(rel(it.href))}">${esc(it.text)}</a>` : esc(it.text)}</h3>`
-      + (it.desc ? `<p>${esc(it.desc)}</p>` : '')]);
-    return { type: 'cards', html: section(head, block('cards', cards)) };
+    // items carrying their own description → rich title+desc cards
+    if (items.some((it) => it.desc)) {
+      const cards = items.map((it) => [`<h3>${it.href ? `<a href="${attr(rel(it.href))}">${esc(it.text)}</a>` : esc(it.text)}</h3>`
+        + (it.desc ? `<p>${esc(it.desc)}</p>` : '')]);
+      return { type: 'cards', html: section(head, block('cards', cards)) };
+    }
+    // else: a prose bullet list → fall through to prose (rendered as <ul> below)
   }
 
   // "name  description" paragraph clusters (≥3 with a leading link) → cards
@@ -108,8 +125,16 @@ function regionSection(headNode, body) {
     return { type: 'cards', html: section(headNode ? `<h2>${esc(htext)}</h2>` : '', block('cards', cards)) };
   }
 
-  // else prose → buffer (head + paras) for flush (service-body or topic-panels)
-  return { type: 'prose', head: headNode ? esc(htext) : '', paras: paras.map((p) => esc(p.text)) };
+  // else prose → buffer (head + body html: paragraphs + bullet lists) for flush.
+  // Track list-presence + word count so the flush can tell parallel narrative
+  // (→ topic-panels) from a sequential article with bullet lists (→ one article).
+  return {
+    type: 'prose',
+    head: headNode ? htext : '',
+    html: bodyToHtml(body),
+    hasList: lists.length > 0,
+    wc: paras.reduce((s, p) => s + words(p.text), 0),
+  };
 }
 
 const INFO_RE = /^(for )?more information$/i;
@@ -220,18 +245,28 @@ export function build(slug, family, outPath) {
   const flushProse = () => {
     if (!proseBuf.length) return;
     const lead = proseBuf.filter((r) => !r.head);
-    const titled = proseBuf.filter((r) => r.head && r.paras.length);
-    if (lead.length) {
+    const titled = proseBuf.filter((r) => r.head && r.html);
+    // topic-panels only for PARALLEL narrative: 3–5 titled sections, all list-free and
+    // of comparable, moderate length (15–180 words) — the hip-replacement "Why / What
+    // to Expect / Everyday Life" shape. A sequential article (many sections, a very
+    // long section, or any section with a bullet list) stays one service-body so
+    // headings + paragraphs + <ul>s read as prose, not bordered cards.
+    const panels = titled.length >= 3 && titled.length <= 5
+      && titled.every((r) => !r.hasList && r.wc >= 15 && r.wc <= 180);
+    if (panels) {
+      if (lead.length) {
+        const [r0, r1] = takeRail();
+        const overview = (r0 || r1) ? '<h2>Overview</h2>' : '';
+        S.push(section(block('service-body', [[r0], [r1], [overview + lead.map((r) => r.html).join('')]])));
+      }
+      S.push(section(block('topic-panels', titled.map((r) => [esc(r.head), r.html]))));
+    } else {
+      // one clean article: lead intro + every titled section (h2 + prose + bullets)
       const [r0, r1] = takeRail();
-      const overview = (r0 || r1) ? '<h2>Overview</h2>' : '';
-      S.push(section(block('service-body', [[r0], [r1], [overview + lead.map((r) => r.paras.map((t) => `<p>${t}</p>`).join('')).join('')]])));
-    }
-    if (titled.length >= 3) {
-      // each titled sub-section → one topic-panel (heading cell + body cell)
-      S.push(section(block('topic-panels', titled.map((r) => [`${esc(r.head)}`, r.paras.map((t) => `<p>${t}</p>`).join('')]))));
-    } else if (titled.length) {
-      const [r0, r1] = lead.length ? ['', ''] : takeRail();
-      S.push(section(block('service-body', [[r0], [r1], [titled.map((r) => `<h2>${esc(r.head)}</h2>${r.paras.map((t) => `<p>${t}</p>`).join('')}`).join('')]])));
+      const overview = (r0 || r1) && lead.length ? '<h2>Overview</h2>' : '';
+      const bodyHtml = overview + lead.map((r) => r.html).join('')
+        + titled.map((r) => `<h2>${esc(r.head)}</h2>${r.html}`).join('');
+      if (bodyHtml) S.push(section(block('service-body', [[r0], [r1], [bodyHtml]])));
     }
     proseBuf = [];
   };
@@ -247,7 +282,7 @@ export function build(slug, family, outPath) {
       S.push(section(title ? `<h2>${esc(title.head.text)}</h2>` : '', block('svc-cards', cards.map((r) => [esc(r.head.text)]))));
     } else {
       // not a cluster — bare headings carry no body; drop (matches prior behaviour)
-      for (const r of bareBuf) proseBuf.push({ head: esc(r.head.text), paras: [] });
+      for (const r of bareBuf) proseBuf.push({ head: r.head.text, html: '', hasList: false, wc: 0 });
     }
     bareBuf = [];
   };
@@ -255,7 +290,7 @@ export function build(slug, family, outPath) {
     if (isBare(r)) { bareBuf.push(r); continue; }
     flushBare();
     const seg = regionSection(r.head, r.body);
-    if (seg.type === 'prose') { proseBuf.push({ head: seg.head, paras: seg.paras }); continue; }
+    if (seg.type === 'prose') { proseBuf.push({ head: seg.head, html: seg.html, hasList: seg.hasList, wc: seg.wc }); continue; }
     flushProse();
     S.push(seg.html);
   }

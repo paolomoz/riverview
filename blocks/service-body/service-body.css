@@ -17,6 +17,9 @@
 .service-body .ds-cond-list { list-style: disc; padding-left: 1.3em; margin-top: var(--spacing-sm); columns: 2; column-gap: var(--spacing-lg); }
 .service-body .ds-cond-list li { margin-block: 6px; break-inside: avoid; font-size: var(--body); line-height: 1.5; }
 .service-body .ds-cond-list li::marker { color: var(--color-accent); }
+.service-body .ds-prose-list { list-style: disc; padding-left: 1.3em; margin-top: var(--spacing-sm); max-width: var(--measure-article); }
+.service-body .ds-prose-list li { margin-block: 8px; font-size: var(--body); line-height: var(--line-height-body); }
+.service-body .ds-prose-list li::marker { color: var(--color-accent); }
 
 /* ---- virtual tour region (captured poster; video embed = migrate conditional) ---- */
 .service-body .ds-tour { margin-top: var(--spacing-md); }
