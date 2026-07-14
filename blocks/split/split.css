@@ -1,0 +1,5 @@
+.split .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-xl);align-items:center;padding-block:var(--section-padding)}
+.split .split-media img{width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow-plinth);object-fit:cover}
+.split .split-copy{display:flex;flex-direction:column;gap:var(--spacing-sm)}
+.split .split-copy h2{font-size:clamp(27px,4.5vw,var(--heading-xl));color:var(--color-fg)}
+@media (max-width:1023px){.split .split-grid{grid-template-columns:1fr;gap:var(--spacing-md)}}

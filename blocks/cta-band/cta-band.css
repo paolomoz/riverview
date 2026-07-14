@@ -1,0 +1,7 @@
+.cta-band{position:relative;background:var(--color-accent);color:#fff;overflow:hidden}
+.cta-band .ds-wave-top{position:absolute;top:-1px;left:0;right:0;width:100%;height:clamp(40px,6vw,80px);transform:scaleY(-1);z-index:1}
+.cta-band .cta-band-inner{position:relative;z-index:2;padding-block:clamp(72px,9vw,110px);max-width:760px}
+.cta-band h2{color:#fff;font-size:clamp(27px,4.5vw,var(--heading-xl))}
+.cta-band p{font-size:var(--lede);line-height:1.45;margin-top:var(--spacing-sm)}
+.cta-band .btn-group,.cta-band p:has(a.btn){margin-top:var(--spacing-md)}
+.cta-band a.btn-secondary{border-color:#fff;color:#fff}
