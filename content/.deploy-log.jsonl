@@ -2667,3 +2667,13 @@
 {"t":"2026-07-13T12:07:41.721Z","path":"/es/bienestar/que-es-el-sindrome-del-intestino-irritable-ibs","step":"verify","ok":true}
 {"t":"2026-07-13T12:07:41.859Z","path":"/es/colesterol-elevado-evaluacion-de-su-salud-riesgos","step":"verify","ok":true}
 {"t":"2026-07-13T12:07:41.873Z","path":"/es/breast-health/prevention/mamografias-y-salud-mamaria","step":"verify","ok":true}
+{"t":"2026-07-13T15:48:30.482Z","path":"/es/herramientas","step":"put","status":401,"text":""}
+{"t":"2026-07-13T15:48:30.482Z","path":"/es/colecciones-sobre-salud","step":"put","status":401,"text":""}
+{"t":"2026-07-13T15:48:30.483Z","path":"/es/centros-de-salud","step":"put","status":401,"text":""}
+{"t":"2026-07-13T15:48:30.483Z","path":"/employerclinicEHR","step":"put","status":401,"text":""}
+{"t":"2026-07-13T15:48:30.483Z","path":"/EHRupdate","step":"put","status":401,"text":""}
+{"t":"2026-07-13T15:57:19.846Z","path":"/es/centros-de-salud","step":"verify","ok":true}
+{"t":"2026-07-13T15:57:19.987Z","path":"/es/colecciones-sobre-salud","step":"verify","ok":true}
+{"t":"2026-07-13T15:57:20.105Z","path":"/EHRupdate","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-13T15:57:20.126Z","path":"/employerclinicEHR","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-13T15:57:23.881Z","path":"/es/herramientas","step":"verify","ok":true}
