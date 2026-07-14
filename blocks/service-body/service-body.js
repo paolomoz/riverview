@@ -34,12 +34,15 @@ export default async function decorate(block) {
 
   const navLabel = (navCell?.querySelector('p')?.textContent || '').trim();
   const navList = navCell?.querySelector('ul');
-  const infoLabel = (infoCell?.querySelector('p')?.textContent || 'More Information').trim();
-  const address = infoCell?.querySelector('address');
+  // DA strips <address>, so detect the rail info by structure: the first <p> in the
+  // info cell is the label, any following <p>/<address> content is the address body.
+  const infoPs = infoCell ? [...infoCell.children].filter((el) => /^(P|ADDRESS)$/.test(el.tagName)) : [];
+  const infoLabel = (infoPs[0]?.textContent || 'More Information').trim();
+  const addressParts = infoCell?.querySelector('address') ? [infoCell.querySelector('address')] : infoPs.slice(1);
 
   // no rail content (no child-nav links AND no address) → single-column prose,
   // not the two-column grid with an empty grey rail box.
-  const hasRail = !!(navList || address);
+  const hasRail = !!(navList || addressParts.length);
 
   block.replaceChildren();
   const wrap = document.createElement('div');
@@ -84,15 +87,16 @@ export default async function decorate(block) {
       railBody.append(nav);
     }
 
-    if (address) {
+    if (addressParts.length) {
       const info = document.createElement('div');
       info.className = 'ds-rail-info';
       const label2 = document.createElement('p');
       label2.className = 'ds-rail-label';
       label2.textContent = infoLabel;
       info.append(label2);
-      const addr = address.cloneNode(true);
+      const addr = document.createElement('address');
       addr.className = 'ds-rail-address';
+      addr.innerHTML = addressParts.map((el) => el.innerHTML).join('<br>');
       info.append(addr);
       railBody.append(info);
     }
