@@ -1,0 +1,7 @@
+.story-band{position:relative;background:var(--color-accent);color:#fff;overflow:hidden}
+.story-band .story-wave-top{position:absolute;top:-1px;left:0;right:0;width:100%;height:clamp(40px,6vw,80px);transform:scaleY(-1);z-index:1}
+.story-band .ds-wrap{position:relative;z-index:2}
+.story-band .story-band-inner{padding-block:clamp(64px,9vw,100px);max-width:720px}
+.story-band .story-band-inner h2{color:#fff;font-size:clamp(27px,4vw,var(--heading-xl));font-weight:900}
+.story-band .story-band-inner blockquote{margin:var(--spacing-sm) 0 0;font-family:var(--body-font-family);font-size:var(--heading-md);line-height:1.45;color:#fff}
+.story-band .story-band-inner .btn-group{margin-top:var(--spacing-md)}

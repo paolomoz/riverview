@@ -1,0 +1,8 @@
+.topic-panels .ds-wrap{padding-block:0}
+.topic-panels .topic-panels-grid{display:grid;gap:var(--spacing-md)}
+.topic-panels .topic-panel{background:#fff;border:1px solid var(--color-border);border-radius:var(--radius-tile);padding:clamp(24px,4vw,40px)}
+.topic-panels .topic-panel--wash{background:var(--color-mint-wash);border-color:transparent}
+.topic-panels .topic-panel h3{font-size:var(--heading-lg);font-weight:800;color:var(--color-accent);line-height:1.2;text-wrap:balance}
+.topic-panels .topic-panel-body{margin-top:var(--spacing-sm);max-width:68ch}
+.topic-panels .topic-panel-body p{color:var(--color-fg);font-size:var(--body);line-height:1.65}
+.topic-panels .topic-panel-body p+p{margin-top:.9em}

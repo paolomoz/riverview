@@ -1,0 +1,14 @@
+.appointment .ds-wrap{padding-block:0}
+.appointment .appointment-panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-tile);padding:clamp(24px,4vw,44px);max-width:820px}
+.appointment .appointment-panel h2{font-size:clamp(24px,3.5vw,var(--heading-xl));font-weight:800;color:var(--color-accent)}
+.appointment .appointment-intro{margin-top:var(--spacing-sm);color:var(--color-fg);font-size:var(--body);line-height:1.6;max-width:64ch}
+.appointment .appointment-form{margin-top:var(--spacing-md);display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-sm)}
+.appointment .appointment-field{display:flex;flex-direction:column;gap:6px}
+.appointment .appointment-field--wide{grid-column:1/-1}
+.appointment .appointment-field label{font-family:var(--heading-font);font-weight:700;font-size:var(--body-sm);color:var(--color-ink-navy)}
+.appointment .appointment-field input,.appointment .appointment-field select{font:inherit;font-size:var(--body);padding:11px 13px;border:1px solid var(--color-border);border-radius:var(--radius);background:#fff;color:var(--color-fg);min-height:44px}
+.appointment .appointment-field input:focus,.appointment .appointment-field select:focus{outline:2px solid var(--color-accent);outline-offset:1px;border-color:var(--color-accent)}
+.appointment .appointment-submit{grid-column:1/-1;justify-self:start;margin-top:6px;font-family:var(--heading-font);font-weight:700;font-size:var(--body);padding:13px 28px;min-height:44px;border:0;border-radius:var(--radius-pill);background:var(--color-accent);color:#fff;cursor:pointer;transition:background .15s ease}
+.appointment .appointment-submit:hover{background:var(--color-ink-navy)}
+.appointment .appointment-ribbon{margin-top:14px;font-size:var(--body-xs,13px);color:var(--color-muted);font-style:italic}
+@media (max-width:640px){.appointment .appointment-form{grid-template-columns:1fr}.appointment .appointment-field--wide{grid-column:auto}}
