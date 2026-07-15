@@ -8,7 +8,7 @@ const b=await chromium.launch();const pg=await (await b.newContext()).newPage();
 await pg.goto('file://'+(SRC.startsWith('/')?SRC:process.cwd()+'/'+SRC),{waitUntil:'load'});
 const data=await pg.evaluate(()=>{
   const clean=t=>(t||'').replace(/\s+/g,' ').trim();
-  const relify=el=>{el.querySelectorAll('a').forEach(a=>{const h=a.getAttribute('href')||'';if(h.startsWith('https://www.riverview.org'))a.setAttribute('href',h.replace('https://www.riverview.org','')||'/');});return el;};
+  const relify=el=>{el.querySelectorAll('a').forEach(a=>{const h=a.getAttribute('href')||'';let h2=h.replace(/https?:\/\/[a-z0-9.-]*pantheonsite\.io/,'https://www.riverview.org');if(h2.startsWith('https://www.riverview.org'))a.setAttribute('href',h2.replace('https://www.riverview.org','')||'/');});return el;};
   const inner=el=>relify(el.cloneNode(true)).innerHTML.trim();
   const S=[];
   const title=document.title;
@@ -35,8 +35,10 @@ const data=await pg.evaluate(()=>{
         const extraP=[...box.querySelectorAll('p')].slice(1).filter(p=>!p.querySelector('img')&&clean(p.textContent)!==lbl).map(p=>`<p>${inner(p)}</p>`).join('');
         return [`<p>${lbl}</p>${img?`<img src="${img.src}" alt="${img.alt||''}">`:''}${extraP}${ul?relify(ul.cloneNode(true)).outerHTML:''}`];
       });
-      const addr=rail.querySelector('.ds-rail-address,address');
-      const infoLbl=addr?clean(addr.closest('.ds-rail-info')?.querySelector('.ds-rail-label')?.textContent)||'More Information':'';
+      const addrEls=[...rail.querySelectorAll('.ds-rail-address,address,.ds-rail-loc')];
+      const hoursEls=[...rail.querySelectorAll('.ds-rail-hours')];
+      const addr=addrEls.length?{innerHTML:addrEls.map((a,i)=>inner(a)+(hoursEls[i]?'<br>'+inner(hoursEls[i]):'')).join('<br><br>')}:null;
+      const infoLbl=addr?clean(rail.querySelector('.ds-rail-info .ds-rail-label')?.textContent)||'For More Information':'';
       // main col → ordered segments: prose runs vs nested component groups
       const segs=[];let buf=[];
       const flushBuf=()=>{if(!buf.length)return;const d=document.createElement('div');buf.forEach(n=>d.append(n.cloneNode(true)));relify(d);
@@ -52,7 +54,7 @@ const data=await pg.evaluate(()=>{
       });};
       walk(proseEl);flushBuf();
       const first=segs[0]&&segs[0].kind==='prose'?segs.shift():{kind:'prose',html:''};
-      S.push({t:'service-body',rows:[[`<p>${navLabel}</p>${navUl?relify(navUl.cloneNode(true)).outerHTML:''}`],[addr?`<p>${infoLbl}</p><p>${inner(addr)}</p>`:''],[first.html],...boxes]});
+      S.push({t:'service-body',rows:[[`<p>${navLabel}</p>${navUl?relify(navUl.cloneNode(true)).outerHTML:''}`],[addr?`<p>${infoLbl}</p><p>${addr.innerHTML}</p>`:''],[first.html],...boxes]});
       segs.forEach(g=>{if(g.kind==='prose')S.push({t:null,pre:[g.html],rows:[]});else S.push({t:g.kind==='cards'?'cards':g.kind,rows:g.rows});});
       return;
     }
@@ -62,6 +64,41 @@ const data=await pg.evaluate(()=>{
     if(head)parts.push(`<h2>${clean(head.textContent)}</h2>`);
     const headP=head?.parentElement?.querySelector('p');
     if(headP)parts.push(`<p>${inner(headP)}</p>`);
+    // appointment form
+    const form=sec.querySelector('form');
+    if(form){
+      const rows=[[`<h2>${clean(sec.querySelector('h2')?.textContent)||'Schedule an Appointment'}</h2>`]];
+      [...form.querySelectorAll('p,.ds-form-note')].filter(pp=>!pp.closest('.ds-field')&&clean(pp.textContent)&&!/connects to the appointment/i.test(pp.textContent)).forEach(pp=>rows.push([inner(pp)]));
+      [...form.querySelectorAll('.ds-field')].forEach(f=>{
+        const lbl=clean(f.querySelector('label')?.textContent);
+        const sel=f.querySelector('select');const ta=f.querySelector('textarea');const inp=f.querySelector('input');
+        let type='text';
+        if(sel){const opts=[...sel.querySelectorAll('option')].map(o=>clean(o.textContent)).filter(o=>o&&!/^-|select|none/i.test(o));type=opts.length?'select:'+opts.join('|'):'select';}
+        else if(ta)type='text';
+        else if(inp)type=inp.getAttribute('type')||'text';
+        if(lbl)rows.push([lbl,type]);
+      });
+      S.push({t:'appointment',rows});return;
+    }
+    // provider/person cards
+    const persons=[...sec.querySelectorAll('.ds-person,[class*=person-card]')];
+    if(persons.length){
+      const rows=persons.map(c=>{const img=c.querySelector('img');const nameA=c.querySelector('h3 a')||c.querySelector('h3');const spec=clean(c.querySelector('.ds-spec,.person-spec,[class*=spec]')?.textContent);
+        const meta=[...c.querySelectorAll('p,a[href^="tel:"]')].filter(el=>!el.closest('h3')&&!/view details|schedule|locations/i.test(el.textContent)&&clean(el.textContent)&&clean(el.textContent)!==spec).map(el=>el.tagName==='A'?`<p><a href="${el.getAttribute('href')}">${clean(el.textContent)}</a></p>`:`<p>${inner(el)}</p>`).join('');
+        const acts=[...c.querySelectorAll('a')].filter(a=>/schedule|locations/i.test(a.textContent)).map((a,i)=>`${i?' ':''}<a href="${a.getAttribute('href')}">${clean(a.textContent)}</a>`).join('');
+        return [img?`<img src="${img.src}" alt="${img.alt||''}">`:'',nameA?(nameA.tagName==='A'?`<a href="${nameA.getAttribute('href')}">${clean(nameA.textContent)}</a>`:clean(nameA.textContent)):'',spec||'',meta,acts?`<p>${acts}</p>`:''];});
+      S.push({t:'people',pre:parts,rows});
+      const more=[...sec.querySelectorAll('a')].find(a=>/view more/i.test(a.textContent));
+      if(more)S.push({t:null,pre:[`<p><strong><a href="${more.getAttribute('href')}">View More</a></strong></p>`],rows:[]});
+      return;
+    }
+    // poster/story cards with linked media (video posters)
+    const posters=[...sec.querySelectorAll('.ds-media-card,[class*=stories] article,[class*=story-card]')].filter(c=>c.querySelector('img'));
+    if(posters.length&&!sec.querySelector('.ds-hub-card,.ds-prog-card')){
+      S.push({t:'cards',pre:parts,rows:posters.map(c=>{const img=c.querySelector('img');const h3=clean(c.querySelector('h3,h2')?.textContent);const link=c.querySelector('a[href]');const ps=[...c.querySelectorAll('p')].map(pp=>`<p>${inner(pp)}</p>`).join('');
+        return [`<img src="${img.src}" alt="${img.alt||h3}">`+(h3?`<h3>${link?`<a href="${link.getAttribute('href')}">${h3}</a>`:h3}</h3>`:'')+ps];})});
+      return;
+    }
     // tabs
     const tablist=sec.querySelector('.ds-tablist');
     if(tablist){

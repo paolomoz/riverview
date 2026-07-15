@@ -11,3 +11,8 @@
 .people .person-link{margin-top:auto;font-size:var(--body-sm);color:var(--color-link);font-weight:600}
 @media (max-width:1023px){.people .people-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.people .people-grid{grid-template-columns:1fr}}
+.people .person-meta{font-size:13px;color:var(--color-muted)}
+.people .person-meta a{color:var(--color-link);font-weight:600}
+.people .person-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.people .person-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 14px;border-radius:var(--radius-pill);background:var(--color-accent);color:#fff;font-size:13px;font-family:var(--heading-font);font-weight:700;text-decoration:none}
+.people .person-actions a:hover{background:var(--color-ink-navy)}
