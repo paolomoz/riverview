@@ -130,6 +130,27 @@ export default async function decorate(block) {
   const proseNodes = proseCell ? [...proseCell.children] : [];
   proseNodes.forEach((node) => {
     const el = node.cloneNode(true);
+    // titled media pair (DA strips figure/figcaption): a <p> whose only content is
+    // an img/picture becomes a ds-tour; a preceding strong-only <p> is its caption.
+    if (el.tagName === 'P' && el.querySelector('picture,img') && !(el.textContent || '').trim()) {
+      const prev = prose.lastElementChild;
+      let capText = '';
+      if (prev && prev.tagName === 'P' && prev.children.length === 1 && prev.firstElementChild.tagName === 'STRONG'
+        && (prev.textContent || '').trim() === (prev.firstElementChild.textContent || '').trim()) {
+        capText = prev.textContent.trim(); prev.remove();
+      }
+      const tour = document.createElement('div');
+      tour.className = 'ds-tour';
+      const figure = document.createElement('figure');
+      const media = document.createElement('div');
+      media.className = 'ds-tour-media';
+      media.append(el.querySelector('picture') || el.querySelector('img'));
+      figure.append(media);
+      if (capText) { const cap = document.createElement('figcaption'); cap.textContent = capText; figure.append(cap); }
+      tour.append(figure);
+      prose.append(tour);
+      return;
+    }
     if (el.tagName === 'UL') {
       // short parallel labels → 2-column condition list; sentence-fragment bullet
       // lists (criteria, steps) → single-column prose list (readable long items)
