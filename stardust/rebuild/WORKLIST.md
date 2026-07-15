@@ -8,12 +8,6 @@ Each page: run PROCESS.md steps 1–12, one page = one commit. Fidelity gate
 at step 12 decides done (heading-match >=90%, structural counts, hero image).
 
 ## Tier 1 — header-linked (high importance): 20 pages
-- [ ] /services/specialty-care
-- [ ] /services/emergency-room-urgent-care
-- [ ] /services/womens-health
-- [ ] /services/rehabilitation-services
-- [ ] /services/gastroenterology-services
-- [ ] /services/laboratory-services
 
 ## Tier 2 — enriched composed pages (flat-scrape built): 185 pages
 - [ ] /about-riverview-health
@@ -203,6 +197,14 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /your-wellness-newsletter-riverview-health
 
 ## Done
+- [x] /services/specialty-care
+- [x] /services/emergency-room-urgent-care
+- [x] /services/womens-health
+- [x] /services/rehabilitation-services
+- [x] /services/gastroenterology-services
+- [x] /services/laboratory-services
+
+**TIER 1 COMPLETE: 22/22**
 - [x] /leadership
 - [x] /history-0
 - [x] /community-benefit-0
