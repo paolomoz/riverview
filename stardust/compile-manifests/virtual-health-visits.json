@@ -1,0 +1,15 @@
+{
+ "path": "/virtual-health-visits",
+ "manifest": {
+  "videos": 0,
+  "people": 0,
+  "formFields": 0,
+  "pills": 0,
+  "svcCards": 0,
+  "listItems": 3,
+  "paras": 5,
+  "navLinks": 0,
+  "headings": 2
+ },
+ "hero": false
+}

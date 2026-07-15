@@ -1,0 +1,15 @@
+{
+ "path": "/services/heart-vascular-services/vascular-services",
+ "manifest": {
+  "videos": 0,
+  "people": 0,
+  "formFields": 0,
+  "pills": 0,
+  "svcCards": 25,
+  "listItems": 0,
+  "paras": 4,
+  "navLinks": 0,
+  "headings": 4
+ },
+ "hero": false
+}

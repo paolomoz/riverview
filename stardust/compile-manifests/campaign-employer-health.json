@@ -1,0 +1,15 @@
+{
+ "path": "/campaign/employer-health",
+ "manifest": {
+  "videos": 0,
+  "people": 0,
+  "formFields": 0,
+  "pills": 0,
+  "svcCards": 0,
+  "listItems": 0,
+  "paras": 11,
+  "navLinks": 0,
+  "headings": 8
+ },
+ "hero": true
+}

@@ -1,0 +1,15 @@
+{
+ "path": "/first-available-primary-care",
+ "manifest": {
+  "videos": 0,
+  "people": 0,
+  "formFields": 0,
+  "pills": 0,
+  "svcCards": 0,
+  "listItems": 0,
+  "paras": 8,
+  "navLinks": 11,
+  "headings": 3
+ },
+ "hero": true
+}

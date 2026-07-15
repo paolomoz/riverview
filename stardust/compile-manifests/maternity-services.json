@@ -1,0 +1,15 @@
+{
+ "path": "/maternity-services",
+ "manifest": {
+  "videos": 2,
+  "people": 0,
+  "formFields": 0,
+  "pills": 0,
+  "svcCards": 0,
+  "listItems": 0,
+  "paras": 9,
+  "navLinks": 8,
+  "headings": 4
+ },
+ "hero": false
+}
