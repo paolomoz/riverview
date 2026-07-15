@@ -40,11 +40,17 @@ part of the process.
      mint/grey bands, cta-band). New treatment → add CSS before
      `/* ---- responsive ---- */`, document it in the brief.
    - Phones → tel: links with THIS page's numbers (never the site default).
+   - **DOM-order trap (always check):** sidebar regions ("For More Information")
+     greedily capture the following MAIN prose in the harvest walker. Split by
+     address shape: ≤16 words AND matching street/zip/phone → rail address;
+     everything else is main prose, rendered in main, in order. Never group
+     address blocks by fixed stride.
    - Forms → labeled, non-submitting, + "connects at launch" ribbon.
    - No invented copy, no invented CTAs, no duplicate of the page's own CTAs.
 7. **GATE (render).** file:// at 1440 AND 360: h1=1, no overflow, 0 pageerrors,
    plus per-page structural counts asserted from the brief (pills=N, people=N,
-   form-fields=N, rail present).
+   form-fields=N, rail present) AND: no rail/address element contains >20 words
+   (prose-in-rail = automatic fail; the ortho exemplar caught this in review).
 8. **GATE (fidelity).** Every capture heading present; every harvest region
    accounted for (rendered or named in unsourcedContent). Fail → fix, re-gate.
 9. **REVIEW.** Open the file + the live original side by side. User approves →
