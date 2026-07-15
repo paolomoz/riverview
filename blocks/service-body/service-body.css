@@ -72,3 +72,7 @@
 .service-body .ds-rail-box ul{list-style:none;margin:0;padding:0}
 .service-body .ds-rail-box a{display:flex;align-items:center;min-height:40px;color:var(--color-link);font-family:var(--heading-font);font-weight:700;text-decoration:none;border-top:0}
 .service-body .ds-rail-box a:hover{color:var(--color-ink-navy);text-decoration:underline}
+.service-body .ds-rail-box img{max-width:150px;height:auto;margin:6px 0}
+.service-body .ds-rail-box p{font-size:var(--body-sm);font-weight:700;margin-top:4px}
+.service-body .ds-rail-box ul a{display:inline-flex;justify-content:center;align-items:center;min-height:42px;padding:8px 24px;margin-top:8px;background:var(--color-accent);color:#fff;border-radius:var(--radius-pill)}
+.service-body .ds-rail-box ul a:hover{background:var(--color-ink-navy);color:#fff;text-decoration:none}

@@ -184,3 +184,7 @@ main .section > .block-content + .default-content { padding-top: 0; padding-bott
 main .section:has(> .block-content > .cards.band) { background: var(--color-surface); }
 main .section:has(> .block-content > .cards.band) > .default-content,
 main .section:has(> .block-content > .cards.features) > .default-content { text-align: center; max-width: 72ch; }
+main .section:has(> .block-content > .tabs.band) { background: var(--color-surface); }
+main .section:has(> .block-content > .cards.programs) { background: var(--color-mint-wash); }
+main .section:has(> .block-content > .cards.programs) > .default-content,
+main .section:has(> .block-content > .cards.stories) > .default-content h2 { text-align: center; }

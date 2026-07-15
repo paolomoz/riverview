@@ -14,3 +14,14 @@
 .cards.media .card .card-media{order:2;margin-top:10px}
 .cards.media .card img{aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);box-shadow:6px 6px 0 0 var(--color-mint)}
 .cards.media .card h3{text-align:center;color:var(--color-link);font-size:var(--body)}
+.cards.stories .card{border:0;box-shadow:none;padding:0;background:transparent}
+.cards.stories .card img{aspect-ratio:16/10;object-fit:cover;border-radius:var(--radius)}
+.cards.stories .card-body em{display:inline-block;font-style:normal;background:var(--color-surface);border:1px solid var(--color-border);border-radius:4px;padding:2px 10px;font-size:12px;font-family:var(--heading-font);font-weight:700;color:var(--color-ink-navy);margin-top:12px}
+.cards.stories .card-body h3{margin-top:8px}
+.cards.stories .card-body h3 a{color:var(--color-fg);text-decoration:none}
+.cards.stories .card-body h3 a:hover{text-decoration:underline}
+.cards.stories .card-body > p:last-child a{display:flex;justify-content:center;align-items:center;min-height:44px;border:2px solid var(--color-accent);border-radius:var(--radius-pill);color:var(--color-accent);font-family:var(--heading-font);font-weight:700;text-decoration:none;margin-top:14px}
+.cards.stories .card-body > p:last-child a:hover{background:var(--color-accent);color:#fff}
+.cards.programs .card{border:0;box-shadow:none;padding:0;background:transparent}
+.cards.programs .card img{aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius)}
+.cards.programs .card-body h3{margin-top:14px;font-weight:800;color:var(--color-fg)}
