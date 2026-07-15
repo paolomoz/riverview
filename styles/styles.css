@@ -178,3 +178,5 @@ main .section > .default-content { padding-top: var(--section-padding); }
 main .section:has(> .block-content > .people) > .default-content { text-align: center; }
 main .section:has(> .block-content > .service-hero) > .default-content,
 main .section:first-child > .default-content { padding-top: 0; }
+/* trailing default-content after a block (e.g. people View More): no doubled top gap, section-padding below */
+main .section > .block-content + .default-content { padding-top: 0; padding-bottom: var(--section-padding); }
