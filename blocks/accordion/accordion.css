@@ -1,0 +1,9 @@
+.accordion .ds-wrap{padding-block:0}
+.accordion .accordion-list{max-width:72ch}
+.accordion details{border:1px solid var(--color-border);border-radius:var(--radius);background:#fff;margin-top:10px}
+.accordion summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;min-height:44px;font-family:var(--heading-font);font-weight:700;font-size:var(--body);color:var(--color-accent)}
+.accordion summary::-webkit-details-marker{display:none}
+.accordion summary::after{content:"+";font-size:22px;color:var(--color-mint);flex:none}
+.accordion details[open] summary::after{content:"–"}
+.accordion .accordion-body{padding:0 20px 18px;font-size:var(--body);line-height:1.6;color:var(--color-fg)}
+.accordion .accordion-body a{color:var(--color-link);font-weight:600}

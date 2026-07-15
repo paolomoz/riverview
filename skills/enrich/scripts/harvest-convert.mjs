@@ -80,9 +80,26 @@ const flushProse = () => {
 const isBioish = (r) => r.heading && r.level >= 3 && r.level <= 4 && !CTA(r) && !r.imgs.length
   && r.items.length === 0 && r.paras.length >= 1 && words(r.paras[0]) <= 8;
 
+// FAQ detection: a run of ≥4 '?'-ending headed regions → accordion (David's #5:
+// one row per Q/A — question cell + answer cell)
+const isFaqish = (r) => r.heading && /\?\s*$/.test(r.heading) && r.paras.length >= 1 && !r.imgs.length;
+
 let i = 0;
 while (i < regions.length) {
   const r = regions[i];
+  // FAQ run → accordion rows (question cell + answer cell)
+  if (isFaqish(r)) {
+    let j = i;
+    while (j < regions.length && isFaqish(regions[j])) j += 1;
+    if (j - i >= 4) {
+      flushProse();
+      S.push(section(block('accordion', regions.slice(i, j).map((q) => [
+        esc(q.heading),
+        q.paras.map((p) => `<p>${telify(p)}</p>`).join(''),
+      ]))));
+      i = j; continue;
+    }
+  }
   // bio run (leadership-style grid)?
   if (isBioish(r)) {
     let j = i;
