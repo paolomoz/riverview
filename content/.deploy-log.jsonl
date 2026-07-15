@@ -3999,3 +3999,30 @@
 {"t":"2026-07-15T06:48:37.724Z","path":"/suburban-health-organization","step":"verify","ok":true}
 {"t":"2026-07-15T06:48:37.788Z","path":"/services/specialty-care","step":"verify","ok":true}
 {"t":"2026-07-15T06:48:43.481Z","path":"/visitor-information","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:54.690Z","path":"/bill-pay","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:54.707Z","path":"/community-benefit-0","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:55.147Z","path":"/EHRupdate","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-15T10:38:55.151Z","path":"/about/awards-accreditations","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:59.322Z","path":"/community-wellness/wellness-coalition","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:59.394Z","path":"/community-wellness","step":"verify","ok":true}
+{"t":"2026-07-15T10:38:59.866Z","path":"/employerclinicEHR","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-15T10:39:00.666Z","path":"/donate/riverview-health-foundation","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:04.097Z","path":"/history-0","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:04.246Z","path":"/frequently-asked-questions","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:04.678Z","path":"/leadership","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:05.689Z","path":"/patient-stories","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:09.068Z","path":"/riverview-work","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:09.263Z","path":"/services/emergency-room-urgent-care","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:09.268Z","path":"/preparing-your-visit-0","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:10.437Z","path":"/services/gastroenterology-services","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:13.578Z","path":"/services/orthopedic-services","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:13.683Z","path":"/services/laboratory-services","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:13.923Z","path":"/services/rehabilitation-services","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:15.123Z","path":"/services/specialty-care","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:18.053Z","path":"/services/womens-health","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:18.155Z","path":"/suburban-health-organization","step":"verify","ok":true}
+{"t":"2026-07-15T10:39:18.906Z","path":"/visitor-information","step":"verify","ok":true}
+{"t":"2026-07-15T10:43:49.979Z","path":"/EHRupdate","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-15T10:43:50.041Z","path":"/history-0","step":"verify","ok":true}
+{"t":"2026-07-15T10:43:50.121Z","path":"/employerclinicEHR","step":"verify","ok":false,"why":"plain.html 404"}
+{"t":"2026-07-15T10:43:50.351Z","path":"/frequently-asked-questions","step":"verify","ok":true}

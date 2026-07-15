@@ -163,6 +163,13 @@ while (i < regions.length) {
 }
 flushProse();
 
+// section-nav captured but no service-body consumed it (card/label-only pages) →
+// emit a rail-only service-body so the in-section wayfinding links survive.
+if (railNav && !railUsed) {
+  S.push(section(block('service-body', [[railNav], [''], ['']])));
+  railUsed = true;
+}
+
 const doc = `<body>\n  <header></header>\n  <main>\n${S.join('\n')}\n  </main>\n  <footer></footer>\n</body>\n`;
 fs.mkdirSync(outFile.replace(/\/[^/]+$/, ''), { recursive: true });
 fs.writeFileSync(outFile, doc);

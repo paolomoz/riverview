@@ -11566,8 +11566,8 @@
   },
   "/EHRupdate": {
     "status": "verify-fail",
-    "attempts": 16,
-    "ts": "2026-07-15T06:48:06.677Z",
+    "attempts": 18,
+    "ts": "2026-07-15T10:43:44.885Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -11576,8 +11576,8 @@
   },
   "/employerclinicEHR": {
     "status": "verify-fail",
-    "attempts": 16,
-    "ts": "2026-07-15T06:48:12.782Z",
+    "attempts": 18,
+    "ts": "2026-07-15T10:43:44.886Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13528,7 +13528,7 @@
   "/about/awards-accreditations": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:06.678Z",
+    "ts": "2026-07-15T10:38:49.131Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13537,7 +13537,7 @@
   "/bill-pay": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:06.678Z",
+    "ts": "2026-07-15T10:38:49.131Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13546,7 +13546,7 @@
   "/community-benefit-0": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:06.678Z",
+    "ts": "2026-07-15T10:38:49.131Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13555,7 +13555,7 @@
   "/community-wellness/wellness-coalition": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:11.744Z",
+    "ts": "2026-07-15T10:38:54.692Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13564,7 +13564,7 @@
   "/community-wellness": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:12.192Z",
+    "ts": "2026-07-15T10:38:54.708Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13573,25 +13573,7 @@
   "/donate/riverview-health-foundation": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:12.384Z",
-    "put": 201,
-    "preview": 200,
-    "live": 200,
-    "verify": "ok"
-  },
-  "/frequently-asked-questions": {
-    "status": "live",
-    "attempts": 1,
-    "ts": "2026-07-15T06:48:16.452Z",
-    "put": 200,
-    "preview": 200,
-    "live": 200,
-    "verify": "ok"
-  },
-  "/history-0": {
-    "status": "live",
-    "attempts": 1,
-    "ts": "2026-07-15T06:48:16.929Z",
+    "ts": "2026-07-15T10:38:55.148Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13600,7 +13582,7 @@
   "/leadership": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:17.429Z",
+    "ts": "2026-07-15T10:38:59.866Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13609,7 +13591,7 @@
   "/patient-stories": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:17.758Z",
+    "ts": "2026-07-15T10:39:00.666Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13618,7 +13600,7 @@
   "/preparing-your-visit-0": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:21.790Z",
+    "ts": "2026-07-15T10:39:04.098Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13627,7 +13609,7 @@
   "/riverview-work": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:22.621Z",
+    "ts": "2026-07-15T10:39:04.249Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13636,7 +13618,7 @@
   "/services/emergency-room-urgent-care": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:23.024Z",
+    "ts": "2026-07-15T10:39:04.679Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13645,7 +13627,7 @@
   "/services/gastroenterology-services": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:27.420Z",
+    "ts": "2026-07-15T10:39:05.689Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13654,7 +13636,7 @@
   "/services/laboratory-services": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:27.700Z",
+    "ts": "2026-07-15T10:39:09.070Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13663,7 +13645,7 @@
   "/services/orthopedic-services": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:27.756Z",
+    "ts": "2026-07-15T10:39:09.263Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13672,7 +13654,7 @@
   "/services/rehabilitation-services": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:32.270Z",
+    "ts": "2026-07-15T10:39:09.272Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13681,7 +13663,7 @@
   "/services/specialty-care": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:32.289Z",
+    "ts": "2026-07-15T10:39:10.437Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13690,7 +13672,7 @@
   "/services/womens-health": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:32.323Z",
+    "ts": "2026-07-15T10:39:13.579Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13699,7 +13681,7 @@
   "/suburban-health-organization": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:32.983Z",
+    "ts": "2026-07-15T10:39:13.684Z",
     "put": 200,
     "preview": 200,
     "live": 200,
@@ -13708,7 +13690,25 @@
   "/visitor-information": {
     "status": "live",
     "attempts": 1,
-    "ts": "2026-07-15T06:48:37.551Z",
+    "ts": "2026-07-15T10:39:13.924Z",
+    "put": 200,
+    "preview": 200,
+    "live": 200,
+    "verify": "ok"
+  },
+  "/frequently-asked-questions": {
+    "status": "live",
+    "attempts": 1,
+    "ts": "2026-07-15T10:43:44.886Z",
+    "put": 200,
+    "preview": 200,
+    "live": 200,
+    "verify": "ok"
+  },
+  "/history-0": {
+    "status": "live",
+    "attempts": 1,
+    "ts": "2026-07-15T10:43:44.886Z",
     "put": 200,
     "preview": 200,
     "live": 200,
