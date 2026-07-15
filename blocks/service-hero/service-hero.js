@@ -36,8 +36,22 @@ export default async function decorate(block) {
   const h1 = cell(1)?.querySelector('h1') || cell(1);
   const lede = cell(2)?.querySelector('p') || cell(2);
   const ctaNodes = cell(3) ? [...cell(3).querySelectorAll('a')] : [];
+  const heroImg = block.querySelector('img'); // authored per-page hero photo row
 
   block.replaceChildren();
+
+  if (heroImg) {
+    block.classList.add('service-hero--photo');
+    const photo = document.createElement('div');
+    photo.className = 'ds-hero-photo';
+    photo.style.backgroundImage = `url("${heroImg.src}")`;
+    if (heroImg.alt) { photo.setAttribute('role', 'img'); photo.setAttribute('aria-label', heroImg.alt); }
+    block.append(photo);
+    const scrim = document.createElement('div');
+    scrim.className = 'ds-hero-scrim';
+    scrim.setAttribute('aria-hidden', 'true');
+    block.append(scrim);
+  }
 
   // hero photo band is a variant (class "photo") — the cancer-services hub carries
   // it; service-detail / SEO-lander / enriched pages use the plain navy topo band.

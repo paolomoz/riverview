@@ -26,8 +26,13 @@ part of the process.
    the capture's headings — anything the harvest missed (lazy grids) or
    invented (system divs) goes on the probe list.
 4. **PROBE.** One targeted playwright eval per composed component the two
-   sources can't pair (people cards, tabbed content, accordions' open state).
-   Never guess pairings; never invent hrefs.
+   sources can't pair (people cards, tabbed content, accordions' open state)
+   — AND the hero image: it is a CSS background on the source
+   (`.hgm-marquee*__bg`), invisible to harvest/capture img lists. Probe
+   `backgroundImage` of top-of-page elements. Wherever present, author it as
+   an IMG ROW in service-hero (per-page, David's Model) — the block renders
+   the photo band + navy scrim site-consistently. Never hard-code hero URLs
+   in CSS. Never guess pairings; never invent hrefs.
 5. **BRIEF.** Author `<slug>-shape.md`: the seen section list, each with
    captured-source lineage + block treatment + voice classification. Named
    omissions go in unsourcedContent (e.g. "webform option list — bound at
