@@ -2,6 +2,7 @@
  "path": "/virtual-health-visits",
  "manifest": {
   "videos": 0,
+  "imgs": 1,
   "people": 0,
   "formFields": 0,
   "pills": 0,

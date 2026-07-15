@@ -2,6 +2,7 @@
  "path": "/breast-care",
  "manifest": {
   "videos": 2,
+  "imgs": 3,
   "people": 0,
   "formFields": 0,
   "pills": 0,

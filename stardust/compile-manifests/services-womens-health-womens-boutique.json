@@ -2,6 +2,7 @@
  "path": "/services/womens-health/womens-boutique",
  "manifest": {
   "videos": 1,
+  "imgs": 0,
   "people": 0,
   "formFields": 0,
   "pills": 0,

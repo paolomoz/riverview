@@ -19,7 +19,7 @@ const tel = (t) => esc(t).replace(/(\(?\d{3}\)?)[.\-\s](\d{3})[.\-\s](\d{4})/g, 
 const linkify = (n) => { let out = tel(n.text); for (const l of n.links || []) { const lt = esc(l.text); if (lt && out.includes(lt)) out = out.replace(lt, `<a href="${rel(l.href)}">${lt}</a>`); } return out; };
 const PILLS_RE = /symptom|sign|condition|we treat|disorders?|allergens?/i;
 const isLabelSet = (items) => items.length >= 3 && items.every((it) => words(it.text) <= 6 && !/[.:;]$/.test(it.text.trim()));
-const manifest = { videos: 0, people: 0, formFields: 0, pills: 0, svcCards: 0, listItems: 0, paras: 0, navLinks: 0, headings: 0 };
+const manifest = { videos: 0, imgs: 0, people: 0, formFields: 0, pills: 0, svcCards: 0, listItems: 0, paras: 0, navLinks: 0, headings: 0 };
 
 const S = [];
 S.push(section(`<div class="metadata">${row('Title', esc(H.title))}${row('Description', esc(H.description || H.hero?.lede || '').slice(0, 155))}</div>`));
@@ -65,7 +65,7 @@ for (let i = 0; i < nodes.length; i += 1) {
     emitHead(); prose += `<ul>${n.items.map((it) => `<li>${it.href ? `<a href="${rel(it.href)}">${esc(it.text)}</a>` : esc(it.text)}</li>`).join('')}</ul>`; manifest.listItems += n.items.length; continue;
   }
   if (n.t === 'video') { emitHead(); prose += `${n.title ? `<p><strong>${esc(n.title)}</strong></p>` : ''}<p>${n.poster ? `<img src="${n.poster}" alt="${esc(n.title || '')}">` : ''}</p>`; manifest.videos += 1; continue; }
-  if (n.t === 'img') { emitHead(); prose += `<p><img src="${n.src}" alt="${esc(n.alt)}"></p>`; continue; }
+  if (n.t === 'img') { emitHead(); prose += `<p><img src="${n.src}" alt="${esc(n.alt)}"></p>`; manifest.imgs += 1; continue; }
   if (n.t === 'form') {
     flushProse(); pendingHead = null;
     const rows = [[`<h2>${esc(n.heading)}</h2>`], ...n.notes.map((t) => [esc(t)]), ...n.fields.map((f) => [esc(f.label), f.type])];
