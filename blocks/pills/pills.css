@@ -1,4 +1,4 @@
-.pills .ds-wrap{padding-block:0}
+.pills .ds-wrap{padding-block:16px var(--section-padding)}
 .pills .pills-list{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}
 .pills .pills-list li{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-ink-navy);border-radius:var(--radius-pill);padding:9px 18px;font-family:var(--heading-font);font-weight:700;font-size:var(--body-sm);transition:background .15s ease,border-color .15s ease}
 .pills .pills-list li:has(a):hover{background:var(--color-mint-wash);border-color:var(--color-mint)}

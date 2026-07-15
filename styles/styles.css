@@ -170,3 +170,11 @@ a.ds-link:hover { color: var(--color-ink-navy); }
 
 @media (max-width: 1023px) { :root { --section-padding: 48px; } }
 @media (max-width: 640px) { :root { --section-padding: 32px; } .ds-wrap, .wrap { padding-inline: 20px; } }
+
+/* ---- rebuild rhythm: section heads, banded sections (ortho exemplar polish) ---- */
+main .section > .default-content h2 { margin-top: 40px; }
+main .section > .default-content h2:first-child { margin-top: 0; }
+main .section > .default-content { padding-top: var(--section-padding); }
+main .section:has(> .block-content > .people) > .default-content { text-align: center; }
+main .section:has(> .block-content > .service-hero) > .default-content,
+main .section:first-child > .default-content { padding-top: 0; }

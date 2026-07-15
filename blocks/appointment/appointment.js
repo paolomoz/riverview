@@ -17,7 +17,7 @@ export default function decorate(block){
     let ctl;if(type.startsWith('select')){ctl=document.createElement('select');const opts=type.includes(':')?['- Select -',...type.slice(type.indexOf(':')+1).split('|')]:['- Select -'];opts.forEach((o,i)=>{const op=document.createElement('option');op.textContent=o.trim();if(i===0){op.disabled=true;op.selected=true;}ctl.append(op);});}
     else{ctl=document.createElement('input');ctl.type=type;}
     ctl.id=id;ctl.name=name;w.append(l,ctl);form.append(w);});
-  const submit=document.createElement('button');submit.type='submit';submit.className='appointment-submit';submit.textContent='Request Appointment';
+  const submit=document.createElement('button');submit.type='submit';submit.className='appointment-submit';submit.textContent=fieldRows.length?'Submit':'Request Appointment';
   form.append(submit);panel.append(form);
   const ribbon=document.createElement('p');ribbon.className='appointment-ribbon';ribbon.textContent='Form connects to the appointment system at launch.';
   panel.append(ribbon);
