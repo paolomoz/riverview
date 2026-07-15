@@ -8,12 +8,6 @@ Each page: run PROCESS.md steps 1–12, one page = one commit. Fidelity gate
 at step 12 decides done (heading-match >=90%, structural counts, hero image).
 
 ## Tier 1 — header-linked (high importance): 20 pages
-- [ ] /community-wellness/wellness-coalition
-- [ ] /leadership
-- [ ] /history-0
-- [ ] /about/awards-accreditations
-- [ ] /community-benefit-0
-- [ ] /suburban-health-organization
 - [ ] /services/specialty-care
 - [ ] /services/emergency-room-urgent-care
 - [ ] /services/womens-health
@@ -209,6 +203,12 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /your-wellness-newsletter-riverview-health
 
 ## Done
+- [x] /leadership
+- [x] /history-0
+- [x] /community-benefit-0
+- [x] /suburban-health-organization
+- [x] /about/awards-accreditations
+- [x] /community-wellness/wellness-coalition
 - [x] /preparing-your-visit-0 (batch 2)
 - [x] /frequently-asked-questions (batch 2)
 - [x] /patient-stories (batch 2)
