@@ -1,0 +1,13 @@
+.tabs .ds-wrap{padding-block:8px var(--section-padding)}
+.tabs .tabs-list{display:flex;flex-wrap:wrap;border:1px solid var(--color-border);border-radius:var(--radius);overflow:hidden;width:max-content;max-width:100%}
+.tabs .tabs-tab{font:inherit;font-family:var(--heading-font);font-weight:700;font-size:var(--body-sm);padding:14px 20px;min-height:48px;background:#fff;border:0;border-left:1px solid var(--color-border);color:var(--color-accent);cursor:pointer}
+.tabs .tabs-tab:first-child{border-left:0}
+.tabs .tabs-tab[aria-selected="true"]{background:var(--color-accent);color:#fff}
+.tabs .tabs-panel{margin-top:var(--spacing-lg);display:grid;grid-template-columns:1fr 1fr;gap:var(--spacing-xl);align-items:start}
+.tabs .tabs-panel[hidden]{display:none}
+.tabs .tabs-media img{width:100%;height:auto;border-radius:var(--radius-tile)}
+.tabs .tabs-copy h3{font-size:clamp(24px,3.4vw,var(--heading-lg));font-weight:800;color:var(--color-fg)}
+.tabs .tabs-copy p{margin-top:var(--spacing-sm);line-height:1.6}
+.tabs .tabs-copy ul{margin-top:var(--spacing-sm);padding-left:1.3em;list-style:disc}
+.tabs .tabs-copy li{margin-block:6px}.tabs .tabs-copy li::marker{color:var(--color-accent)}
+@media (max-width:900px){.tabs .tabs-panel{grid-template-columns:1fr}.tabs .tabs-list{width:100%}.tabs .tabs-tab{flex:1 1 auto}}

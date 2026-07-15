@@ -8,3 +8,9 @@
 .cards .card-body .ds-link,.cards .card-body a.btn{margin-top:auto}
 @media (max-width:1023px){.cards .cards-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.cards .cards-grid{grid-template-columns:1fr}}
+.cards.features .card{border:0;box-shadow:none;padding:0;background:transparent}
+.cards.features .card::before{content:"";display:block;width:34px;height:34px;border:2px solid var(--color-mint);border-radius:var(--radius);transform:rotate(45deg);margin:6px 0 14px 6px}
+.cards.media .card{border:0;box-shadow:none;padding:0;background:transparent}
+.cards.media .card .card-media{order:2;margin-top:10px}
+.cards.media .card img{aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);box-shadow:6px 6px 0 0 var(--color-mint)}
+.cards.media .card h3{text-align:center;color:var(--color-link);font-size:var(--body)}

@@ -67,3 +67,8 @@
 @media (max-width: 640px) {
   .service-body .ds-cond-list { columns: 1; }
 }
+.service-body .ds-rail-box{background:var(--color-mint-wash);border-radius:var(--radius-tile);padding:14px 18px;margin-top:var(--spacing-md)}
+.service-body .ds-rail-box .ds-rail-label{margin:0 0 4px}
+.service-body .ds-rail-box ul{list-style:none;margin:0;padding:0}
+.service-body .ds-rail-box a{display:flex;align-items:center;min-height:40px;color:var(--color-link);font-family:var(--heading-font);font-weight:700;text-decoration:none;border-top:0}
+.service-body .ds-rail-box a:hover{color:var(--color-ink-navy);text-decoration:underline}

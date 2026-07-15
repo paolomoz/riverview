@@ -5,3 +5,10 @@
 .split .split-copy{display:flex;flex-direction:column;gap:var(--spacing-sm)}
 .split .split-copy h2{font-size:clamp(27px,4.5vw,var(--heading-xl));color:var(--color-fg)}
 @media (max-width:1023px){.split .split-grid{grid-template-columns:1fr;gap:var(--spacing-md)}}
+.split.blue{background:var(--color-link)}
+.split.blue .split-copy h2,.split.blue .split-copy p{color:#fff}
+.split.blue .split-copy a:not(.btn){color:#fff}
+.split.story{background:transparent}
+.split.story .split-grid{background:var(--color-mint-wash);border-radius:var(--radius-tile);padding:clamp(24px,4vw,40px);grid-template-columns:240px 1fr;margin-block:var(--spacing-md)}
+.split.story .split-media img{border-radius:50% var(--radius-tile) 50% var(--radius-tile);aspect-ratio:1;object-fit:cover;box-shadow:none}
+@media (max-width:900px){.split.story .split-grid{grid-template-columns:1fr}}

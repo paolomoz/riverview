@@ -101,6 +101,21 @@ export default async function decorate(block) {
       railBody.append(info);
     }
 
+    // rows 3+ → extra rail boxes (mint): a label <p> + a <ul> of links
+    rows.slice(3).forEach((r) => {
+      const c = r.querySelector(':scope > div') || r;
+      const label = (c.querySelector('p')?.textContent || '').trim();
+      const ulEl = c.querySelector('ul');
+      if (!label || !ulEl) return;
+      const box = document.createElement('div');
+      box.className = 'ds-rail-box';
+      const lp = document.createElement('p');
+      lp.className = 'ds-rail-label';
+      lp.textContent = label;
+      box.append(lp, ulEl.cloneNode(true));
+      railBody.append(box);
+    });
+
     details.append(railBody);
     aside.append(details);
     grid.append(aside);
