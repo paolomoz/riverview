@@ -62,8 +62,9 @@ part of the process.
    state.json `prototyped`→`approved`.
 10. **MIGRATE.** Convert the approved prototype to an EDS content page per
     David's Model: one row per item; section heads as default content;
-    semantic inline tags ONLY (strong/em/a/br survive DA — address/span do
-    not); FAQ runs → accordion rows (q cell + a cell).
+    semantic inline tags ONLY (strong/em/a/picture/br survive DA — address/span/
+    figure/figcaption do NOT: titled media = a strong-only <p> before an img-only
+    <p>; service-body pairs them into a captioned media card); FAQ runs → accordion rows (q cell + a cell).
 11. **DEPLOY.** deploy-batch at the exact original path → live.
 12. **VERIFY.** Headless on the LIVE page (networkidle, post-decoration):
     heading-set match ≥90% vs original, structural counts from step 7, zero
