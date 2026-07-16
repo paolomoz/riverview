@@ -83,7 +83,12 @@ export default async function decorate(block) {
       const nav = document.createElement('nav');
       nav.className = 'ds-rail-nav';
       nav.setAttribute('aria-label', `${navLabel} sections`);
-      nav.append(navList.cloneNode(true));
+      const navClone = navList.cloneNode(true);
+      // DA strips aria-* from content: mark the current page at decorate time
+      navClone.querySelectorAll('a').forEach((a) => {
+        try { if (new URL(a.href).pathname.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) a.setAttribute('aria-current', 'page'); } catch { /* noop */ }
+      });
+      nav.append(navClone);
       railBody.append(nav);
     }
 
