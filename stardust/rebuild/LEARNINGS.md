@@ -118,3 +118,13 @@ emitted (split-only pages like /history-0 drop them — global nav covers it).
   authoritative over any pre-analysis.
 - No hero CTA invention on clinical pages (ER: no Schedule button — judgment
   codified: canonical CTAs only where the archetype family carries them).
+
+## Leadership gen-3 correction (2026-07-16)
+
+- The canary agent's bio-CARD treatment passed all COUNT gates while missing the
+  source's LAYOUT treatment (full-width profile rows w/ portraits + mint
+  plinth). **Counts verify structure, not treatment** — central verification
+  must include a screenshot-vs-render treatment diff for layout-bearing
+  sections (profile rows vs cards vs list), not only numbers.
+- Lazy-loaded portraits need the full-scroll extract (5/5 in capture media);
+  name→file matching must strip credential suffixes (MD/DO/PA/NP).
