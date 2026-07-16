@@ -20,7 +20,7 @@ if (!url || !slug) { console.error('usage: node harvest2.mjs <url> <slug>'); pro
 
 const b = await chromium.launch();
 const pg = await (await b.newContext({ viewport: { width: 1440, height: 1000 } })).newPage();
-await pg.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+try { await pg.goto(url, { waitUntil: 'networkidle', timeout: 45000 }); } catch { await pg.goto(url, { waitUntil: 'domcontentloaded', timeout: 45000 }); await pg.waitForTimeout(3000); }
 await pg.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
 await pg.waitForTimeout(2000);
 await pg.evaluate(() => window.scrollTo(0, 0));
