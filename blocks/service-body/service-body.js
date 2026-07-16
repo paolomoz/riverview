@@ -42,7 +42,8 @@ export default async function decorate(block) {
 
   // no rail content (no child-nav links AND no address) → single-column prose,
   // not the two-column grid with an empty grey rail box.
-  const hasRail = !!(navList || addressParts.length);
+  const hasBoxRows = rows.slice(3).some((r) => (r.textContent || '').trim());
+  const hasRail = !!(navList || addressParts.length || hasBoxRows);
 
   block.replaceChildren();
   const wrap = document.createElement('div');
