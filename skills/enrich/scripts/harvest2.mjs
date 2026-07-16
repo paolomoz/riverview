@@ -96,7 +96,7 @@ const data = await pg.evaluate(() => {
         return { label: clean(lbl?.textContent), type };
       }).filter((x) => x.label);
       const notes = [...f.querySelectorAll('p,.webform-element-description,[class*=message]')].map((p) => clean(p.textContent)).filter((t) => t.length > 20 && !JUNK.test(t));
-      push({ t: 'form', heading: clean((el.closest('section') || f).querySelector('h2,h3')?.textContent) || 'Schedule an Appointment', fields, notes: [...new Set(notes)].slice(0, 2) }); return;
+      const fh0 = clean((el.closest('section') || f).querySelector('h2,h3')?.textContent); const fh = (!fh0 || /status message/i.test(fh0)) ? 'Schedule an Appointment' : fh0; push({ t: 'form', heading: fh, fields, notes: [...new Set(notes)].slice(0, 2) }); return;
     }
     if (tag === 'IMG') { push({ t: 'img', src: abs(el.currentSrc || el.src), alt: clean(el.alt) }); return; }
     // provider/people grid?
