@@ -3,4 +3,8 @@
 .callout .callout-inner{text-align:center;max-width:64ch;margin-inline:auto}
 .callout .callout-inner h2{font-size:clamp(25px,3.6vw,var(--heading-xl));font-weight:800;color:var(--color-fg)}
 .callout .callout-inner h2 a{color:var(--color-accent)}
-.callout .callout-note{margin-top:8px;font-size:var(--body-sm);color:var(--color-muted)}
+.callout .callout-note{margin-top:12px;font-size:var(--body-sm);color:var(--color-muted)}
+.callout.mint{background:var(--color-mint-wash)}
+.callout.mint .callout-inner{max-width:78ch}
+.callout.mint .callout-note{color:var(--color-fg);font-weight:600;line-height:1.6}
+.callout.mint .callout-note p{margin-top:10px}

@@ -12,3 +12,4 @@
 .split.story .split-grid{background:var(--color-mint-wash);border-radius:var(--radius-tile);padding:clamp(24px,4vw,40px);grid-template-columns:240px 1fr;margin-block:var(--spacing-md)}
 .split.story .split-media img{border-radius:50% var(--radius-tile) 50% var(--radius-tile);aspect-ratio:1;object-fit:cover;box-shadow:none}
 @media (max-width:900px){.split.story .split-grid{grid-template-columns:1fr}}
+.split.plain{background:transparent}
