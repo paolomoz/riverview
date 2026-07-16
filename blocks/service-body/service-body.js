@@ -111,7 +111,7 @@ export default async function decorate(block) {
       const c = r.querySelector(':scope > div') || r;
       const label = (c.querySelector('p')?.textContent || '').trim();
       const ulEl = c.querySelector('ul');
-      if (!label || !ulEl) return;
+      if (!label) return;
       const box = document.createElement('div');
       box.className = 'ds-rail-box';
       const lp = document.createElement('p');
@@ -122,7 +122,7 @@ export default async function decorate(block) {
       if (boxImg) box.append(boxImg.closest('picture') || boxImg);
       // non-label paragraphs (e.g. "Already have an account.") between label and list
       [...c.querySelectorAll('p')].slice(1).forEach((pp) => { if (!pp.querySelector('img')) box.append(pp.cloneNode(true)); });
-      box.append(ulEl.cloneNode(true));
+      if (ulEl) box.append(ulEl.cloneNode(true));
       railBody.append(box);
     });
 
