@@ -187,6 +187,18 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /westfield-endoscopy-center
 - [ ] /your-wellness-newsletter-riverview-health
 
+
+## Tier-2 sweep status (2026-07-16)
+
+- COMPILED + LIVE + GATE-PASS: 151 pages (148 first pass + 3 after sidebar fix)
+- RESTORED to pre-sweep versions (compiler regressed richer content): 11 —
+  patients-and-visitors, campaign x2, foundation, riverview-health-foundation,
+  foundation50, care-you-trust, breast-care, gastro/procedures, birth-control,
+  services/cancer-services (approved archetype)
+- AGENT QUEUE (24): the 10 restored non-archetype pages + 14 gate warns (real
+  gaps: uncaptured webforms, sidebar CTA boxes, side callouts) — see
+  /tmp/t2-regate.json + restore list in git history
+
 ## Done
 - [x] /maternity-services (COMPILED)
 - [x] /services/heart-vascular-services/vascular-services (COMPILED)
