@@ -194,7 +194,7 @@ main .section:has(> .block-content > .cards.stories) > .default-content h2 { tex
 main .section.rail-page { max-width: var(--max-width); margin-inline: auto; padding-inline: 32px;
   display: grid; grid-template-columns: minmax(0, 1fr) 304px; gap: 0 var(--spacing-xl); align-items: start; }
 main .section.rail-page > * { grid-column: 1; }
-main .section.rail-page > .block-content:has(> .service-body) { grid-column: 2; grid-row: 1 / span 20; position: sticky; top: 24px; }
+main .section.rail-page > .block-content:has(> .service-body:first-child) { grid-column: 2; grid-row: 1 / span 20; position: sticky; top: 24px; }
 main .section.rail-page > .block-content:has(> .service-body) .ds-body-grid { grid-template-columns: 1fr; grid-template-areas: "rail"; }
 main .section.rail-page > .block-content:has(> .service-body) .ds-main { display: none; }
 main .section.rail-page .service-body { padding-block: 0; }
