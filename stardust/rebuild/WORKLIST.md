@@ -16,10 +16,8 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /bill-pay/pay-my-bill
 - [ ] /bill-pay/payment-options
 - [ ] /book-specialty-care-appointment
-- [ ] /breast-care
 - [ ] /campaign/grateful-patients-chuck-and-sally-crow
 - [ ] /campaign/grateful-patients-tom-and-soni-sheehan
-- [ ] /care-you-trust
 - [ ] /champions-care
 - [ ] /compassionate-care-postpartum-depression-noblesville
 - [ ] /covid-19-visitor-information
@@ -29,8 +27,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /find-relief-your-allergies-riverview-health
 - [ ] /find-solution-your-back-pain-riverview-health-noblesville
 - [ ] /foundation-frequently-asked-questions
-- [ ] /foundation
-- [ ] /foundation50
 - [ ] /gynecological-surgery
 - [ ] /health-forms-library
 - [ ] /improving-movement-physical-therapy-noblesville
@@ -43,13 +39,11 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /patients-visitors/jasons-story
 - [ ] /postpartum-care
 - [ ] /pregnancy
-- [ ] /preventative-screenings
 - [ ] /receive-expert-orthopedic-hand-surgery-riverview-health-noblesville
 - [ ] /rely-riverview-health-noblesville-impact-concussion-assessment-noblesville
 - [ ] /riverview-at-work/direct-primary-care-redirect
 - [ ] /riverview-at-work/workmed-occupational-health-redirect
 - [ ] /riverview-health-employer-health-center
-- [ ] /riverview-health-foundation
 - [ ] /same-day-primary-care
 - [ ] /schedule-health-center-appointments
 - [ ] /schedule-vascular-screening
@@ -93,7 +87,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /services/heart-vascular-services/performing-ablations-riverview-health-noblesville
 - [ ] /services/heart-vascular-services/receive-implantable-cardioverter-defibrillator-noblesville
 - [ ] /services/heart-vascular-services/treat-arrhythmia-pacemaker-noblesville
-- [ ] /services/heart-vascular-services
 - [ ] /services/interventional-pain-management
 - [ ] /services/laboratory-services/direct-access-laboratory-testing
 - [ ] /services/maternity/learn-about-c-sections-riverview-health
@@ -200,6 +193,7 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
   /tmp/t2-regate.json + restore list in git history
 
 ## Done
+- [x] agent-queue wave 1: foundation(+alias), preventative-screenings, heart-vascular-services, gastro/procedures, breast-care, care-you-trust — live + verified (screenings 54% = concatenated-heading measurement artifact, content verified complete)
 - [x] /maternity-services (COMPILED)
 - [x] /services/heart-vascular-services/vascular-services (COMPILED)
 - [x] /mychart-health-records-scheduling-and-more (COMPILED)
