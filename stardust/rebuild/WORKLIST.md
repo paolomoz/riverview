@@ -17,7 +17,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /bill-pay/payment-options
 - [ ] /book-specialty-care-appointment
 - [ ] /breast-care
-- [ ] /campaign/employer-health
 - [ ] /campaign/grateful-patients-chuck-and-sally-crow
 - [ ] /campaign/grateful-patients-tom-and-soni-sheehan
 - [ ] /care-you-trust
@@ -29,8 +28,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /explore-diagnostic-services-available-riverview-health-noblesville
 - [ ] /find-relief-your-allergies-riverview-health
 - [ ] /find-solution-your-back-pain-riverview-health-noblesville
-- [ ] /first-available-primary-care
-- [ ] /foundation-events
 - [ ] /foundation-frequently-asked-questions
 - [ ] /foundation
 - [ ] /foundation50
@@ -41,8 +38,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /maintain-your-health-well-woman-exam
 - [ ] /maternity-center
 - [ ] /maternity-classes-support-groups
-- [ ] /maternity-services
-- [ ] /mychart-health-records-scheduling-and-more
 - [ ] /patients-and-visitors/schedule-appointment/request-appointment
 - [ ] /patients-and-visitors
 - [ ] /patients-visitors/jasons-story
@@ -98,7 +93,6 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /services/heart-vascular-services/performing-ablations-riverview-health-noblesville
 - [ ] /services/heart-vascular-services/receive-implantable-cardioverter-defibrillator-noblesville
 - [ ] /services/heart-vascular-services/treat-arrhythmia-pacemaker-noblesville
-- [ ] /services/heart-vascular-services/vascular-services
 - [ ] /services/heart-vascular-services
 - [ ] /services/interventional-pain-management
 - [ ] /services/laboratory-services/direct-access-laboratory-testing
@@ -185,18 +179,25 @@ at step 12 decides done (heading-match >=90%, structural counts, hero image).
 - [ ] /services/womens-health/find-treatment-kidney-stones-riverview-health-noblesville
 - [ ] /services/womens-health/mammograms-breast-ultrasound-and-breast-biopsies-riverview-health
 - [ ] /services/womens-health/reliable-care-vaginitis-noblesville
-- [ ] /services/womens-health/womens-boutique
 - [ ] /services/wound-care
 - [ ] /services
 - [ ] /treatment-abnormal-vaginal-bleeding-noblesville
-- [ ] /virtual-health-visits
 - [ ] /visitor-information/chaplaincy-services
-- [ ] /visitor-information/code-conduct
 - [ ] /visitor-information/patient-messages-prayer-requests
 - [ ] /westfield-endoscopy-center
 - [ ] /your-wellness-newsletter-riverview-health
 
 ## Done
+- [x] /maternity-services (COMPILED)
+- [x] /services/heart-vascular-services/vascular-services (COMPILED)
+- [x] /mychart-health-records-scheduling-and-more (COMPILED)
+- [x] /virtual-health-visits (COMPILED)
+- [x] /foundation-events (COMPILED)
+- [x] /campaign/employer-health (COMPILED)
+- [x] /visitor-information/code-conduct (COMPILED)
+- [x] /first-available-primary-care (COMPILED)
+- [x] /services/womens-health/womens-boutique (COMPILED)
+- [~] /breast-care — compiled but <90% fidelity (second sidebar block type) -> agent-path queue
 - [x] /services/specialty-care
 - [x] /services/emergency-room-urgent-care
 - [x] /services/womens-health

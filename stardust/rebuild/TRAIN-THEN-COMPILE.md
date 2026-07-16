@@ -71,7 +71,7 @@ the same parallel-agents + central-verification harness from training.
 | TRAIN (parallel agents + central verify) | same tokens, ~4× throughput | ~5 min amortized |
 | COMPILE | **~0** (+ ~2k central verification) | ~1 min |
 
-Tier-2 sample: 10/10 compiled, 0 fallbacks, 0 junk (spans/staging URLs/blocked
+Tier-2 sample: 10/10 compiled, 0 junk; live fidelity gate: 9/10 >=90% heading match (maternity fixed a multi-marquee h1 bug), 1/10 (breast-care, a second sidebar block type) correctly fell to the agent path — the projected ~90/10 split. RULE: the wave runner MUST run the source-heading fidelity diff as an auto-gate; the compile manifest alone is self-consistency, not fidelity (spans/staging URLs/blocked
 widgets all filtered by rulebook patterns).
 
 ## Porting to a new site — the checklist
