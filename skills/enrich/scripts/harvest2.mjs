@@ -37,7 +37,8 @@ const data = await pg.evaluate(() => {
     description: document.querySelector('meta[name="description"]')?.content || '', hero: null, sidebar: null, body: [] };
 
   // ---- hero ----
-  const hero = document.querySelector('[class*="hgm-marquee"]');
+  // pick the marquee that actually contains the page h1 (pages can have several marquee-classed wrappers)
+  const hero = [...document.querySelectorAll('[class*="hgm-marquee"]')].find((el) => el.querySelector('h1')) || document.querySelector('[class*="hgm-marquee"]');
   if (hero) {
     const bgEl = hero.querySelector('[class*="__bg"]') || hero;
     const bg = getComputedStyle(bgEl).backgroundImage.match(/url\("?([^")]+)/)?.[1] || null;
