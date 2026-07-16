@@ -25,3 +25,7 @@
 .cards.programs .card{border:0;box-shadow:none;padding:0;background:transparent}
 .cards.programs .card img{aspect-ratio:3/2;object-fit:cover;border-radius:var(--radius)}
 .cards.programs .card-body h3{margin-top:14px;font-weight:800;color:var(--color-fg)}
+.cards.trustees .cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--spacing-xl)}
+.cards.trustees .card{border:0;border-left:1px solid var(--color-border);border-radius:0;box-shadow:none;background:transparent;padding:10px 0 10px 16px;font-size:var(--body-sm)}
+.cards.trustees .card:hover{box-shadow:none;transform:none}
+@media (max-width:640px){.cards.trustees .cards-grid{grid-template-columns:1fr}}
