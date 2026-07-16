@@ -7,6 +7,20 @@ const [,,SRC,OUT,PATHP]=process.argv;
 const b=await chromium.launch();const pg=await (await b.newContext()).newPage();
 await pg.goto('file://'+(SRC.startsWith('/')?SRC:process.cwd()+'/'+SRC),{waitUntil:'load'});
 const data=await pg.evaluate(()=>{
+  // pre-process: native <video> (prototype players) -> mp4-linked poster pair (DA-safe)
+  document.querySelectorAll('main video').forEach((v)=>{
+    const poster=v.getAttribute('poster')||'';const src=v.getAttribute('src')||v.querySelector('source')?.getAttribute('src')||'';
+    const scope=v.closest('div,section,article');
+    const t=scope?.querySelector('h2,h3,h4,h5')?.textContent?.trim()||'';
+    const d=document.createElement('div');
+    d.innerHTML=(t?`<p><strong>${t}</strong></p>`:'')+`<p><a href="${src||poster}">${poster?`<img src="${poster}" alt="${t}">`:(t||'Watch video')}</a></p>`;
+    v.replaceWith(...d.children);
+  });
+  // fallback sections: promote CTA buttons to strong-a so the runtime styles them
+  document.querySelectorAll('main a.ds-btn').forEach((a)=>{
+    if(a.closest('.ds-hero'))return;
+    if(!a.querySelector('strong')&&!a.closest('strong')){const st=document.createElement('strong');a.replaceWith(st);st.append(a);}
+  });
   const clean=t=>(t||'').replace(/\s+/g,' ').trim();
   const relify=el=>{el.querySelectorAll('a').forEach(a=>{const h=a.getAttribute('href')||'';let h2=h.replace(/https?:\/\/[a-z0-9.-]*pantheonsite\.io/,'https://www.riverview.org');if(h2.startsWith('https://www.riverview.org'))a.setAttribute('href',h2.replace('https://www.riverview.org','')||'/');});return el;};
   const inner=el=>relify(el.cloneNode(true)).innerHTML.trim();
