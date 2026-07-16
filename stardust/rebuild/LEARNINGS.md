@@ -128,3 +128,18 @@ emitted (split-only pages like /history-0 drop them — global nav covers it).
   sections (profile rows vs cards vs list), not only numbers.
 - Lazy-loaded portraits need the full-scroll extract (5/5 in capture media);
   name→file matching must strip credential suffixes (MD/DO/PA/NP).
+
+## 1-by-1 treatment pass results (2026-07-16)
+
+- awards: treatment correct (prose article); DA strips aria-* in content →
+  service-body now sets rail aria-current at DECORATE time by URL match.
+- community-benefit: REBUILT — the source shows programs/CHNA/partners as
+  plain BULLET LISTS; the label-cards rule over-styled them (39 cards → 3
+  <ul>s). Rule refined: label-set → cards/pills applies to SERVICE offering
+  lists; on about/editorial pages the screenshot's own treatment wins.
+- suburban: verified correct as-is.
+- wellness-coalition: two variants added for parity — `split plain`
+  (white certificate split; base split is mint) and `callout mint`
+  (centered mint tile, N body rows). Lesson: never regex-inject block markup
+  into content files — unbalanced divs make DA silently flatten the block;
+  rebuild the section with the block builder.
