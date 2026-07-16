@@ -38,7 +38,7 @@ let railNav = ''; let railInfo = '';
 if (H.sidebar) {
   if (H.sidebar.nav.length) { railNav = `<p>${esc(H.sidebar.navLabel || 'In this section')}</p><ul>${H.sidebar.nav.map((l) => `<li><a href="${rel(l.href)}"${rel(l.href) === rel(H.url) ? ' aria-current="page"' : ''}>${esc(l.text)}</a></li>`).join('')}</ul>`; manifest.navLinks = H.sidebar.nav.length; }
   const box = H.sidebar.info[0];
-  if (box) railInfo = `<p>${esc(box.label)}</p><p>${box.lines.map((l) => tel(l.text)).join('<br>')}</p>`;
+  if (box) railInfo = `<p>${esc(box.label)}</p><p>${box.lines.map((l) => (l.head ? `<strong>${esc(l.text)}</strong>` : tel(l.text))).join('<br>')}</p>`;
 }
 let railUsed = false;
 const takeRail = () => { if (railUsed || (!railNav && !railInfo)) return ['', '']; railUsed = true; return [railNav, railInfo]; };

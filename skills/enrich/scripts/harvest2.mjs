@@ -58,7 +58,7 @@ const data = await pg.evaluate(() => {
     const info = [];
     sb.querySelectorAll('.field.body, .field--name-body').forEach((box) => {
       const label = clean(box.querySelector('h2,h3,h4,h5')?.textContent) || 'For More Information';
-      const lines = [...box.querySelectorAll('p,li')].map((p) => ({ html: p.innerHTML.trim(), text: clean(p.textContent) })).filter((l) => l.text);
+      const lines = [...box.querySelectorAll('p,li,h3,h4,h5,h6')].filter((el) => clean(el.textContent) !== label).map((p) => ({ html: p.innerHTML.trim(), text: clean(p.textContent), head: /^H\d$/.test(p.tagName) })).filter((l) => l.text);
       const boxLinks = links(box);
       if (lines.length || boxLinks.length) info.push({ label, lines, links: boxLinks });
     });
