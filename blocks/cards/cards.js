@@ -9,7 +9,9 @@ export default function decorate(block){
     const media=cell.querySelector('picture,img');
     if(media){const m=document.createElement('div');m.className='card-media';m.append(media.closest('picture')||media);card.append(m);}
     const body=document.createElement('div');body.className='card-body';
-    [...cell.children].forEach((n)=>{if(!n.matches('picture,img')&&!n.querySelector('picture,img'))body.append(n);});
+    const hasBlockKids=cell.querySelector('p,h1,h2,h3,h4,h5,h6,ul,ol,div');
+    if(!hasBlockKids&&(cell.textContent||'').trim()){const p=document.createElement('p');p.innerHTML=cell.innerHTML;body.append(p);}
+    else [...cell.children].forEach((n)=>{if(!n.matches('picture,img')&&!n.querySelector('picture,img'))body.append(n);});
     card.append(body);grid.append(card);
   });
   wrap.append(grid);block.replaceChildren(wrap);

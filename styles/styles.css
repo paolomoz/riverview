@@ -175,7 +175,7 @@ a.ds-link:hover { color: var(--color-ink-navy); }
 main .section > .default-content h2 { margin-top: 40px; }
 main .section > .default-content h2:first-child { margin-top: 0; }
 main .section > .default-content { padding-top: var(--section-padding); }
-main .section:has(> .block-content > .people) > .default-content { text-align: center; }
+main .section:has(> .block-content > .people):not(.rail-page) > .default-content { text-align: center; }
 main .section:has(> .block-content > .service-hero) > .default-content,
 main .section:first-child > .default-content { padding-top: 0; }
 /* trailing default-content after a block (e.g. people View More): no doubled top gap, section-padding below */
