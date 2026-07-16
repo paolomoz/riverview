@@ -188,3 +188,22 @@ main .section:has(> .block-content > .tabs.band) { background: var(--color-surfa
 main .section:has(> .block-content > .cards.programs) { background: var(--color-mint-wash); }
 main .section:has(> .block-content > .cards.programs) > .default-content,
 main .section:has(> .block-content > .cards.stories) > .default-content h2 { text-align: center; }
+
+/* ---- rail-page composite: a section whose service-body is rail-only pins it
+       as a sticky right column beside ALL sibling blocks (leadership et al.) ---- */
+main .section.rail-page { max-width: var(--max-width); margin-inline: auto; padding-inline: 32px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 304px; gap: 0 var(--spacing-xl); align-items: start; }
+main .section.rail-page > * { grid-column: 1; }
+main .section.rail-page > .block-content:has(> .service-body) { grid-column: 2; grid-row: 1 / span 20; position: sticky; top: 24px; }
+main .section.rail-page > .block-content:has(> .service-body) .ds-body-grid { grid-template-columns: 1fr; grid-template-areas: "rail"; }
+main .section.rail-page > .block-content:has(> .service-body) .ds-main { display: none; }
+main .section.rail-page .service-body { padding-block: 0; }
+main .section.rail-page > .default-content { max-width: none; margin: 0; padding: 0; }
+main .section.rail-page > .default-content h2 { font-size: clamp(27px, 4vw, var(--heading-xl)); font-weight: 800; margin-top: var(--spacing-xl); }
+main .section.rail-page > .default-content:first-child h2, main .section.rail-page > .block-content + .default-content h2 { margin-top: var(--spacing-xl); }
+main .section.rail-page .ds-wrap { max-width: none; margin: 0; padding: 0; }
+main .section.rail-page { padding-block: var(--section-padding); }
+@media (max-width: 900px) {
+  main .section.rail-page { grid-template-columns: 1fr; }
+  main .section.rail-page > .block-content:has(> .service-body) { grid-column: 1; grid-row: auto; position: static; }
+}
