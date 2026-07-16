@@ -45,7 +45,8 @@ const takeRail = () => { if (railUsed || (!railNav && !railInfo)) return ['', ''
 
 // body flow → sections (heading-delimited runs, same rules as Tier-1)
 let prose = '';
-const flushProse = () => { if (!prose) return; const [r0, r1] = takeRail(); S.push(section(block('service-body', [[r0], [r1], [prose]]))); prose = ''; };
+const flushProse = () => { if (!prose) return; const [r0, r1] = takeRail(); const extras = (H.sidebar?.info || []).slice(1).map((b2) => [`<p>${esc(b2.label)}</p>${b2.links.length ? `<ul>${b2.links.map((l) => `<li><a href="${rel(l.href)}">${esc(l.text)}</a></li>`).join('')}</ul>` : `<p>${b2.lines.map((l) => tel(l.text)).join('<br>')}</p>`}`]);
+S.push(section(block('service-body', [[r0], [r1], [prose], ...extras]))); prose = ''; };
 let pendingHead = null; // heading awaiting a typed component (list/people/form)
 const emitHead = () => { if (pendingHead) { prose += `<h${Math.min(pendingHead.level, 3)}>${esc(pendingHead.text)}</h${Math.min(pendingHead.level, 3)}>`; manifest.headings += 1; pendingHead = null; } };
 

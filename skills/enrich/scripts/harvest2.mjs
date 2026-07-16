@@ -56,7 +56,9 @@ const data = await pg.evaluate(() => {
     const nav = navEl ? links(navEl) : [];
     const navLabel = navEl ? clean(navEl.querySelector('h2,h3,h4,h5,strong,p')?.textContent) || '' : '';
     const info = [];
-    sb.querySelectorAll('.field.body, .field--name-body').forEach((box) => {
+    sb.querySelectorAll('.field.body, .field--name-body, .region-left-sidebar > div > div:not([class*=menu-component]), .region-right-sidebar > div > div:not([class*=menu-component])').forEach((box) => {
+      if (box.closest('[class*=menu-component]') || box.matches('[class*=menu-component]')) return;
+      if ([...sb.querySelectorAll('.field.body')].some((b2) => b2 !== box && b2.contains(box))) return;
       const label = clean(box.querySelector('h2,h3,h4,h5')?.textContent) || 'For More Information';
       const lines = [...box.querySelectorAll('p,li,h3,h4,h5,h6')].filter((el) => clean(el.textContent) !== label).map((p) => ({ html: p.innerHTML.trim(), text: clean(p.textContent), head: /^H\d$/.test(p.tagName) })).filter((l) => l.text);
       const boxLinks = links(box);
