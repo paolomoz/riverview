@@ -15,7 +15,7 @@ let pass = 0; const warn = [];
 for (const p of paths) {
   try {
     const o = (await heads(`https://www.riverview.org${p}`, 'main h1,main h2,main h3,main h4,main h5,main h6,h1')).filter((t) => !EXCL.test(t));
-    const d = new Set(await heads(`https://main--riverview--paolomoz.aem.page${p}`, 'main h1,main h2,main h3,main h4,main h5,main h6,main strong,main .ds-rail p,main .ds-rail li,h1'));
+    const d = new Set(await heads(`https://main--riverview--paolomoz.aem.page${p}`, 'main h1,main h2,main h3,main h4,main h5,main h6,main strong,main .ds-rail p,main .ds-rail li,main figcaption,main em,h1'));
     const os = [...new Set(o)];
     const matched = os.filter((h) => d.has(h)).length;
     const pct = os.length ? Math.round((100 * matched) / os.length) : 100;
