@@ -16,7 +16,18 @@
  *           A <figure> WITH an <img> → lede figure (image + caption).
  *           A <figure> WITHOUT an <img> → caption-only figure (mint-ruled italic).
  */
+// a11y: unwrap raw image-file links around pictures (no discernible text; the
+// full-size-image link serves no purpose here)
+function unwrapImageLinks(scope){
+  scope.querySelectorAll('a[href]').forEach((a)=>{
+    const href=a.getAttribute('href')||'';
+    if(/\.(jpe?g|png|gif|webp)(\?|$)/i.test(href)&&!(a.textContent||'').trim()&&a.querySelector('picture,img')){
+      a.replaceWith(...a.childNodes);
+    }
+  });
+}
 export default async function decorate(block) {
+  unwrapImageLinks(block);
   const rows = [...block.children];
   const bodyCell = rows[0]?.querySelector(':scope > div') || rows[0];
   const nodes = bodyCell ? [...bodyCell.children] : [];
