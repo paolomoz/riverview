@@ -29,6 +29,26 @@
   .rv-nav-sub a { display: block; padding: 11px 14px; color: var(--color-link); text-decoration: none; font-size: var(--body); border-radius: var(--radius); }
   .rv-nav-sub a:hover { background: var(--color-surface); color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
 
+  /* small mega menu (Patients & Visitors, Services) — grey intro panel + column grid */
+  .rv-header-bar { position: relative; }
+  .rv-nav-item.rv-has-mega { position: static; }
+  .rv-nav-mega { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 70;
+    background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 0 0 var(--radius-tile) var(--radius-tile);
+    box-shadow: var(--shadow-card); overflow: hidden;
+    grid-template-columns: 300px 1fr; }
+  .rv-nav-item.rv-has-mega:hover .rv-nav-mega, .rv-nav-item.rv-has-mega:focus-within .rv-nav-mega { display: grid; }
+  .rv-mega-intro { background: var(--color-surface); padding: 36px 32px; }
+  .rv-mega-intro h2 { font-size: var(--heading-md); font-weight: 800; color: var(--color-fg); }
+  .rv-mega-intro a { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; text-decoration: none; min-height: 44px; }
+  .rv-mega-intro a:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+  .rv-mega-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; padding: 24px 40px 32px; align-content: start; }
+  .rv-mega-cols a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 12px 2px;
+    color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; font-size: var(--body); text-decoration: none;
+    border-bottom: 1px solid var(--color-fg); }
+  .rv-mega-cols a svg { flex: none; color: var(--color-accent); }
+  .rv-mega-cols a:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 1100px) { .rv-mega-cols { grid-template-columns: repeat(2, 1fr); } }
+
   .rv-burger { display: none; width: 48px; height: 48px; align-items: center; justify-content: center; background: none; border: 2px solid var(--color-accent); border-radius: var(--radius); color: var(--color-accent); cursor: pointer; }
   .rv-mnav-toggle { position: absolute; opacity: 0; pointer-events: none; }
   .rv-mobile-panel { display: none; background: var(--color-accent); color: #fff; }
@@ -53,13 +73,13 @@
   <nav aria-label="Utility">
     <div class="rv-wrap">
       <div class="rv-util-group rv-util-links">
-        <a href="/providers">Find a Provider</a>
-        <a href="/bill-pay">Pay My Bill</a>
+        <a href="/providers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> Find a Provider</a>
+        <a href="/bill-pay"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Pay My Bill</a>
       </div>
       <div class="rv-util-group rv-util-links">
-        <a href="/riverview-work">For Employers</a>
-        <a href="https://careers.riverview.org/">Careers</a>
-        <a href="/donate">Donate</a>
+        <a href="/riverview-work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.5-1.6 1.6-2.3 2.5-2.3s2 .7 2.5 2.3"/><path d="M14 9h4M14 12h4"/></svg> For Employers</a>
+        <a href="https://careers.riverview.org/"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg> Careers</a>
+        <a href="/donate"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5s-7.5-4.7-9.4-9C1.3 8.6 3 5.5 6 5.1c1.8-.2 3.5.6 4.5 2 .4.6.9 1.4 1.5 1.4s1.1-.8 1.5-1.4c1-1.4 2.7-2.2 4.5-2 3 .4 4.7 3.5 3.4 6.4-1.9 4.3-9.4 9-9.4 9z"/></svg> Donate</a>
       </div>
       <div class="rv-util-group rv-util-links">
         <a href="/search-results"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4.5 4.5"/></svg> Search</a>
@@ -77,33 +97,21 @@
   </a>
   <nav class="rv-nav" aria-label="Main">
     <ul class="rv-nav-list">
-      <li class="rv-nav-item">
+      <li class="rv-nav-item rv-has-mega">
         <a class="rv-nav-top" href="/patients-and-visitors">Patients &amp; Visitors</a>
         <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-        <ul class="rv-nav-sub">
-          <li><a href="/schedule-appointment">Schedule an Appointment</a></li>
-          <li><a href="/bill-pay">Pay My Bill</a></li>
-          <li><a href="/preparing-your-visit-0">Preparing for Your Visit</a></li>
-          <li><a href="/visitor-information">Visitor Information</a></li>
-          <li><a href="/frequently-asked-questions">Frequently Asked Questions</a></li>
-          <li><a href="/patient-stories">Patient Stories</a></li>
-          <li><a href="/press-release">Press Releases</a></li>
-        </ul>
+        <div class="rv-nav-mega">
+          <div class="rv-mega-intro"><h2>Patients &amp; Visitors</h2><a href="/patients-and-visitors">Visit our Patients &amp; Visitors page <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="m14 6 6 6-6 6"/></svg></a></div>
+          <div class="rv-mega-cols"><a href="/schedule-appointment"><span>Schedule an Appointment</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/preparing-your-visit-0"><span>Preparing for your Visit</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/visitor-information"><span>Visitor Information</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/frequently-asked-questions"><span>FAQs</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/patient-stories"><span>Patient Stories</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/press-release"><span>News &amp; Media</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></div>
+        </div>
       </li>
-      <li class="rv-nav-item">
+      <li class="rv-nav-item rv-has-mega">
         <a class="rv-nav-top" href="/services">Services</a>
         <span class="rv-nav-caret" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
-        <ul class="rv-nav-sub">
-          <li><a href="/services/primary-care">Primary Care</a></li>
-          <li><a href="/services/specialty-care">Specialty Care</a></li>
-          <li><a href="/services/emergency-room-urgent-care">Emergency Room &amp; Urgent Care</a></li>
-          <li><a href="/services/womens-health">Women&rsquo;s Health</a></li>
-          <li><a href="/services/rehabilitation-services">Rehabilitation Services</a></li>
-          <li><a href="/location/azure-plastic-surgery-med-spa">Azure Plastic Surgery &amp; Med Spa</a></li>
-          <li><a href="/services/orthopedic-services">Orthopedic Services</a></li>
-          <li><a href="/services/gastroenterology-services">Gastroenterology Services</a></li>
-          <li><a href="/services/laboratory-services">Laboratory Services</a></li>
-        </ul>
+        <div class="rv-nav-mega">
+          <div class="rv-mega-intro"><h2>Services</h2><a href="/services">View all services <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="m14 6 6 6-6 6"/></svg></a></div>
+          <div class="rv-mega-cols"><a href="/services/primary-care"><span>Primary Care</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/womens-health"><span>Women's Health Services</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/orthopedic-services"><span>Orthopedics &amp; Sports Medicine</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/specialty-care"><span>Specialty Care</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/rehabilitation-services"><span>Physical Therapy &amp; Fitness</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/gastroenterology-services"><span>Digestive Health</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/emergency-room-urgent-care"><span>Emergency Room &amp; Urgent Care</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/location/azure-plastic-surgery-med-spa"><span>Plastic Surgery</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a><a href="/services/laboratory-services"><span>Laboratory Services</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a></div>
+        </div>
       </li>
       <li class="rv-nav-item">
         <a class="rv-nav-top" href="/community-wellness">Community &amp; Wellness</a>
@@ -152,9 +160,9 @@
           <li><a href="/about">About</a></li>
         </ul>
         <ul class="rv-mobile-util">
-          <li><a href="/providers">Find a Provider</a></li>
+          <li><a href="/providers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg> Find a Provider</a></li>
           <li><a href="/bill-pay">Pay My Bill</a></li>
-          <li><a href="/riverview-work">For Employers</a></li>
+          <li><a href="/riverview-work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6.5 16c.5-1.6 1.6-2.3 2.5-2.3s2 .7 2.5 2.3"/><path d="M14 9h4M14 12h4"/></svg> For Employers</a></li>
           <li><a href="https://careers.riverview.org/">Careers</a></li>
           <li><a href="/donate">Donate</a></li>
           <li><a href="/search-results">Search</a></li>
