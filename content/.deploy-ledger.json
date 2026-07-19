@@ -405,15 +405,6 @@
     "live": 200,
     "verify": "ok"
   },
-  "/index": {
-    "status": "live",
-    "attempts": 2,
-    "ts": "2026-07-15T21:54:46.625Z",
-    "put": 200,
-    "preview": 200,
-    "live": 200,
-    "verify": "ok"
-  },
   "/location/adam-w-brazus-md": {
     "status": "live",
     "attempts": 2,
