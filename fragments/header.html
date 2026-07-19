@@ -22,9 +22,10 @@
   .rv-nav-top:hover { color: var(--color-accent); text-decoration: underline; text-underline-offset: 4px; }
   .rv-nav-caret { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; color: var(--color-accent); pointer-events: none; }
   .rv-nav-caret svg { transition: transform 0.15s ease; }
-  .rv-nav-sub { display: none; position: absolute; top: 100%; left: 0; min-width: 290px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 8px; z-index: 70; }
+  .rv-nav-sub { display: block; visibility: hidden; opacity: 0; transition: visibility 0s linear 0.25s, opacity 0.12s ease 0.1s; position: absolute; top: 100%; left: 0; min-width: 290px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius); box-shadow: var(--shadow-card); padding: 8px; z-index: 70; }
+  .rv-nav-sub::before { content: ''; position: absolute; bottom: 100%; left: 0; right: 0; height: 18px; }
   /* CSS-only dropdown: open on hover or keyboard focus-within */
-  .rv-nav-item:hover .rv-nav-sub, .rv-nav-item:focus-within .rv-nav-sub { display: block; }
+  .rv-nav-item:hover .rv-nav-sub, .rv-nav-item:focus-within .rv-nav-sub { visibility: visible; opacity: 1; transition-delay: 0s, 0s; }
   .rv-nav-item:hover .rv-nav-caret svg, .rv-nav-item:focus-within .rv-nav-caret svg { transform: rotate(180deg); }
   .rv-nav-sub a { display: block; padding: 11px 14px; color: var(--color-link); text-decoration: none; font-size: var(--body); border-radius: var(--radius); }
   .rv-nav-sub a:hover { background: var(--color-surface); color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
@@ -32,12 +33,14 @@
   /* small mega menu (Patients & Visitors, Services) — grey intro panel + column grid */
   .rv-header-bar { position: relative; }
   .rv-nav-item.rv-has-mega { position: static; }
-  .rv-nav-mega { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 70;
+  .rv-nav-mega { display: grid; visibility: hidden; opacity: 0; transition: visibility 0s linear 0.25s, opacity 0.12s ease 0.1s;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 70;
     background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 0 0 var(--radius-tile) var(--radius-tile);
-    box-shadow: var(--shadow-card); overflow: hidden;
+    box-shadow: var(--shadow-card);
     grid-template-columns: 300px 1fr; }
-  .rv-nav-item.rv-has-mega:hover .rv-nav-mega, .rv-nav-item.rv-has-mega:focus-within .rv-nav-mega { display: grid; }
-  .rv-mega-intro { background: var(--color-surface); padding: 36px 32px; }
+  .rv-nav-mega::before { content: ''; position: absolute; bottom: 100%; left: 0; right: 0; height: 26px; }
+  .rv-nav-item.rv-has-mega:hover .rv-nav-mega, .rv-nav-item.rv-has-mega:focus-within .rv-nav-mega { visibility: visible; opacity: 1; transition-delay: 0s, 0s; }
+  .rv-mega-intro { background: var(--color-surface); padding: 36px 32px; border-radius: 0 0 0 var(--radius-tile); }
   .rv-mega-intro h2 { font-size: var(--heading-md); font-weight: 800; color: var(--color-fg); }
   .rv-mega-intro a { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; color: var(--color-link); font-family: var(--heading-font-family); font-weight: 700; text-decoration: none; min-height: 44px; }
   .rv-mega-intro a:hover { color: var(--color-ink-navy); text-decoration: underline; text-underline-offset: 3px; }
