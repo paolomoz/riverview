@@ -207,3 +207,6 @@ main .section.rail-page { padding-block: var(--section-padding); }
   main .section.rail-page { grid-template-columns: 1fr; }
   main .section.rail-page > .block-content:has(> .service-body) { grid-column: 1; grid-row: auto; position: static; }
 }
+/* qa: long unbroken URLs/words in prose must wrap (mobile overflow fix) */
+main a[href] { overflow-wrap: anywhere; }
+main p, main li, main td { overflow-wrap: break-word; }
