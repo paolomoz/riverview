@@ -18,10 +18,30 @@
 @font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-900.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
 
-/* Metric-matched fallback: local Arial adjusted to Parabolica Text's line box
-   (fonttools-computed from the self-hosted woff2: 140.91 / 77.14 / 17.60). */
+/* Metric-matched fallbacks, one per face (fonttools-computed from the
+   self-hosted woff2 metrics; Arial xAvgCharWidth base 44.14%). Overloading the
+   literal "Arial" family with Text-face metrics reflowed every 700/900 heading
+   at swap time (hero CLS). */
 @font-face {
-  font-family: "Arial";
+  font-family: "parabolica-fallback";
+  src: local("Arial");
+  font-weight: 900;
+  size-adjust: 139.56%;
+  ascent-override: 77.89%;
+  descent-override: 17.77%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "parabolica-fallback";
+  src: local("Arial");
+  font-weight: 400 700;
+  size-adjust: 136.84%;
+  ascent-override: 79.15%;
+  descent-override: 18.13%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "parabolica-text-fallback";
   src: local("Arial");
   size-adjust: 140.91%;
   ascent-override: 77.14%;
@@ -30,8 +50,8 @@
 }
 
 :root {
-  --heading-font-family: "parabolica", arial, "Segoe UI", "Helvetica Neue", sans-serif;
-  --body-font-family: "parabolica-text", arial, "Segoe UI", "Helvetica Neue", sans-serif;
+  --heading-font-family: "parabolica", "parabolica-fallback", arial, "Segoe UI", "Helvetica Neue", sans-serif;
+  --body-font-family: "parabolica-text", "parabolica-text-fallback", arial, "Segoe UI", "Helvetica Neue", sans-serif;
   --heading-xxl: 61px;
   --heading-xl: 39px;
   --heading-lg: 31px;
