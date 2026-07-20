@@ -38,6 +38,16 @@ const handleRequest = async (request, env, ctx) => {
     });
   }
 
+  // EDS paths never end in '/': 301 trailing-slash variants to the canonical path
+  if (url.pathname.length > 1 && url.pathname.endsWith('/')) {
+    const to = new URL(request.url);
+    to.pathname = to.pathname.replace(/\/+$/, '');
+    return new Response('Moved permanently to ' + to.href, {
+      status: 301,
+      headers: { location: to.href },
+    });
+  }
+
   if (url.pathname.startsWith('/drafts/')) {
     return new Response('Not Found', { status: 404 });
   }
