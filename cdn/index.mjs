@@ -94,14 +94,23 @@ const handleRequest = async (request, env, ctx) => {
   if (env.ORIGIN_AUTHENTICATION) {
     req.headers.set('authorization', `token ${env.ORIGIN_AUTHENTICATION}`);
   }
+  // While the audit window is open (ROBOTS=allow) bypass the edge cache so
+  // crawlers always see the freshest origin content; normal mode caches everything.
+  const cfOpts = env.ROBOTS === 'allow'
+    ? { cacheTtl: 0, cacheEverything: false }
+    : { cacheEverything: true };
   let resp = await fetch(req, {
     method: req.method,
-    cf: {
-      // cf doesn't cache html by default: need to override the default behavior
-      cacheEverything: true,
-    },
+    cf: cfOpts,
   });
   resp = new Response(resp.body, resp);
+  const ct = resp.headers.get('content-type') || '';
+  if (ct.includes('text/html')) {
+    const lang = (url.pathname === '/es' || url.pathname.startsWith('/es/')) ? 'es' : 'en';
+    resp = new HTMLRewriter().on('html', {
+      element(el) { el.setAttribute('lang', lang); },
+    }).transform(resp);
+  }
   if (resp.status === 301 && savedSearch) {
     const location = resp.headers.get('location');
     if (location && !location.match(/\?.*$/)) {
