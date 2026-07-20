@@ -42,6 +42,13 @@ const handleRequest = async (request, env, ctx) => {
     return new Response('Not Found', { status: 404 });
   }
 
+  // demo-domain crawl gate: ROBOTS=disallow blocks crawlers again after the audit window
+  if (url.pathname === '/robots.txt' && env.ROBOTS === 'disallow') {
+    return new Response('User-agent: *\nDisallow: /\n', {
+      headers: { 'content-type': 'text/plain; charset=utf-8' },
+    });
+  }
+
   if(isRUMRequest(url)) {
     // only allow GET, POST, OPTIONS
     if(!['GET', 'POST', 'OPTIONS'].includes(request.method)) {
@@ -106,7 +113,11 @@ const handleRequest = async (request, env, ctx) => {
     resp.headers.delete('Content-Security-Policy');
   }
   resp.headers.delete('age');
-  resp.headers.delete('x-robots-tag');
+  if (env.ROBOTS === 'disallow') {
+    resp.headers.set('x-robots-tag', 'noindex, nofollow');
+  } else {
+    resp.headers.delete('x-robots-tag');
+  }
   return resp;
 };
 

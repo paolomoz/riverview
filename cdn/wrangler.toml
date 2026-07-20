@@ -10,3 +10,4 @@ routes = [
 [vars]
 ORIGIN_HOSTNAME = "main--riverview--paolomoz.aem.live"
 PUSH_INVALIDATION = "disabled"
+ROBOTS = "allow"
