@@ -133,7 +133,7 @@ export default async function decorate(block) {
   }
 
   // ── main: prose column ──
-  const main = document.createElement('div');
+  const main = document.createElement('article');
   main.className = 'ds-main';
   const prose = document.createElement('div');
   prose.className = 'ds-prose';

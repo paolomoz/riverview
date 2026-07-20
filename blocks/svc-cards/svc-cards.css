@@ -1,5 +1,5 @@
 .svc-cards .ds-wrap{padding-block:0}
-.svc-cards .svc-cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-sm)}
+.svc-cards .svc-cards-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:var(--spacing-sm)}
 .svc-cards .svc-card{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid var(--color-border);border-radius:var(--radius);padding:16px 18px;transition:box-shadow .15s ease,border-color .15s ease,transform .15s ease}
 .svc-cards .svc-card:hover{box-shadow:var(--shadow-card);border-color:#c9cdd6;transform:translateY(-2px)}
 .svc-cards .svc-diamond{flex:none;width:32px;height:32px;border:2px solid var(--color-mint);border-radius:var(--radius);transform:rotate(45deg)}
