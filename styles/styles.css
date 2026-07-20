@@ -11,12 +11,12 @@
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ---- self-hosted brand faces (proprietary — see licensing alert above) ---- */
-@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-900.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
-@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-900.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: optional; }
+@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: optional; }
+@font-face { font-family: "parabolica"; src: url("/styles/fonts/parabolica-900.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: optional; }
+@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-400.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: optional; }
+@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-700.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: optional; }
+@font-face { font-family: "parabolica-text"; src: url("/styles/fonts/parabolica-text-900.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: optional; }
 
 /* Metric-matched fallbacks, one per face (fonttools-computed from the
    self-hosted woff2 metrics; Arial xAvgCharWidth base 44.14%). Overloading the
