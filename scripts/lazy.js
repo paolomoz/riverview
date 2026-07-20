@@ -10,6 +10,9 @@ async function loadSidekick() {
 }
 
 (function loadLazy() {
+  // Footer fragment lands here — after every section has hydrated — so its
+  // insertion at the document end cannot shift visible content (see postlcp.js).
+  import('./postlcp.js').then((mod) => mod.loadStaticFragment('footer'));
   import('./utils/lazyhash.js');
   import('./utils/favicon.js');
   // Author facing tools

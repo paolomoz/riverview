@@ -6,7 +6,7 @@ function currentLang() {
   return seg === 'es' ? 'es' : 'en';
 }
 
-async function loadStaticFragment(name) {
+export async function loadStaticFragment(name) {
   const el = document.querySelector(name);
   if (!el) return;
   const { codeBase } = getConfig();
@@ -210,10 +210,11 @@ function decorateHeaderSearch() {
 }
 
 export default async function loadPostLCP() {
-  await Promise.all([
-    loadStaticFragment('header'),
-    loadStaticFragment('footer'),
-  ]);
+  // Footer is deferred to the lazy phase (scripts/lazy.js): injecting it here,
+  // while later sections are still hydrating, made every section-growth shove
+  // the visible footer around (CLS 0.4-0.8 on short/async pages). The header
+  // keeps its CSS-reserved min-height, so loading it post-LCP is shift-free.
+  await loadStaticFragment('header');
   await decorateLangSwitcher();
   decorateHeaderSearch();
 }
